@@ -1,3 +1,7 @@
+# Note: This repository was created for an apparently defunct project. I am deprecting this and will delete it at some point soon (maybe a month?)
+
+---
+
 # Pivotal Cloud Foundry Documentation Book
 
 In this topic:
