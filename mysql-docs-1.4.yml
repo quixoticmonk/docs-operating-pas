@@ -1,8 +1,0 @@
----
-
-copyright_notice: '© Copyright Pivotal Software Inc, 2013-2015'
-header: pdf_header.html
-pages:
-     - p-mysql/index.html
-     - p-mysql/release-notes.html
-     - p-mysql/backup.html
