@@ -1,0 +1,38 @@
+---
+breadcrumb: <%= vars.product_name %> Documentation
+title: Configuring UAA Password Policy
+owner: Identity
+---
+
+If your <%= vars.app_runtime %> deployment uses the internal user store for authentication, you can configure its password policy within the <%= vars.app_runtime %> tile.
+
+## <a id="config-access"></a> Open the Internal UAA Configuration
+
+To open the internal UAA configuration for your deployment:
+
+1. In a browser, navigate to the fully qualified domain name (FQDN) of your Ops Manager and log in.
+
+1. Click the **<%= vars.app_runtime %>** tile.
+
+1. Select **Authentication and Enterprise SSO** on the **Settings** tab.
+
+	<%= image_tag("er-config-auth-enterprise-sso-uaa.png") %>
+
+1. Confirm that the **Internal UAA** option is selected.
+
+
+## <a id="pw-requirements"></a> Set Password Requirements and Entry Attempts
+
+To set password requirements and the maximum password entry attempts allowed:
+
+1. For **Minimum password length**, enter the minimum number of characters for a valid password.
+
+1. For **Minimum uppercase characters**, enter the minimum number of uppercase characters required for a valid password.
+
+1. For **Minimum lowercase characters**, enter the minimum number of lowercase characters required for a valid password.
+
+1. For **Minimum numerical digits**, enter the minimum number of digits required for a valid password.
+
+1. For **Minimum special characters**, enter the minimum number of special characters required for a valid password.
+
+1. For **Maximum password entry attempts allowed**, enter the maximum number of failures allowed to enter a password within a five-minute timespan before the account is locked.
