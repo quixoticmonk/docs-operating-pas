@@ -20,7 +20,7 @@ Before beginning this procedure, ensure that you have successfully completed the
 
 1. Navigate to the <%= vars.product_name %> Operations Manager Installation Dashboard.
 
-1. Click **Import a Product** to add your tile to Ops Manager. For more information, see [Adding and Deleting Products](./add-delete.html).
+1. Click **Import a Product** to add your tile to Ops Manager. For more information, see [Adding and Deleting Products](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/add-delete.html).
 
 1. Click the **Pivotal Application Service** tile in the Installation Dashboard.
 
@@ -149,7 +149,7 @@ In the **CredHub** pane, you configure the CredHub server.
 1. (Optional) To configure CredHub to use an HSM, configure the following fields:
     * **HSM provider partition:** Enter the name of the HSM provider partition.
     * **HSM provider partition password:** Enter a password to use to access the HSM provider partition.
-    * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see the [Create and Register HSM Clients](hsm-config.html#create-register-hsm) section in the _Preparing CredHub HSMs for Configuration_ topic.
+    * **HSM provider client certificate:** Enter the client certificate for the HSM. For more information, see the [Create and Register HSM Clients](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/hsm-config.html#create-register-hsm) section in the _Preparing CredHub HSMs for Configuration_ topic.
     * Under **HSM provider encryption keys**, specify one or more keys to use for encrypting and decrypting the values stored in the HSM provider. For each key, complete the following fields:
         * **Name:** Enter the name of the encryption key.
         * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
@@ -176,7 +176,7 @@ For more information about using CredHub for securing service instance credentia
 
 In the **Databases** pane, you can configure PAS to use an internal MySQL database provided with <%= vars.product_name %>, or you can configure an external database provider for the databases required by PAS.
 
-<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="upgrading-pcf.html">Upgrading <%= vars.product_name %></a>.</p>
+<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/upgrading-pcf.html">Upgrading <%= vars.product_name %></a>.</p>
 
 ### <a id='internal-db'></a> Internal Database Configuration
 
