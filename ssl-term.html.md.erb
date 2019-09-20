@@ -14,7 +14,7 @@ Choose an SSL termination method to determine the steps you must take to configu
 ## <a id="haproxy"></a> Using the HAProxy Load Balancer
 
 <%= vars.product_name %> deploys with a single instance of HAProxy for use in lab and test environments. You can use this HAProxy instance for SSL termination and load balancing to the PAS Gorouters. HAProxy can generate a self-signed certificate if you do not want to obtain a signed certificate from a well-known certificate authority.
-<%= partial '../customizing/known-issue-self-signed-certs' %>
+<%= partial './known-issue-self-signed-certs' %>
 
 To use the HAProxy load balancer, you must create a wildcard A record in your DNS and configure three fields in the PAS product tile.
 

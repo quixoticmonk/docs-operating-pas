@@ -59,7 +59,7 @@ To scale down your deployment:
 
 If you scale down or delete a job that uses persistent disk, PAS marks the disk as **orphaned**. Orphaned disks are not attached to any job, and PAS deletes them after five days. 
 
-Use the BOSH CLI to list and recover orphaned disks. Follow the instructions in the [Prepare to Use the BOSH CLI](../customizing/trouble-advanced.html#prepare) section of the _Advanced Troubleshooting with the BOSH CLI_ topic to log in to the BOSH Director, and then follow the procedures in [Orphaned Disks](http://bosh.io/docs/persistent-disks.html#orphaned-disks) in the BOSH documentation.
+Use the BOSH CLI to list and recover orphaned disks. Follow the instructions in the [Prepare to Use the BOSH CLI](./trouble-advanced.html#prepare) section of the _Advanced Troubleshooting with the BOSH CLI_ topic to log in to the BOSH Director, and then follow the procedures in [Orphaned Disks](http://bosh.io/docs/persistent-disks.html#orphaned-disks) in the BOSH documentation.
 
 
 ## <a id="deployscenarios"></a> Scaling Recommendations for Specific Deployment Configurations
@@ -157,4 +157,4 @@ If you use an external load balancer, choose the following values in the Resourc
       </tr>
 </table>
 
-For more information about configuring load balancers in the Resource Config section of PAS, see [Configuring Load Balancing for PAS](../customizing/configure-lb.html).
+For more information about configuring load balancers in the Resource Config section of PAS, see [Configuring Load Balancing for PAS](./configure-lb.html).
