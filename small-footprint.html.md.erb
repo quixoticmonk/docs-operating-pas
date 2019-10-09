@@ -95,15 +95,15 @@ The following image shows the VMs performs the same functions in both versions o
 
 The following topics list the minimum resources needed to run Small Footprint PAS and Ops Manager on the public IaaSes that <%= vars.product_name %> supports:
 
-* [Installing <%= vars.product_name %> on AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/aws.html#aws)
-* [Installing <%= vars.product_name %> on Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/azure.html#azure)
-* [Installing <%= vars.product_name %> on GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/gcp.html#gcp)
-* [Installing <%= vars.product_name %> on vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/vsphere.html#vsphere-reqs)
+* [Installing <%= vars.product_name %> on AWS](./aws.html#aws)
+* [Installing <%= vars.product_name %> on Azure](./azure.html#azure)
+* [Installing <%= vars.product_name %> on GCP](./gcp.html#gcp)
+* [Installing <%= vars.product_name %> on vSphere](./vsphere.html#vsphere-reqs)
 
 
 ## <a id='install'></a> Installing Small Footprint PAS
 
-To install the Small Footprint PAS tile, follow the instructions for [Installing <%= vars.product_name %>](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/installing/index.html) on your IaaS.
+To install the Small Footprint PAS tile, follow the instructions for [Installing <%= vars.product_name %>](../installing/index.html) on your IaaS.
 
 Follow the same installation and configuration steps as for PAS, with the following differences:
 
@@ -127,9 +127,9 @@ Follow the same installation and configuration steps as for PAS, with the follow
 If you need to troubleshoot a job that runs on the Control or Database VMs, do the following:
 
 1. Follow the procedures in _Advanced Troubleshooting with the BOSH CLI_ to  the log in to the BOSH Director for your deployment:
-	1. [Gather Credential and IP Address Information](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#gather)
-	1. [SSH into Ops Manager](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#ssh)
-	1. [Log in to the BOSH Director](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/trouble-advanced.html#log-in)
+	1. [Gather Credential and IP Address Information](./trouble-advanced.html#gather)
+	1. [SSH into Ops Manager](./trouble-advanced.html#ssh)
+	1. [Log in to the BOSH Director](./trouble-advanced.html#log-in)
 
 1. Use BOSH to list the VMs in your Small Footprint PAS deployment:
 	<pre>bosh -e MY-ENV -d MY-DEPLOYMENT vms</pre>
