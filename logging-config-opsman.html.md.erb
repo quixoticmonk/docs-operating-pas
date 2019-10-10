@@ -91,7 +91,7 @@ More API parameters are available to customize retrieved app logs. For more info
 
 ## <a id='syslog-forward'></a> Enable Syslog Forwarding
 
-<%= partial '../customizing/system_logging' %>
+<%= partial "/pcf/core/<%= vars.current_major_version.sub('.', '-') %>/system_logging" %>
 
 
 ## <a id='container-metrics'></a> Include Container Metrics in Syslog Drains
