@@ -88,7 +88,7 @@ If you are installing PAS on AWS using Terraform, do the following to set up loa
 
 To configure the Gorouter or HAProxy to AWS Elastic Load Balancers, do the following:
 
-1. Record the names of your ELBs. If you followed the procedures in the [Installing <%= vars.product_name %> on AWS Manually](/platform/<%= vars.current_major_version.sub('.', '-') %>/om/aws/prepare-env-manual.html) topic, you created the following:
+1. Record the names of your ELBs. If you followed the procedures in the [Installing <%= vars.product_name %> on AWS Manually](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/om/aws/prepare-env-manual.html) topic, you created the following:
   * `<%= vars.product_name_lc %>-ssh-elb`: A SSH load balancer. This is a Classic Load Balancer. 
   * `<%= vars.product_name_lc %>-tcp-elb`: A TCP load balancer. This is a Classic Load Balancer. 
   * `<%= vars.product_name_lc %>-web-elb`: A web load balancer. This is an Application Load Balancer. 
@@ -97,7 +97,7 @@ To configure the Gorouter or HAProxy to AWS Elastic Load Balancers, do the follo
 1. In the PAS tile, click **Resource Config**.
 
 1. Enter the name of your SSH load balancer.
-  <%= image_tag("images/aws/resource-config-lb.png") %>
+  <%= image_tag("aws/resource-config-lb.png") %>
   1. Show the **LOAD BALANCERS** field underneath the job that handles SSH requests.  This depends on the PAS release you are using:
       - **PAS**: Click the icon next to the **Diego Brain** job name to expand the row.
       - **Small Footprint Runtime**: Click the icon next to the **Control** job name to expand the row.
@@ -135,7 +135,7 @@ showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneat
 1. Ensure that the **INTERNET CONNECTED** checkboxes are deselected for all jobs.
 
 1. Scale the number of instances as appropriate for your deployment.
-  <p class="note"><strong>Note:</strong> For a high availability deployment of <%= vars.product_name %> on Azure, Pivotal recommends scaling the number of each PAS job to a minimum of three (3) instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="../plan/azure/azure_ref_arch.html">Reference Architecture for <%= vars.product_name %> on Azure</a>.</p>
+  <p class="note"><strong>Note:</strong> For a high availability deployment of <%= vars.product_name %> on Azure, Pivotal recommends scaling the number of each PAS job to a minimum of three (3) instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/plan/azure/azure_ref_arch.html">Reference Architecture for <%= vars.product_name %> on Azure</a>.</p>
 
 ### <a id="azure-manual"></a> Azure Paved Manually
 
@@ -165,7 +165,7 @@ showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneat
 1. Ensure that the **INTERNET CONNECTED** checkboxes are deselected for all jobs.
 
 1. Scale the number of instances as appropriate for your deployment.
-<p class="note"><strong>Note:</strong> For a high availability deployment of <%= vars.product_name %> on Azure, Pivotal recommends scaling the number of each PAS job to a minimum of three (3) instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="../plan/azure/azure_ref_arch.html">Reference Architecture for <%= vars.product_name %> on Azure</a>.</p>
+<p class="note"><strong>Note:</strong> For a high availability deployment of <%= vars.product_name %> on Azure, Pivotal recommends scaling the number of each PAS job to a minimum of three (3) instances. Using three or more instances for each job creates a sufficient number of availability sets and fault domains for your deployment. For more information, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/plan/azure/azure_ref_arch.html">Reference Architecture for <%= vars.product_name %> on Azure</a>.</p>
 
 ## <a id="gcp"></a> GCP
 
@@ -180,7 +180,7 @@ showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneat
 
 1. In the the **LOAD BALANCERS** field, enter a comma-delimited list consisting of the values of `ws_router_pool` and `http_lb_backend_name` from your Terraform output. For example, `tcp:<%= vars.product_name_lc %>-cf-ws,http:<%= vars.product_name_lc %>-httpslb`. These are the names of the TCP WebSockets and HTTP(S) load balancers for your deployment.
 
-    <%= image_tag("images/gcp/resource-config-lb.png") %>
+    <%= image_tag("gcp/resource-config-lb.png") %>
     
     <p class="note"><strong>Note:</strong> Do not add a space between key/value pairs in the <code>LOAD BALANCER</code> field or it will fail.</p>
     <p class="note"><strong>Note:</strong> If you are using HAProxy in your deployment, then enter the above load balancer values in the <code>LOAD BALANCERS</code> field of the <strong>HAProxy</strong> row instead of the <strong>Router</strong> row. For a high availability configuration, scale up the HAProxy job to more than one instance.</p>
@@ -222,12 +222,12 @@ showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneat
 
 1. In the the **LOAD BALANCERS** field, enter a comma-delimited list consisting of the name of your TCP WebSockets load balancer and the name of your HTTP(S) load balancer backend with the protocol prepended. For example, `tcp:MY-<%= vars.platform_code %>-wss-logs,http:MY-<%= vars.platform_code %>-http-lb-backend`.
 
-    <%= image_tag("images/gcp/resource-config-lb.png") %>
+    <%= image_tag("gcp/resource-config-lb.png") %>
     
     <p class="note"><strong>Note:</strong> Do not add a space between key/value pairs in the <code>LOAD BALANCER</code> field or it will fail.</p>
     <p class="note"><strong>Note:</strong> If you are using HAProxy in your deployment, then enter the above load balancer values in the <code>LOAD BALANCERS</code> field of the <strong>HAProxy</strong> row instead of the <strong>Router</strong> row. For a high availability configuration, scale up the HAProxy job to more than one instance.</p>
 
-1. If you have enabled TCP routing in the <a href="#tcp-routing-enable">Networking</a> pane and set up the <a href="/platform/<%= vars.current_major_version.sub('.', '-') %>/om/gcp/prepare-env-manual.html#tcp_websockets_lb">TCP Load Balancer in GCP</a>, add the name of your TCP load balancer, prepended with <code>tcp:</code>, to the <strong>LOAD BALANCERS</strong> column of the <strong>TCP Router</strong> row. For example, <code>tcp:<%= vars.product_name_lc %>-tcp-router</code>.
+1. If you have enabled TCP routing in the <a href="#tcp-routing-enable">Networking</a> pane and set up the <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/om/gcp/prepare-env-manual.html#tcp_websockets_lb">TCP Load Balancer in GCP</a>, add the name of your TCP load balancer, prepended with <code>tcp:</code>, to the <strong>LOAD BALANCERS</strong> column of the <strong>TCP Router</strong> row. For example, <code>tcp:<%= vars.product_name_lc %>-tcp-router</code>.
 
 1. Expand the row for the job that handles SSH requests. This depends on the PAS release you are using:
     - **PAS**: Click the icon next to **Diego Brain**.
