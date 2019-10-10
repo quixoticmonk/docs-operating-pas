@@ -115,7 +115,7 @@ To ensure BOSH Director is running, do the following:
 1. Review the **State** and **Status** columns for the VM. If the **State** is not **Powered On**, restart the VM. 
 
 1. If the VM is **Powered On** but **Status** does not display **Normal**, it may be due the following known issue: [Monit inaccurately reports the health of UAA](https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/opsmanager-rn.html#monit). To resolve this issue, do the following:
-	1. SSH into the BOSH Director VM using the instructions in [SSH into the BOSH Director VM](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/trouble-advanced.html#bosh-director-ssh). 
+	1. SSH into the BOSH Director VM using the instructions in [SSH into the BOSH Director VM](../customizing/trouble-advanced.html#bosh-director-ssh). 
 	1. Run the following command to see that all processes are running:
 
 		```
@@ -134,9 +134,9 @@ If enabled, the BOSH Resurrector re-creates any VMs in a problematic state after
 
 To ensure BOSH Resurrector finished recovering, do the following:
 
-1. Log in to the Ops Manager VM with SSH using the instructions in [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/trouble-advanced.html#ssh). 
+1. Log in to the Ops Manager VM with SSH using the instructions in [Log in to the Ops Manager VM with SSH](../customizing/trouble-advanced.html#ssh). 
 
-1. Authenticate with the BOSH Director VM using the instructions in [Authenticate with the BOSH Director VM](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/trouble-advanced.html#log-in). 
+1. Authenticate with the BOSH Director VM using the instructions in [Authenticate with the BOSH Director VM](../customizing/trouble-advanced.html#log-in). 
 
 1. Run the following command to see if there is any currently running or queued Resurrector activity:
 

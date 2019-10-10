@@ -91,7 +91,7 @@ More API parameters are available to customize retrieved app logs. For more info
 
 ## <a id='syslog-forward'></a> Enable Syslog Forwarding
 
-<%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/system_logging" %>
+<%= partial '../customizing/system_logging' %>
 
 
 ## <a id='container-metrics'></a> Include Container Metrics in Syslog Drains
@@ -111,7 +111,7 @@ Apps constantly generate app logs and <%= vars.product_name %> platform componen
 
 * The Traffic Controller serves the aggregated data stream through the Firehose WebSocket endpoint.
 
-Follow the instructions below to scale the Loggregator system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.product_name %>](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/monitoring/).
+Follow the instructions below to scale the Loggregator system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.product_name %>](../monitoring/).
 
 ### <a id="instances"></a> Add Component VM Instances
 
@@ -143,8 +143,6 @@ To enable app traffic logging:
 1. From the PAS tile, select the **Networking** pane.
 
 1. Enable the **Log traffic for all accepted and denied app packets** checkbox.
-
-<%= image_tag 'images/log-app-traffic-enable.png' %>
 
 ### <a id="log-behavior"></a> App Logging Behavior
 
