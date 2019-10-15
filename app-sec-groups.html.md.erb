@@ -117,10 +117,14 @@ The procedure for securing your deployment with ASGs varies depending on your ne
 Applying the default ASG to the `system` org provides network access to <%= vars.product_short %> system apps without restrictions, which enables them to continue functioning properly after you perform [Step 4: Remove the Deployment-wide Default ASG Binding](#unbind-default). To apply the default ASG to the `system` org:
 
 1. Bind the default ASG to the staging set in the `system` org:
-    <pre class="terminal">$ cf bind-security-group default\_security\_group system</pre>
+    ```
+    cf bind-staging-security-group default\_security\_group system
+    ```
 
 1. Bind the default ASG to the running set in the `system` org:
-    <pre class="terminal">$ cf bind-security-group default\_security\_group system</pre>
+    ```
+    cf bind-running-security-group default\_security\_group system
+    ```
 
 For more information about staging and running sets, see the [ASG Sets](../concepts/asg.html#asg-sets) section of the _App Security Groups_ topic.
 
