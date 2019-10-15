@@ -5,12 +5,21 @@ owner: PAS Releng
 
 This topic describes how to configure Pivotal Application Service (PAS) as part of deploying <%= vars.product_name  %>.
 
-Before beginning this procedure, ensure that you have successfully completed the steps to prepare your environment for <%= vars.product_name %> and install and configure the BOSH Director.
 
-<p class="note"><strong>Note:</strong> If you plan to <a href="http://docs.pivotal.io/addon-ipsec/installing.html">install the <%= vars.product_name %> IPsec add-on</a>, you must do so before installing any other tiles. Pivotal recommends installing IPsec immediately after Pivotal Operations Manager, and before installing the PAS Runtime tile.</p>
+## <a id='prereqs'></a> Prerequisites
+
+Before beginning this procedure, you must:
+
+* Ensure that you have successfully completed the steps to prepare your environment for <%= vars.product_name %> and install and configure the BOSH Director. For more information, see the [Ops Manager configuration topic for your IaaS](../om/).
+
+* If you plan to install the <%= vars.product_name %> IPsec add-on, you must do so before installing any other tiles. Pivotal recommends installing IPsec immediately after Pivotal Ops Manager and before installing the PAS Runtime tile. For more information, see [Installing the IPsec Add-On for <%= vars.product_name %>](http://docs.pivotal.io/addon-ipsec/installing.html).
 
 
 ## <a id='om-add'></a> Add PAS to Ops Manager
+
+Before you can configure PAS, you must add the PAS tile to your Ops Manager Installation Dashboard.
+
+To add the PAS tile to your Ops Manager Installation Dashboard:
 
 1. If you have not already downloaded PAS, log in to [Pivotal Network](https://network.pivotal.io/products/pivotal-cf), and click PAS.
 
@@ -18,7 +27,7 @@ Before beginning this procedure, ensure that you have successfully completed the
   1. Click PAS to download the PAS `.pivotal` file.
   1. Click **<%= vars.product_name  %> Small Footprint Runtime** to download the Small Footprint Runtime `.pivotal` file. For more information, see [Getting Started with Small Footprint PAS](./small-footprint.html).
 
-1. Navigate to the <%= vars.product_name %> Operations Manager Installation Dashboard.
+1. Navigate to the <%= vars.product_name %> Ops Manager Installation Dashboard.
 
 1. Click **Import a Product** to add your tile to Ops Manager. For more information, see [Adding and Deleting Products](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/add-delete.html).
 
@@ -29,7 +38,9 @@ Before beginning this procedure, ensure that you have successfully completed the
 
 <p class="note"><strong>Note:</strong> For Azure environments, this configuration pane is <strong>Assign Networks</strong> and does not include AZ configuration.</p>
 
-In the Assign AZ and Networks pane, you assign jobs to your Availability Zones (AZs) and networks.
+In the **Assign AZ and Networks** pane, you assign jobs to your Availability Zones (AZs) and networks.
+
+To configure the **Assign AZ and Networks** pane:
 
 1. Select **Assign AZ and Networks**.
 
@@ -46,6 +57,8 @@ In the Assign AZ and Networks pane, you assign jobs to your Availability Zones (
 ## <a id='domains'></a> Configure Domains
 
 In the **Domains** pane, you configure a wildcard DNS record for both the apps domain and system domain.
+
+To configure the **Domains** pane:
 
 1. Select **Domains**.
 
@@ -107,11 +120,13 @@ In the **CredHub** pane, you configure the CredHub server.
 
 <p class="note"><strong>Note:</strong> Enabling CredHub is not required. However, you cannot leave the fields under <strong>Encryption keys</strong> blank. If you do not intend to use CredHub, enter any text in the <strong>Name</strong> and <strong>Key</strong> fields as placeholder values.</p>
 
+To configure the **CredHub** pane:
+
 1. Select **CredHub**.
 
 1. Under **CredHub database location**, select the location of your CredHub database. PAS includes this CredHub database for services to store their service instance credentials.
     * **PAS database**: If you select this option, CredHub uses the same database as other PAS components, whether the database is internal or external. You configure this database in the **Databases** pane.
-      <p class="note"><strong>Note:</strong> If you deploy PAS on GCP, you must select <strong>PAS database</strong>. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a>.
+      <p class="note"><strong>Note:</strong> If you deploy PAS on GCP, you must select <strong>PAS database</strong>. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a> in the <em>Pivotal Application Service v2.4 Release Notes</em>.
     * **Other external database**: If you select this option, configure the following fields:
         * **Hostname:** Enter the IP address of your database server.
         * **TCP port:** Enter the port of your database server, such as `3306`.
@@ -180,7 +195,7 @@ In the **Databases** pane, you can configure PAS to use an internal MySQL databa
 
 ### <a id='internal-db'></a> Internal Database Configuration
 
-<p class="note"><strong>Note:</strong> For Runtime CredHub to work on GCP installations, you must use internal MySQL. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a>.</p>
+<p class="note"><strong>Note:</strong> For Runtime CredHub to work on GCP installations, you must use internal MySQL. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a> in the <em>Pivotal Application Service v2.4 Release Notes</em>.</p>
 
 <p class="note"><strong>Note:</strong> For GCP installations, Pivotal recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.</p>
 
@@ -190,7 +205,7 @@ To configure high availability for your internal MySQL databases, see [Configure
 
 ### <a id='create-dbs'></a> External System Database Configuration
 
-<p class="note"><strong>Note:</strong> If you use external MySQL, you cannot use Runtime CredHub. See <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a>.</p>
+<p class="note"><strong>Note:</strong> If you use external MySQL, you cannot use Runtime CredHub. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a> in the <em>Pivotal Application Service v2.4 Release Notes</em>.</p>
 
 <%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/ert_database_external" %>
 
@@ -240,8 +255,6 @@ To configure high availability for your internal MySQL databases, see [Configure
 
 ## <a id='resources'></a> Configure Resources
 
-### <a name='lb'></a> Configure Load Balancing
-
 In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic. For more information, see [Configure Load Balancing for PAS](configure-lb.html).
 
 ### <a name='scale-down'></a> (Optional) Scale Down and Disable Resources
@@ -254,8 +267,10 @@ In the **Resource Config** pane, you must associate load balancers with the VMs 
 
 ## <a id='complete'></a> Complete the PAS Installation
 
+To complete your installation of PAS:
+
 1. Click the **Installation Dashboard** link to return to the Installation Dashboard.
 
 1. Click **Review Pending Changes**, then **Apply Changes**. The install process generally requires a minimum of 90 minutes to complete. The following image shows the Changes Applied window that displays when the installation process successfully completes.
 
-    ![There is a heading at the top of the window that says, Changes Applied. Below the heading, there is text that begins with, Ops Manager Director was successfully installed. Below the text, there is a Close button and a button to return to the Installation Dashboard.](images/cloudform/ops-manager-complete.png)
+    ![At the top of the pop-up window is a teal checkmark and the words 'Changes Applied'. In the upper-right corner is a gray circle with a white X in the middle. Below 'Changes Applied' is the text 'Ops Manager Director was successfully installed.' Below this text is the italicized text 'We recommend that you export a backup of this installation from the actions menu.' Below this text are two buttons, a gray rectangular button labeled 'Close' and a blue rectangular button labeled 'Return to Installation Dashboard'.](images/cloudform/ops-manager-complete.png)
