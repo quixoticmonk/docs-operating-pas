@@ -14,12 +14,12 @@ For performance reasons, the Diego Cells cache the Docker image layers and the <
 
 Disk cleanup is the process of removing unused layers from the Diego Cell disk. The disk cleanup process removes all unused Docker image layers and old <%= vars.product_name %> Stacks, regardless of their size or age.
 
-To perform a detailed analysis of disk usage in your PAS deployment, see [Examining GrootFS Disk Usage](../adminguide/examining_grootfs_disk.html).
+To perform a detailed analysis of disk usage in your Pivotal Application Service (PAS) deployment, see [Examining GrootFS Disk Usage](../adminguide/examining_grootfs_disk.html).
 
 
 ## <a id='options'></a> Options for Disk Cleanup
 
-<%= vars.product_name %> provides the following options for scheduling the disk cleanup process on Diego Cells: 
+<%= vars.product_name %> provides the following options for scheduling the disk cleanup process on Diego Cells in the **App Containers** pane of the PAS tile: 
 
 * **Never clean up Diego Cell disk space**: Pivotal does not recommend selecting this option for production environments.
 
