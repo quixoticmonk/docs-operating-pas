@@ -143,6 +143,21 @@ In the **System Logging** pane, you can configure system logging in PAS to forwa
 
 1. If you are not using HAProxy for this isolation segment, set the number of **Instances** to `0`.
 
+### <a id='compute-networking-isolation'></a> Compute and Networking Isolation
+
+To configure the **Compute and Networking Isolation** pane:
+
+1. Select **Compute and Networking Isolation**.
+
+1. Choose whether to enable or disable compute isolation under **Compute isolation**.
+    * To disable compute isolation, select **Disable**.
+    * To enable compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field.
+    <p class='note'><strong>Note:</strong> If you disable compute isolation, you must set <strong>Router sharding mode</strong> to <strong>No Isolation Segment</strong>.</p>
+
+1. Select a sharding mode under **Router sharding mode**. The options are explained below. For more information, see [Sharding Routers for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment).
+  * **Isolation Segment only**: The routers for the tile acknowledge requests only from apps deployed within the cells of the tile. All other requests fail.
+  * **No Isolation Segment**: The routers for the tile reject requests for any isolation segment. Choose this option to add a group of routers for the PAS tile, such as when you want a private point of entry for the system domain.
+
 ### <a id='after_config'></a> After Tile Configuration
 
 After you configure the <%= vars.product_name %> Isolation Segment tile:
