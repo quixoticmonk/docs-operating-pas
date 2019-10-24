@@ -148,15 +148,13 @@ To configure the **CredHub** pane:
     * **Endpoint:** Enter the Unix socket address for the KMS plugin.
     * **Primary:** Enable the **Primary** checkbox to indicate the primary KMS provider for your environment. You must mark one provider as primary. Do not mark more than one provider as primary. 
 
-1. Under **Encryption keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database.
+1. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database.
     * If you plan to use internal encryption, configure the following fields:
         * **Name:** Enter any key name.
-        * **Provider:** Select **Internal**.
         * **Key:** Enter a randomly generated value that is at least 20 characters long. This key is used for encrypting all data.
         * **Primary:** This checkbox marks the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary.
     * If you plan to use a hardware security module (HSM) as your encryption provider, configure the following fields:
         * **Name:** Enter a key name that already exists on your HSM or a new key name. For each new key name, CredHub generates a key in **HSM provider partition** that you configure below.
-        * **Provider:** Select **HSM**.
         * **Key:** Enter a placeholder value under **Key**. CredHub does not use this key for encryption. However, you cannot leave the **Key** field blank.
         * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as primary. Do not mark more than one key as primary. 
     <p class="note"><strong>Note:</strong> For information about using additional keys for key rotation, see <a href="../opsguide/credential-rotation.html">Rotating Runtime CredHub Encryption Keys</a>.</p>
