@@ -27,7 +27,7 @@ Before deploying PAS with NSX-T networking, you must have the following:
 * The [VMware NSX-T Container Plug-in for <%= vars.product_name %> tile](https://network.pivotal.io/products/vmware-nsx-t) downloaded from Pivotal Network and imported to the Ops Manager **Installation Dashboard**. For information about downloading and importing Pivotal products to the Installation Dashboard, see [Adding and Importing Products](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/add-delete.html#add-import).
 
 * The [PAS tile](https://network.pivotal.io/products/elastic-runtime) downloaded from Pivotal Network and imported to the Ops Manager Installation Dashboard. The PAS tile must be in one of the following two states:
-  * Not deployed yet; you have not yet clicked **Review Pending Changes**, then **Apply Changes** on this version of PAS.
+  * Configured but not deployed yet; you have not yet clicked **Review Pending Changes**, then **Apply Changes** on this version of PAS.
   * Deployed previously, with the **Networking** pane > **Container network interface plugin** field set to **External**.
   <p class="note"><strong>Note:</strong> Deploying PAS with its container network interface (CNI) set to **Silk** configures Diego Cells to use an internally-managed container network. Subsequently switching the CNI interface to **External** NSX-T leads to errors.</p>
 
