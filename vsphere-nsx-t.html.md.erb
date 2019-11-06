@@ -281,16 +281,12 @@ To enable NSX-T mode in the BOSH Director:
 
 1. From the Ops Manager **Installation Dashboard**, open the **BOSH Director** tile.
 
-1. In the **vCenter Configs** pane, click the pencil icon for the vCenter Config you want to edit. Then select **NSX Networking**.
-![Configure NSX-T mode in BOSH tile](NSXdirectorconfig.png)
+1. In the **vCenter Configs** pane, click the pencil icon for the vCenter Config you want to edit.
 
-1. Configure NSX networking by entering the following:
-    * **NSX Mode**: Select **NSX-T**.
-    * **NSX Address**: Enter the address of the NSX-T Manager.
-    * **NSX Username**: Enter the username to connect to the NSX-T Manager.
-    * **NSX Password**: The password for the username specified above.
-    * **NSX CA Cert**: A CA certificate in PEM format that authenticates to the NSX-T server.
-    If the NSX-T Manager generated a self-signed certificate, you can retrieve the CA certificate using OpenSSL with the command `openssl s_client -host NSX-ADDRESS -port 443 -prexit -showcerts`.
+1. Select **NSX Networking** below.
+
+1. Configure BOSH Director authentication to the NSX Manager by following the **NSX Networking** instructions
+in the [Step 2: Configure vCenter](https://docs.pivotal.io/platform/ops-manager/2-8/vsphere/config.html#vcenter-config) section of _Configuring BOSH Director on vSphere_.
 
 ### <a id='external-net'></a> Configure PAS for External Container Networking
 
