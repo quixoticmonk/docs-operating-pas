@@ -1,59 +1,73 @@
 ---
-title: Adding Existing SAML or LDAP Users to a Pivotal Application Service Deployment
+title: Adding Existing SAML or LDAP Users to a Pivotal Platform Deployment
 owner: Identity
 ---
 
-<% current_page.data.title = "Adding Existing SAML or LDAP Users to a " + vars.app_runtime_full + " Deployment" %>
+This topic describes the procedure for adding existing SAML or LDAP users to a <%= vars.platform_name %> deployment enabled with SAML or LDAP.
 
-This topic describes the procedure for adding existing SAML or LDAP users to a <%= vars.app_runtime_full %> deployment enabled with SAML or LDAP.
-
-The following two ways exist to add existing SAML or LDAP users to your <%= vars.app_runtime %> deployment:
+The following two ways exist to add existing SAML or LDAP users to your <%= vars.platform_name %> deployment:
 
 * [Option 1: Import Users in Bulk](#bulk-import)
 * [Option 2: Add Users Manually](#manual)
 
-## <a id='prereqs'></a>Prerequisites
 
-You must have the following to perform the procedures in this topic:
+## <a id='prereqs'></a> Prerequisites
 
-* Admin access to the Ops Manager Installation Dashboard for your <%= vars.product_name %> deployment
+To perform the procedures in this topic, you must have:
+
+* Admin access to the Ops Manager Installation Dashboard for your <%= vars.platform_name %> deployment
 * The [Cloud Foundry Command Line Interface](../cf-cli/install-go-cli.html) (cf CLI) v6.23.0 or later
 
-## <a id='bulk-import'></a>Option 1: Import Users in Bulk ##
 
-You can import SAML or LDAP users in bulk by using the CF-MGMT Tool. See [the CF-MGMT README](https://github.com/pivotalservices/cf-mgmt) for instructions about installing and using the tool.
+## <a id='bulk-import'></a> Option 1: Import Users in Bulk
 
-## <a id='manual'></a>Option 2: Add Users Manually ##
+You can import SAML or LDAP users in bulk by using the CF-MGMT Tool. For instructions about installing and using the tool, see [the CF-MGMT README](https://github.com/pivotalservices/cf-mgmt).
 
-Perform the procedures below to add existing SAML or LDAP users to your <%= vars.product_short %> deployment manually.
 
-### <a id='step-id'></a>Step 1: Create User ##
+## <a id='manual'></a> Option 2: Add Users Manually
 
-Perform the following steps to add a SAML or LDAP user:
+The following sections describe how to add existing SAML or LDAP users to your <%= vars.platform_name %> deployment manually.
 
-1. Run `cf target https://api.YOUR-SYSTEM-DOMAIN` to target the API endpoint for your <%= vars.product_name %> deployment. Replace `YOUR-SYSTEM-DOMAIN` with your system domain. For example:
-    <pre class="terminal">$ cf target http<span>s</span>://api.example.com</pre>
+### <a id='step-id'></a> Step 1: Create User
+
+To add a SAML or LDAP user:
+
+1. Target the API endpoint for your <%= vars.platform_name %> deployment by running:
+
+    ```
+    cf target https://api.YOUR-SYSTEM-DOMAIN
+    ```
+    Where `YOUR-SYSTEM-DOMAIN` is your system domain.
+
 1. Run `cf login` and provide credentials for an account with the [Admin user role](../concepts/roles.html#roles):
-    <pre class="terminal">$ cf login</pre>
-1. Run `cf create-user EXAMPLE-USERNAME --origin YOUR-PROVIDER-NAME` to create the user in UAA. Replace `EXAMPLE-USERNAME` with the username of the SAML or LDAP user you wish to add, and select one of the options below:
-    - For LDAP, replace `YOUR-PROVIDER-NAME` with `ldap`. For example:
-    <pre class='terminal'>
-    $ cf create-user j.smith<span>@</span>example.com --origin ldap
-    </pre>
-    - For SAML, replace `YOUR-PROVIDER-NAME` with the name of the SAML provider you provided when configuring Ops Manager. For example:
-    <pre class='terminal'>
-    $ cf create-user j.smith<span>@</span>example.com --origin example-saml-provider
-    </pre>
 
-### <a id='user-role'></a>Step 2: Associate User with Org or Space Role ##
+1. Create the user in UAA by running:
+
+    ```
+    cf create-user EXAMPLE-USERNAME --origin YOUR-PROVIDER-NAME
+    ```
+    Where:
+    * `EXAMPLE-USERNAME` is the username of the SAML or LDAP user you want to add.
+    * `YOUR-PROVIDER-NAME` is `ldap` for an LDAP user, or the name of the SAML provider you provided when configuring Ops Manager for a SAML user.
+
+### <a id='user-role'></a> Step 2: Associate User with Org or Space Role
 
 After creating the SAML or LDAP user, you must associate the user with either an Org or Space role.
 
-For more information about roles, see the [Roles and Permissions](../concepts/roles.html#roles) section of the <em>Orgs, Spaces, Roles, and Permissions</em> topic.
+For more information about roles, see the [Roles and Permissions](../concepts/roles.html#roles) section of the _Orgs, Spaces, Roles, and Permissions_ topic.
 
-#### <a id='org-role'></a>Associate User with Org Role
+#### <a id='org-role'></a> Associate User with Org Role
 
-Run `cf set-org-role USERNAME YOUR-ORG ROLE` to associate the SAML or LDAP user with an Org role. Replace `USERNAME` with the name of the SAML or LDAP user, and replace `YOUR-ORG` with the name of your Org.
+To associate the SAML or LDAP user with an Org role:
+
+1. Run:
+
+    ```
+    cf set-org-role USERNAME YOUR-ORG ROLE
+    ```
+    Where:
+    * `USERNAME` is the name of the SAML or LDAP user.
+    * `YOUR-ORG` is the name of your org.
 
 For `ROLE`, enter one of the following:
 
@@ -61,15 +75,25 @@ For `ROLE`, enter one of the following:
 * `BillingManager`: Billing Managers can create and manage the billing account and payment information.
 * `OrgAuditor`: Org Auditors have read-only access to Org information and reports.
 
-Example:
+For example:
 
-<pre class="terminal">
-$ cf set-org-role j.smith<span>@</span>example.com my-org OrgManager
-</pre>
+```
+cf set-org-role j.smith<span>@</span>example.com my-org OrgManager
+```
 
-#### <a id='space-role'></a>Associate User with Space Role
+#### <a id='space-role'></a> Associate User with Space Role
 
-Run `cf set-space-role USERNAME YOUR-ORG YOUR-SPACE ROLE` to associate the SAML or LDAP user with a Space role. Replace `USERNAME` with the name of the SAML or LDAP user, replace `YOUR-ORG` with the name of your Org, and `YOUR-SPACE` with the name of a Space in your Org.
+To associate the SAML or LDAP user with a Space role:
+
+1. Run:
+
+    ```
+    cf set-space-role USERNAME YOUR-ORG YOUR-SPACE ROLE
+    ```
+    Where:
+    * `USERNAME` is the name of the SAML or LDAP user.
+    * `YOUR-ORG` is the name of your org.
+    * `YOUR-SPACE` is the name of a space in your org.
 
 For `ROLE`, enter one of the following:
 
@@ -77,8 +101,8 @@ For `ROLE`, enter one of the following:
 * `SpaceDeveloper`: Space Developers can create and manage apps and services, and see logs and reports.
 * `SpaceAuditor`: Space Auditors can view logs, reports, and settings on this Space.
 
-Example:
+For example:
 
-<pre class="terminal">
-$ cf set-space-role j.smith<span>@</span>example.com my-org my-space SpaceDeveloper
-</pre>
+```
+cf set-space-role j.smith<span>@</span>example.com my-org my-space SpaceDeveloper
+```
