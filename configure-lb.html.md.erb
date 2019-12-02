@@ -89,7 +89,7 @@ If you are installing PAS on AWS using Terraform, do the following to set up loa
 To configure the Gorouter or HAProxy to AWS Elastic Load Balancers, do the following:
 
 1. Record the names of your ELBs. If you followed the procedures in the [Installing <%= vars.product_name %> on AWS Manually](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/om/aws/prepare-env-manual.html) topic, you created the following:
-  * `<%= vars.product_name_lc %>-ssh-elb`: A SSH load balancer. This is a Classic Load Balancer. 
+  * `<%= vars.product_name_lc %>-ssh-elb`: An SSH load balancer. This is a Classic Load Balancer. 
   * `<%= vars.product_name_lc %>-tcp-elb`: A TCP load balancer. This is a Classic Load Balancer. 
   * `<%= vars.product_name_lc %>-web-elb`: A web load balancer. This is an Application Load Balancer. 
     * `<%= vars.product_name_lc %>-web-elb-target-group`: a target group for the web load balancer
