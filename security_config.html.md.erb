@@ -8,20 +8,20 @@ This topic describes how to configure Transport Layer Security (TLS) termination
 
 ## <a id="ssl_term"></a> Configure TLS Termination
 
-When you deploy <%= vars.product_name %>, you must configure the TLS termination for HTTP traffic in your PAS configuration. You can terminate TLS at all of the following points:
+When you deploy <%= vars.platform_name %>, you must configure the TLS termination for HTTP traffic in your PAS configuration. You can terminate TLS at all of the following points:
 
 * Load balancer
 * Load balancer and the Gorouter
 * The Gorouter
 
-To choose and configure the TLS termination option for your deployment, see the [TLS Termination Options for HTTP Routing](../adminguide/securing-traffic.html#ssl_options) section of the _Securing Traffic into Cloud Foundry_ topic.
+To choose and configure the TLS termination option for your deployment, see the [TLS Termination Options for HTTP Routing](../adminguide/securing-traffic.html#ssl_options) section of the _Securing Traffic into PAS_ topic.
 
 <%=vars.ssl_haproxy_2%>
 
 
 ## <a id="certs"></a> Obtain TLS Certificates
 
-To secure traffic into <%= vars.product_name %>, you must obtain at least one TLS certificate. For general certificate requirements for deploying <%= vars.product_name %>, see [Certificate Requirements](../adminguide/securing-traffic.html#certtypes).
+To secure traffic into <%= vars.platform_name %>, you must obtain at least one TLS certificate. For general certificate requirements for deploying <%= vars.platform_name %>, see the [Certificate Requirements](../adminguide/securing-traffic.html#certtypes) section of the _Securing Traffic into PAS_ topic.
 
 For additional IaaS-specific certificate requirements:
 
@@ -29,7 +29,7 @@ For additional IaaS-specific certificate requirements:
 * **GCP**: [Certificate Requirements on GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/gcp.html#gcp_certs)
 
 
-## <a id="create_or_obtain_certs"></a> Creating a Wildcard Certificate for <%= vars.product_name %> Deployments
+## <a id="create_or_obtain_certs"></a> Creating a Wildcard Certificate for <%= vars.platform_name %> Deployments
 
 This section describes how to create or generate a certificate for your PAS environment. If you are deploying to a production environment, you should obtain a certificate from a trusted authority (CA).
 
@@ -56,7 +56,9 @@ In either case for either self-signed or trusted single certificates, apply the 
 
     <p class="note"><strong>Note:</strong> TLS certificates generated for wildcard DNS records only work for a single domain name component or component fragment. For example, a certificate generated for <code>*.EXAMPLE.com</code> does not work for <code>*.apps.EXAMPLE.com</code> and <code>*.sys.EXAMPLE.com</code>. The certificate must have both <code>*.apps.EXAMPLE.com</code> and <code>*.sys.EXAMPLE.com</code> attributed to it. </p>
     
-### <a id="ert_certgen"></a> Generating a RSA Certificate in PAS
+### <a id="ert_certgen"></a> Generating an RSA Certificate in PAS
+
+To generate an RSA certificate in PAS:
 
 1. Navigate to the Ops Manager Installation Dashboard.
 
