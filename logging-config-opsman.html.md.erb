@@ -41,7 +41,7 @@ This topic describes the types of logs that <%= vars.platform_name %> generates.
 
 <sup>1</sup>The Loggregator Firehose also streams component metrics.
 
-**App traffic logs are system logs.** When app containers communicate, or attempt to communicate, their host cells generate _app traffic logs_. App traffic logs are system logs, not app logs. These logs come from host cells, not apps, and they carry no information from within the app. App traffic logs only show app communication behavior, as detected from outside by the host cell.
+**App traffic logs are system logs.** When app containers communicate, or attempt to communicate, their host Diego Cells generate _app traffic logs_. App traffic logs are system logs, not app logs. These logs come from host Diego Cells, not apps, and they carry no information from within the app. App traffic logs only show app communication behavior, as detected from outside by the host Diego Cell.
 
 
 ## <a id="log-cache"></a> Log Cache
@@ -128,8 +128,8 @@ To add component VM instances for Loggregator components:
 
 1. Increase the number in the **Instances** column of the component you want to scale. You can add instances for the following Loggregator components: 
 	* **Loggregator Traffic Controller**
-		<p class="note"><strong>Note</strong>: The Reverse Log Proxy (RLP) BOSH job is colocated on the Traffic Controller VM. If you want to scale Loggregator to handle more logs for syslog drains, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html">Loggregator Architecture</a>.</p>
-		<p class="note"><strong>Note</strong>: The BOSH System Metrics Forwarder</a> job is colocated on the Traffic Controller VM. If you want to scale Loggregator to handle more BOSH component metrics, you can add instances of the Traffic Controller. For more information, see the <a href="../loggregator/architecture.html#bosh-metrics">Related BOSH Components</a> section of the <em>Loggregator Architecture</em> topic.</p>
+		<p class="note"><strong>Note:</strong> The Reverse Log Proxy (RLP) BOSH job is colocated on the Traffic Controller VM. If you want to scale Loggregator to handle more logs for syslog drains, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html">Loggregator Architecture</a>.</p>
+		<p class="note"><strong>Note:</strong> The BOSH System Metrics Forwarder</a> job is colocated on the Traffic Controller VM. If you want to scale Loggregator to handle more BOSH component metrics, you can add instances of the Traffic Controller. For more information, see the <a href="../loggregator/architecture.html#bosh-metrics">Related BOSH Components</a> section of the <em>Loggregator Architecture</em> topic.</p>
 	* **Doppler Server**
 
 1. Click **Save**.
