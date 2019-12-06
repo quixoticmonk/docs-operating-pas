@@ -41,7 +41,7 @@ To configure multi-foundation support in Apps Manager:
 	Where:
 	- `FOUNDATION_NAME` is a name for the foundation.
 	- `FOUNDATION_SYSTEM_DOMAIN` is the system domain of the foundation. The system domain is listed in the **Domains** pane of the PAS tile.
-	- `metricsUrl` is an optional field. If <%= vars.product_name %> Metrics is installed on the foundation, provide the <%= vars.product_name %> Metrics URL.
+	- `metricsUrl` is an optional field. If <%= vars.platform_name %> Metrics is installed on the foundation, provide the <%= vars.platform_name %> Metrics URL.
 
 ### <a id="redirects"></a> Add Redirects in UAA
 
@@ -49,7 +49,7 @@ The Apps Manager UAA clients on each foundation you want to manage must include 
 
 To add redirects:
 
-1. Install the UAA CLI. See [CloudFoundry UAA Command Line Client](https://github.com/cloudfoundry/cf-uaac) in GitHub.
+1. Install the UAA CLI. See the [CloudFoundry UAA Command Line Client](https://github.com/cloudfoundry/cf-uaac) repository in GitHub.
 
 1. Record the UAA admin client credentials password for a foundation you want to manage with Apps Manager: 
 	1. In the PAS tile **Credentials** tab, for **Admin Client Credentials**, click **Link to Credentials**.
@@ -99,12 +99,14 @@ For more information, see [Setting Trusted Certificates](https://docs.pivotal.io
 
 Pivotal recommends that all foundations use the same external SAML identity provider. This allows Apps Manager to automatically authenticate with the identity provider. 
 
-To configure all foundations to use the same SAML identity provider, do the following for each foundation:
+To configure all foundations to use the same SAML identity provider:
 
-1. Select **UAA** in the PAS tile. 
+1. Select **Authentication and Enterprise SSO** in the PAS tile. 
 
 1. Verify that the foundation uses the correct provider for **Provider name**.
 
+1. Repeat the above steps for each foundation in your deployment.
+
 For more information on UAA and identity providers, see [Identity Providers in UAA](../uaa/identity-providers.html).
 
-For more information on how to set up identity providers in UAA, see [Adding Existing SAML or LDAP Users to a <%= vars.product_name %> Deployment](../opsguide/external-user-management.html).
+For more information on how to set up identity providers in UAA, see [Adding Existing SAML or LDAP Users to a <%= vars.platform_name %> Deployment](../opsguide/external-user-management.html).
