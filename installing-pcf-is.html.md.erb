@@ -166,7 +166,7 @@ To configure the **Compute and Networking Isolation** pane:
 1. Select **Compute and Networking Isolation**.
 
 1. Choose whether to enable or disable compute isolation under **Compute isolation**.
-    * To disable compute isolation, select **Disable**.
+    * To disable compute isolation, select **Disable**. Select this option if you do not require compute isolation and you are deploying the Isolation Segment tile for the purpose of making upgrades more  manageable. For example, if you have a PAS tile with a large volume of Diego Cells. This approach helps separate the upgrade of the PAS control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups. 
     * To enable compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment.
     <p class='note'><strong>Note:</strong> If you disable compute isolation, you must set <strong>Router sharding mode</strong> to <strong>No Isolation Segment</strong>.</p>
 
