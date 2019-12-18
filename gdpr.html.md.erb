@@ -3,9 +3,9 @@ title: General Data Protection Regulation and Pivotal Application Service
 owner: Legal
 ---
 
-<% current_page.data.title = "General Data Protection Regulation and " + vars.app_runtime %>
+<% current_page.data.title = "General Data Protection Regulation and " + vars.app_runtime_full %>
 
-This topic provides an overview of the General Data Protection Regulation (GDPR) and where <%= vars.app_runtime %> (<%= vars.product_short %>) may store personal data.
+This topic provides an overview of the General Data Protection Regulation (GDPR) and where <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) may store personal data.
 
 ## <a id='overview'></a> Overview
 
@@ -24,7 +24,7 @@ Article 4, Section 1 of the GDPR defines personal data as follows:
 
 For more information, see the GDPR [text](http://www.privacy-regulation.eu/en/article-4-definitions-GDPR.htm).
 
-Personal data can be collected, stored, and processed in a <%= vars.product_short %> deployment. Pivotal has performed a review of <%= vars.product_short %> components and determined that personal data may reside in the following areas: 
+Personal data can be collected, stored, and processed in a <%= vars.app_runtime_abbr %> deployment. Pivotal has performed a review of <%= vars.app_runtime_abbr %> components and determined that personal data may reside in the following areas: 
 
 + [User Account and Authentication (UAA)](#uaa)
 + [Cloud Foundry API](#capi)
@@ -35,11 +35,11 @@ Personal data can be collected, stored, and processed in a <%= vars.product_shor
 
 ## <a id='where'></a> Where Personal Data May Reside
 
-The following sections explain how different <%= vars.product_short %> components collect personal data.
+The following sections explain how different <%= vars.app_runtime_abbr %> components collect personal data.
 
 ### <a id='uaa'></a> User Account and Authentication (UAA)
 
-UAA is an open-source Cloud Foundry component that provides identity management features and identity-based security for applications and APIs. For more information, see [User Account and Authentication](../uaa/index.html).
+UAA is an open-source Cloud Foundry component that provides identity management features and identity-based security for apps and APIs. For more information, see [User Account and Authentication](../uaa/index.html).
 
 <table>
 <tbody>
@@ -228,7 +228,7 @@ The Cloud Foundry API release contains several components, including the Cloud C
 <td>The first time a user makes a request to the API</td>
 <td>Cloud Controller DB</td>
 <td>It is used to identify permissions for the user</td>
-<td><%= vars.product_name %> operator </td>
+<td><%= vars.platform_name %> operator </td>
 <td>As long as the user is part of the system</td>
 </tr>
 <tr>
@@ -245,15 +245,15 @@ The Cloud Foundry API release contains several components, including the Cloud C
 <td>
 <ul>
 <li>Local VM:<br />component and logs </li>
-<li>Log aggregator used by <%= vars.product_name %> operator</li>
+<li>Log aggregator used by <%= vars.platform_name %> operator</li>
 </ul>
 </td>
 <td> n/a</td>
-<td><%= vars.product_name %> operator</td>
+<td><%= vars.platform_name %> operator</td>
 <td>
 <ul>
 <li>Local VM:<br />4 week maximum by default</li>
-<li>Log aggregator as configured by <%= vars.product_name %> operator</li>
+<li>Log aggregator as configured by <%= vars.platform_name %> operator</li>
 </ul>
  </td>
 </tr>
@@ -272,7 +272,7 @@ The Cloud Foundry API release contains several components, including the Cloud C
 <td> n/a</td>
 <td>
 <ul>
-<li><%= vars.product_name %> operator</li>
+<li><%= vars.platform_name %> operator</li>
 <li>Users that can view the resource that had an audited change</li>
 </ul>
 </td>
@@ -292,15 +292,15 @@ The Cloud Foundry API release contains several components, including the Cloud C
 <td>
 <ul>
 <li>Local VM:<br />CEF logs</li>
-<li>Log aggregator used by <%= vars.product_name %> operator</li>
+<li>Log aggregator used by <%= vars.platform_name %> operator</li>
 </ul>
 </td>
 <td>n/a </td>
-<td><%= vars.product_name %> operator </td>
+<td><%= vars.platform_name %> operator </td>
 <td>
 <ul>
 <li>Local VM:<br />4 week maximum by default</li>
-<li>Log aggregator as configured by <%= vars.product_name %> operator</li>
+<li>Log aggregator as configured by <%= vars.platform_name %> operator</li>
 </ul>
 </td>
 </tr>
@@ -318,7 +318,7 @@ The Cloud Foundry API release contains several components, including the Cloud C
 <td>n/a</td>
 <td>
 <ul>
-<li><%= vars.product_name %> operator</li>
+<li><%= vars.platform_name %> operator</li>
 <li>Users that can view the resource</li></ul>
 </td>
 <td>As long as the resource exists</td>
@@ -352,7 +352,7 @@ To disable logging of client IP addresses, do the following:
 
 ### <a id='diego'></a> Diego
 
-Diego is the container management system for <%= vars.product_short %>. For more information, see [Diego Components and Architecture](../concepts/diego/diego-architecture.html).
+Diego is the container management system for <%= vars.app_runtime_abbr %>. For more information, see [Diego Components and Architecture](../concepts/diego/diego-architecture.html).
 
 <table>
 <tbody>
