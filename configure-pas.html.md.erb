@@ -131,7 +131,6 @@ To configure the **CredHub** pane:
 
 1. Under **CredHub database location**, select the location of your CredHub database. PAS includes this CredHub database for services to store their service instance credentials.
     * **PAS database**: If you select this option, CredHub uses the same database as other PAS components, whether the database is internal or external. You configure this database in the **Databases** pane.
-      <p class="note"><strong>Note:</strong> If you deploy PAS on GCP, you must select <strong>PAS database</strong>. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a> in the <em>Pivotal Application Service v2.4 Release Notes</em>.
     * **Other external database**: If you select this option, configure the following fields:
         * **Hostname:** Enter the IP address of your database server.
         * **TCP port:** Enter the port of your database server, such as `3306`.
