@@ -4,224 +4,228 @@ title: Diagnosing Problems in Pivotal Platform
 owner: Ops Manager
 ---
 
-<% current_page.data.title = "Diagnosing Problems in " + vars.product_name %>
+<% current_page.data.title = "Diagnosing Problems in " + vars.platform_name %>
 
-This guide provides help with diagnosing issues encountered
-during a [<%= vars.product_name %>](https://network.pivotal.io/products/pivotal-cf) installation.
+This topic provides guidance for diagnosing issues encountered during a [<%= vars.platform_name %>](https://network.pivotal.io/products/pivotal-cf) installation.
 
-Besides whether products install successfully or not, an important area to
-consider when diagnosing issues is communication between VMs deployed by Pivotal
-Cloud Foundry.
-Depending on what products you install, communication takes the form of
-messaging, routing, or both.
-If they go wrong, an installation can fail.
-For example, in an Pivotal Application Service (PAS) installation the <%= vars.product_name %> VM tries to push
-a test application to the cloud during post-installation testing.
-The installation fails if the resulting traffic cannot be routed to the HA
-Proxy load balancer.
+Besides whether products install successfully or not, an important consideration when diagnosing issues is communication between VMs deployed by <%= vars.platform_name %>. Depending on what products you install, communication takes the form of messaging, routing, or both. If they go wrong, an installation can fail. For example, in an Pivotal Application Service (PAS) installation the <%= vars.platform_name %> VM tries to push a test app to the cloud during post-installation testing. The installation fails if the resulting traffic cannot be routed to the HA Proxy load balancer.
 
-## <a id='debug'></a>Viewing the Debug Endpoint ##
 
-The debug endpoint is a web page that provides information useful for diagnostics.
-If you have superuser privileges and can view the Ops Manager Installation
-Dashboard, you can access the debug endpoint.
+## <a id='debug'></a> Viewing the Debug Endpoint
 
-* In a browser, open the URL:
+The debug endpoint is a web page that provides information useful for diagnostics. If you have superuser privileges and can view the Ops Manager Installation Dashboard, you can access the debug endpoint.
 
-    `https://OPS-MANAGER-FQDN/debug`
+In a browser, open the URL:
+
+```
+https://OPS-MANAGER-FQDN/debug
+```
+
+Where `OPS-MANAGER-FQDN` is the fully-qualified domain name (FQDN) of your Ops Manager installation.
 
 The debug endpoint offers three links:
 
-* *Files* allows you to view the YAML files that Ops Manager uses to configure
-products that you install.
-The most important YAML file, `installation.yml`, provides networking settings
-and describes `microbosh`.
-In this case, `microbosh` is the VM whose BOSH Director component is used by
-Ops Manager to perform installations and updates of PAS and other
-products.
+* *Files* allows you to view the YAML files that Ops Manager uses to configure products that you install. The most important YAML file, `installation.yml`, provides networking settings and describes `microbosh`. In this case, `microbosh` is the VM whose BOSH Director component is used by Ops Manager to perform installations and updates of PAS and other products.
+
 * *Components* describes the components in detail.
-* *Rails log* shows errors thrown by the VM where the Ops Manager web
-application (a Rails application) is running, as recorded in the
-`production.log` file.
-See the next section to learn how to explore other logs.
 
-## <a id='tips'> </a>Logging Tips ##
+* *Rails log* shows errors thrown by the VM where the Ops Manager web app, such as a Rails app, is running, as recorded in the `production.log` file. To explore other logs, see [Logging Tips](#tips).
 
-### <a id='starting'> </a>Identifying Where to Start ###
 
-This section contains general tips for locating where a particular problem is called out in the log files. Refer to the later sections for tips regarding specific logs (such as those for PAS Components).
+## <a id='tips'> </a> Logging Tips
 
-* Start with the largest and most recently updated files in the job log
-* Identify logs that contain 'err' in the name
-* Scan the file contents for a "failed" or "error" string
+### <a id='starting'> </a> Identifying Where to Start
 
-### <a id='component_logs'></a>Viewing Logs for PAS Components ###
+This section contains general tips for locating where a particular problem is called out in the log files. For guidance regarding specific logs, such as those for PAS components, see the sections below.
 
-To troubleshoot specific PAS components by viewing their log files, browse to the Ops Manager interface and follow the procedure below.
+* Start with the largest and most recently updated files in the job log.
+* Identify logs that contain `err` in the name.
+* Scan the file contents for a "failed" or "error" string.
 
-1. In Ops Manager, browse to the PAS **Status** tab. In the **Job** column, locate the component of interest.
+### <a id='component_logs'></a> Viewing Logs for PAS Components
+
+To troubleshoot specific PAS components by viewing their log files:
+
+1. Navigate to your Ops Manager Installation Dashboard and click on the PAS tile.
+
+1. Select the **Status** tab.
+
+1. In the **Job** column, locate the component you want to troubleshoot.
+
 1. In the **Logs** column for the component, click the download icon.
 
     <%= image_tag("troubleshooting/status.png") %>
 
-1. Browse to the PAS **Logs** tab.
+1. Select the **Logs** tab.
 
     <%= image_tag("troubleshooting/logs.png") %>
 
-1. Once the zip file corresponding to the component of interest moves to the **Downloaded** list, click the linked file path to download the zip file.
+1. Once the ZIP file corresponding to the component moves to the **Downloaded** list, click the linked file path to download the ZIP file.
+
 1. Once the download completes, unzip the file.
 
-The contents of the log directory vary depending on which component you view. For example, the Diego cell log directory contains sub-directories for the `metron_agent` `rep`, `monit`, and `garden` processes. To view the standard error stream for `garden`, download the Diego cell logs and open `diego.0.job > garden > garden.stderr.log`.
+The contents of the log directory vary depending on which component you view. For example, the Diego Cell log directory contains subdirectories for the `metron_agent` `rep`, `monit`, and `garden` processes. To view the standard error stream for `garden`, download the Diego Cell logs and open `diego.0.job > garden > garden.stderr.log`.
 
-###<a id='view_in_terminal'></a>Viewing Web Application and BOSH Failure Logs in a Terminal Window ###
+### <a id='view_in_terminal'></a> Viewing Web App and BOSH Failure Logs in a Terminal Window
 
-You can obtain diagnostic information from the Operations Manager by logging
-in to the VM where it is running. To log in to the Operations Manager VM, you need the following information:
+You can obtain diagnostic information from Ops Manager by logging in to the VM where it is running. To log in to the Ops Manager VM, you need:
 
-* The IP address of the <%= vars.product_name %> VM shown in the `Settings` tab of the Ops
-Manager Director tile.
-* Your **import credentials**. Import credentials are the username and password
-used to import the <%= vars.product_name %> `.ova` or `.ovf` file into your virtualization
-system.
+* The IP address of the <%= vars.platform_name %> VM shown in the **Settings** tab of the Ops Manager Director tile.
 
-Complete the following steps to log in to the Operations Manager VM:
+* Your **import credentials**. Import credentials are the username and password used to import the <%= vars.platform_name %> `.ova` or `.ovf` file into your virtualization system.
+
+To log in to the Ops Manager VM:
 
 1. Open a terminal window.
-1. Run `ssh IMPORT-USERNAME@<%= vars.platform_code %>-VM-IP-ADDRESS` to connect to the <%= vars.product_name %> installation VM.
+
+1. To connect to the <%= vars.platform_name %> installation VM, run:
+
+    ```
+    ssh IMPORT-USERNAME@<%= vars.platform_code %>-VM-IP-ADDRESS
+    ```
+    Where:
+    * `IMPORT-USERNAME` is the username you used to import the `.ova` or `.ovf` file into your virtualization system.
+    * `VM-IP-ADDRESS` is the IP address of the <%= vars.platform_name %> installation VM.
+
 1. Enter your import password when prompted.
-1. Change directories to the home directory of the web application:
 
-    `cd /home/tempest-web/tempest/web/`
+1. Go to the home directory of the web app by running:
 
-1. You are now in a position to explore whether things are as they should be
-within the web application.
-<br /><br />
-    You can also verify that the `microbosh` component is successfully
-installed.
-A successful MicroBOSH installation is required to install PAS and any products like databases and messaging services.
+    ```
+    cd /home/tempest-web/tempest/web/
+    ```
 
-1. Change directories to the BOSH installation log home:
+1. You are now in a position to explore whether things are as they should be within the web app. You can also verify that the `microbosh` component is successfully installed. A successful MicroBOSH installation is required to install PAS and any products like databases and messaging services.
 
-    `cd /var/tempest/workspaces/default/deployments/micro`
+1. Change directories to the BOSH installation log home by running:
 
-1. You may want to begin by running a tail command on the `current` log:
+    ```
+    cd /var/tempest/workspaces/default/deployments/micro
+    ```
 
-    `cd /var/tempest/workspaces/default/deployments/micro`
+1. You may want to begin by running a tail command on the `current` log. Run:
 
-    If you are unable to resolve an issue by viewing configurations, exploring
-logs, or reviewing common problems, you can troubleshoot further by running
-BOSH diagnostic commands with the BOSH Command Line Interface (CLI).
+    ```
+    cd /var/tempest/workspaces/default/deployments/micro
+    ```
+    If you are unable to resolve an issue by viewing configurations, exploring logs, or reviewing common problems, you can troubleshoot further by running BOSH diagnostic commands with the BOSH Command Line Interface (CLI).
 
-<p class="note"><strong>Note</strong>: Do not manually modify the deployment manifest. Operations Manager will overwrite manual changes to this manifest.
-In addition, manually changing the manifest may cause future deployments to
-fail.</p>
+<p class="note"><strong>Note:</strong> Do not manually modify the deployment manifest. Ops Manager overwrites manual changes to this manifest. In addition, manually changing the manifest may cause future deployments to fail.</p>
 
-##<a id='view-vms'></a>Viewing the VMs in Your Deployment ##
 
-To view the VMs in your <%= vars.product_name %> deployment, perform the following steps specific to your IaaS.
+## <a id='view-vms'></a> Viewing the VMs in Your Deployment
 
-###<a id="aws"></a>Amazon Web Services (AWS)
+To view the VMs in your <%= vars.platform_name %> deployment, follow the procedure specific to your IaaS.
 
-1. Log in to the <a href="https://console.aws.amazon.com/">AWS Console</a>.
+### <a id="aws"></a> Amazon Web Services (AWS)
+
+To view the VMs in your AWS deployment:
+
+1. Log in to the AWS Console.
+
 1. Navigate to the EC2 Dashboard.
+
 1. Click **Running Instances**.
-1. Click the gear icon in the upper right.
-1. Select the following: **job**, **deployment**, **director**, **index**.
+
+1. Click the gear icon in the upper-right corner.
+
+1. Select **job**, **deployment**, **director**, and **index**.
+
 1. Click **Close**.
 
-###<a id="openstack"></a>OpenStack
+### <a id="openstack"></a> OpenStack
 
-1. Install the [novaclient](https://github.com/openstack/python-novaclient).
+To view the VMs in your OpenStack deployment:
+
+1. Install the novaclient from the [python-novaclient](https://github.com/openstack/python-novaclient) repository on GitHub.
+
 1. Point novaclient to your OpenStack installation and tenant by exporting the following environment variables:
-<pre class="terminal">
-$ export OS\_AUTH\_URL= YOUR\_KEYSTONE\_AUTH\_ENDPOINT
-$ export OS\_TENANT\_NAME = TENANT\_NAME
-$ export OS\_USERNAME = USERNAME
-$ export OS\_PASSWORD = PASSWORD
-</pre>
-1. List your VMs by running the following command:
-<pre class="terminal">
-$ nova list --fields metadata
-</pre>
 
-###<a id="vsphere"></a>vSphere
+    ```
+    export OS\_AUTH\_URL= YOUR\_KEYSTONE\_AUTH\_ENDPOINT
+    export OS\_TENANT\_NAME = TENANT\_NAME
+    export OS\_USERNAME = USERNAME
+    export OS\_PASSWORD = PASSWORD
+    ```
 
-1. Log into vCenter.
+1. List your VMs by running:
+
+    ```
+    nova list --fields metadata
+    ```
+
+### <a id="vsphere"></a> vSphere
+
+To view the VMs in your vSphere deployment:
+
+1. Log in to vCenter.
+
 1. Select **Hosts and Clusters**.
-1. Select the top level object that contains your <%= vars.product_name %> deployment. For example, select **Cluster**, **Datastore** or **Resource Pool**.
+
+1. Select the top level object that contains your <%= vars.platform_name %> deployment. For example, select **Cluster**, **Datastore**, or **Resource Pool**.
+
 1. In the top tab, click **Related Objects**.
+
 1. Select **Virtual Machines**.
-1. Right click on the **Table** heading and select **Show/Hide Columns**.
-1. Select the following boxes: **job**, **deployment**, **director**, **index**.
 
-##<a id='console-logs'></a>Viewing Apps Manager Logs in a Terminal Window ##
+1. Right-click on the **Table** heading and select **Show/Hide Columns**.
 
-The [Apps Manager](../console/dev-console.html) provides a graphical user
-interface to help manage organizations, users, applications, and spaces.
+1. Select the **job**, **deployment**, **director**, and **index** boxes.
 
-When troubleshooting Apps Manager performance, you might want to view the
-Apps Manager application logs.
-To view the Apps Manager application logs, follow these steps:
 
-1. Run `cf login -a api.MY-SYSTEM-DOMAIN -u admin` from a command line to log
-in to <%= vars.product_name %> using the UAA Administrator credentials. In Pivotal Ops
-Manager, refer to PAS **Credentials** for these
-credentials.
+## <a id='console-logs'></a> Viewing Apps Manager Logs in a Terminal Window
 
-    <pre class='terminal'>
-    $ cf login -a api.example.com -u admin
-    API endpoint: api.example.com
+Apps Manager provides a graphical user interface to help manage organizations, users, apps, and spaces. For more information about Apps Manager, see [Getting Started with Apps Manager](../console/dev-console.html)
 
-    Password>******
-    Authenticating...
-    OK
-    </pre>
+When troubleshooting Apps Manager performance, you might want to view the Apps Manager app logs. To view the Apps Manager app logs:
 
-1. Run `cf target -o system -s apps-manager` to target the `system` org and the
-`apps-manager` space.
+1. From a command line, log in to <%= vars.platform_name %> by running:
 
-    <pre class='terminal'>
-    $ cf target -o system -s apps-manager
-    </pre>
+    ```
+    cf login -a api.YOUR-SYSTEM-DOMAIN -u admin
+    ```
+    Where `YOUR-SYSTEM-DOMAIN` is your system domain.
+    <br>
+    When prompted, enter your UAA Administrator credentials. To obtain these credentials, see **Credentials** tab in the PAS tile.
 
-1. Run `cf logs apps-manager` to tail the Apps Manager logs.
+1. Target the `system` org and the `apps-manager` space by running:
 
-    <pre class='terminal'>
-    $ cf logs apps-manager
-    Connected, tailing logs for app apps-manager in org system / space apps-manager as
-    admin...
-    </pre>
+    ```
+    cf target -o system -s apps-manager
+    ```
 
-###<a id='changing-log-level'></a>Changing Logging Levels for the Apps Manager ##
+1. Tail the Apps Manager logs by running:
 
-The Apps Manager recognizes the `LOG_LEVEL` environment variable.
-The `LOG_LEVEL` environment variable allows you to filter the messages
-reported in the Apps Manager log files by severity level. The Apps Manager defines severity levels using the Ruby standard library [Logger class](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/logger/rdoc/Logger.html).
+    ```
+    cf logs apps-manager
+    ```
 
-By default, the Apps Manager `LOG_LEVEL` is set to `info`.
-The logs show more verbose messaging when you set the `LOG_LEVEL` to `debug`.
+### <a id='changing-log-level'></a> Changing Logging Levels for Apps Manager
 
-To change the Apps Manager `LOG_LEVEL`, run `cf set-env apps-manager LOG_LEVEL` with the desired severity level.
+Apps Manager recognizes the `LOG_LEVEL` environment variable. The `LOG_LEVEL` environment variable allows you to filter the messages reported in Apps Manager log files by severity level. Apps Manager defines severity levels using the Ruby standard library [Logger class](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/logger/rdoc/Logger.html).
 
-<pre class='terminal'>
-$ cf set-env apps-manager LOG_LEVEL debug
-</pre>
+By default, the Apps Manager `LOG_LEVEL` environment variable is set to `info`. The logs show more verbose messaging when you set the `LOG_LEVEL` to `debug`.
 
-You can set `LOG_LEVEL` to one of the six severity levels defined by the Ruby
-Logger class:
+To change the Apps Manager `LOG_LEVEL` environment variable, run:
 
-* **Level 5**: `unknown` -- An unknown message that should always be logged
-* **Level 4**: `fatal` -- An unhandleable error that results in a program crash
-* **Level 3**: `error` -- A handleable error condition
-* **Level 2**: `warn` -- A warning
-* **Level 1**: `info` -- General information about system operation
-* **Level 0**: `debug` -- Low-level information for developers
+```
+cf set-env apps-manager LOG_LEVEL LEVEL
+```
 
-Once set, the Apps Manager log files only include messages at the set
-severity level and above.
-For example, if you set `LOG_LEVEL` to `fatal`, the log includes `fatal` and
-`unknown` level messages only.
+Where `LEVEL` is the desired severity level.
 
-##<a id='disk-space-diagnostics'></a>Analyzing Disk Usage on Containers and Diego Cell VMs
+You can set `LOG_LEVEL` to one of the six severity levels defined by the Ruby Logger class:
+
+* **Level 5**: `unknown` -- An unknown message that should always be logged.
+* **Level 4**: `fatal` -- An unhandleable error that results in a program crash.
+* **Level 3**: `error` -- A handleable error condition.
+* **Level 2**: `warn` -- A warning.
+* **Level 1**: `info` -- General information about system operation.
+* **Level 0**: `debug` -- Low-level information for developers.
+
+Once set, Apps Manager log files only include messages at the set severity level and above. For example, if you set `LOG_LEVEL` to `fatal`, the log includes `fatal` and `unknown` level messages only.
+
+
+## <a id='disk-space-diagnostics'></a> Analyzing Disk Usage on Containers and Diego Cell VMs
 
 To obtain disk usage statistics by Diego Cell VMs and containers, see [Examining GrootFS Disk Usage](../adminguide/examining_grootfs_disk.html).
