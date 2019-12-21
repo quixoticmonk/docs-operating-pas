@@ -11,47 +11,26 @@ Logs forwarded from other sources, such as kernel logs, retain their original PR
 
 The following table describes the log line Structured Data:
 
-<table border="1" class="nice" >
-  <tr>
-    <th>Structured Data</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>ENTERPRISE_NUMBER</td>
-    <td>Cloud Foundry's private enterprise number, <code>47450</code>, as defined in <a href="https://tools.ietf.org/html/rfc5424#section-7.2.2">RFC 5424 Section 7.2.2</a>.</td>
-  </tr>
-  <tr>
-    <td>DIRECTOR</td>
-    <td>The name of the BOSH Director managing the deployment.</td>
-  </tr>
-  <tr>
-    <td>DEPLOYMENT</td>
-    <td>The name of the BOSH deployment.</td>
-  </tr>
-  <tr>
-    <td>INSTANCE_GROUP</td>
-    <td>The name of the  BOSH instance_group.</td>
-  </tr>
-  <tr>
-    <td>AVAILABILITY_ZONE</td>
-    <td>The name of the BOSH availability zone.</td>
-  </tr>
-  <tr>
-    <td>ID</td>
-    <td>The BOSH GUID.</td>
-  </tr>
-</table>
+| Structured Data | Description |
+| --------------- | ----------- |
+| ENTERPRISE_NUMBER | PAS's private enterprise number, `47450`, as defined in [RFC 5424 Section 7.2.2](https://tools.ietf.org/html/rfc5424#section-7.2.2) |
+| DIRECTOR | The name of the BOSH Director managing the deployment. |
+| DEPLOYMENT | The name of the BOSH deployment. |
+| INSTANCE_GROUP | The name of the BOSH instance group. |
+| AVAILABILITY_ZONE | The name of the BOSH availability zone. |
+| ID | The BOSH GUID. |
 
 Log lines use the format below:
 
-<pre>
+```
 <$PRI>$VERSION $TIMESTAMP $HOST $APP_NAME $PROC_ID $MSG_ID   
     [instance@ENTERPRISE_NUMBER director="$DIRECTOR" deployment="$DEPLOYMENT" 
     group="$INSTANCE_GROUP" az="$AVAILABILITY_ZONE" id="$ID"] $MESSAGE
-</pre>
+```
+
 Example log messages:
 
-<pre>
+```
 <14>1 2017-01-25T13:25:03.18377Z 192.0.2.10 etcd - - [instance@47450 
     director="test-env" deployment="cf-c42ae2c4dfb6f67b6c27" group="diego_database" az="us-west1-a" 
     id="83bd66e5-3fdf-44b7-bdd6-508deae7c786"] [INFO] the leader is 
@@ -69,12 +48,12 @@ Example log messages:
     {"address":"192.0.2.12","ports":[{"container_port":8080,"host_port":61532},
     {"container_port":2222,"host_port":61533}]},"request":
     "/v1/actual_lrps/start","session":"418.1"}}
-</pre>
+```
 
 
 ## <a id='examples'></a> Modify Which Logs PAS Forwards
 
-When you enable log forwarding, PAS forwards all log lines written to the `/var/vcap/sys/log` directories on all Cloud Foundry virtual machines (VMs) to your configured External Syslog Aggregator endpoint by default.
+When you enable log forwarding, PAS forwards all log lines written to the `/var/vcap/sys/log` directories on all <%= vars.platform_name %> virtual machines (VMs) to your configured External Syslog Aggregator endpoint by default.
 
 To configure PAS to forward a subset of logs instead of forwarding all logs: 
 

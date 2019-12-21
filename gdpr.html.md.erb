@@ -332,19 +332,17 @@ By default, the [Gorouter](../concepts/architecture/router.html) logs include th
 
 #### <a id='disable-client-ip-logging'></a> Disable Client IP Logging
 
-In Pivotal Application Service (PAS) v2.0 and later and Elastic Runtime v1.12, operators can disable logging of client IP addresses in the Gorouter.
+In PPAS v2.0 and later and Elastic Runtime v1.12, operators can disable logging of client IP addresses in the Gorouter.
 
-To disable logging of client IP addresses, do the following:
+To disable logging of client IP addresses:
 
 1. Navigate to the Ops Manager Installation Dashboard and click the PAS or Elastic Runtime tile.
 
 1. Click **Networking**.
 
 1. Under **Logging of Client IPs in CF Router**, select one of the two options:
-	* If the source IP address exposed by your load balancer is its own IP address,
-          select **Disable logging of X-Forwarded-For header only**. 
-	* If the source IP address exposed by your load balancer belongs to the downstream client,
-          select **Disable logging of both source IP and X-Forwarded-For header**.
+	* If the source IP address exposed by your load balancer is its own IP address, select **Disable logging of X-Forwarded-For header only**. 
+	* If the source IP address exposed by your load balancer belongs to the downstream client, select **Disable logging of both source IP and X-Forwarded-For header**.
 
 1. Click **Save**.
 
@@ -369,33 +367,23 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 <tr>
 <th>Business Execution</th>
 <td>Executing apps and tasks</td>
-<td>No personal data is collected explicitly, but personal data may be encoded in app file contents
-    or runtime metadata such as environment variables or start commands.</td>
-<td>Runtime metadata is collected when Cloud Controller submits work specification to the Diego BBS API.
-    File contents are collected when Diego schedules an app or a task on a Diego cell.</td>
-<td>Runtime metadata is stored in the Diego BBS DB.
-    App file contents are cached on Diego cells.</td>
-<td>Runtime metadata is used to start processes inside app instance containers and to configure their environment.
-    App file contents are presented as part of the app instance container filesystem.</td>
+<td>No personal data is collected explicitly, but personal data may be encoded in app file contents or runtime metadata such as environment variables or start commands.</td>
+<td>Runtime metadata is collected when Cloud Controller submits work specification to the Diego BBS API. File contents are collected when Diego schedules an app or a task on a Diego Cell.</td>
+<td>Runtime metadata is stored in the Diego BBS DB. App file contents are cached on Diego Cells.</td>
+<td>Runtime metadata is used to start processes inside app instance containers and to configure their environment. App file contents are presented as part of the app instance container filesystem.</td>
 <td>Platform operators and other developers with access to the Cloud Controller space containing that app can view the data.</td>
 <td><ul><li>To delete the runtime metadata stored in the Diego BBS DB, stop the app or cancel the task that includes that data.</li>
-<li>To delete the app file contents stored in the running app and task containers, stop the app or cancel the task to destroy the containers.
-    To destroy the app file contents stored in the download cache on the Diego cells,
-    recreate the Diego cell VMs.</li></ul></td>
+<li>To delete the app file contents stored in the running app and task containers, stop the app or cancel the task to destroy the containers. To destroy the app file contents stored in the download cache on the Diego Cells, recreate the Diego Cell VMs.</li></ul></td>
 </tr>
 <tr>
 <th>Reports/Logs</th>
-<td>SSH proxy logs Cloud Foundry user access.</td>
+<td>SSH proxy logs PAS user access.</td>
 <td>UAA user name and ID</td>
 <td>When the user authenticates for SSH access to an app.</td>
-<td>The data is stored in a log file collocated with the SSH proxy instance handling the authentication request.
-    This log file may also have its contents forwarded to a remote syslog destination.</td>
-<td>No processing of the local log file is done automatically.
-    If the log file contents are forwarded to a log aggregation service,
-    they may be parsed and processed arbitrarily.</td>
-<td>Only platform operators have access to the local log file.
-    Platform operators or auditors may have access to these log contents in a downstream log aggregation service.</td>
-<td>To delete the log lines containing the user ID, perform the following steps:
+<td>The data is stored in a log file collocated with the SSH proxy instance handling the authentication request. This log file may also have its contents forwarded to a remote syslog destination.</td>
+<td>No processing of the local log file is done automatically. If the log file contents are forwarded to a log aggregation service, they may be parsed and processed arbitrarily.</td>
+<td>Only platform operators have access to the local log file. Platform operators or auditors may have access to these log contents in a downstream log aggregation service.</td>
+<td>To delete the log lines containing the user ID:
 	<ol><li>Run <code>bosh recreate</code> on the VMs hosting the SSH proxy processes to remove all the logs on ephemeral disk.</li>
 	<li><code>bosh ssh</code> into the VMs hosting the SSH proxy processes and remove specific log lines containing user IDs.</li>
 	<li>Scrub corresponding log lines from any log aggregation service.</li>
@@ -405,7 +393,7 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 
 ### <a id='cf-notifications'></a> Notifications Service
 
-The Notifications Service enables operators to configure components of Cloud Foundry to send emails to end users. For more information, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
+The Notifications Service enables operators to configure components of PAS to send emails to end users. For more information, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
 
 <table>
 <tbody>

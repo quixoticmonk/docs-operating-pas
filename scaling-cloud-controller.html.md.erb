@@ -46,7 +46,7 @@ You can find the above heuristic failures in the following log files:
 
 Before and after scaling Cloud Controller API VMs, you should verify that the Cloud Controller database is not overloaded. All Cloud Controller processes are backed by the same database, so heavy load on the database impacts API performance regardless of the number of Cloud Controllers deployed. Cloud Controller supports both PostgreSQL and MySQL, so there is no specific scaling guidance for the database.
 
-In CF deployments with internal MySQL clusters, a single MySQL database VM with CPU usage over ~80% can be considered overloaded. When this happens, the MySQL VMs must be scaled up to prevent the added load of additional Cloud Controllers exacerbating the issue.
+In PAS deployments with internal MySQL clusters, a single MySQL database VM with CPU usage over ~80% can be considered overloaded. When this happens, the MySQL VMs must be scaled up to prevent the added load of additional Cloud Controllers exacerbating the issue.
 
 Cloud Controller API VMs should primarily be scaled horizontally. Scaling up the number of cores on a single VM is not effective. This is because Ruby's Global Interpreter Lock (GIL) limits the `cloud_controller_ng` process so that it can only effectively use a single CPU core on a multi-core machine.
 
@@ -141,7 +141,7 @@ Cloud Controller emits the following metrics:
 
 The following behaviors may occur:
 
-* Diego domains are frequently unfresh. For more information, see the [Domain Freshness](https://github.com/cloudfoundry/bbs/blob/master/doc/domains.md#domain-freshness) section in the _Overview of Domains_ topic on GitHub.
+* Diego domains are frequently unfresh. For more information, see the [Domain Freshness](https://github.com/cloudfoundry/bbs/blob/master/doc/domains.md#domain-freshness) section in the _Overview of Domains_ topic in the BBS Server repository on GitHub.
 * The Diego Desired LRP count is larger than the total process instance count reported through the Cloud Controller APIs.
 * Deployments are slow to increase and decrease instance count.
 
@@ -188,7 +188,7 @@ You can find the above heuristic failures in the following log files:
 
 ### How to Scale
 
-The internal WebDAV blobstore cannot be scaled horizontally, not even for availability purposes, because of its reliance on the `singleton-blobstore` VM's persistent disk for file storage. For this reason, it is not recommended for environments that require high availability. For these environments, you should use an external blobstore. For more information, see [Cloud Controller Blobstore Configuration](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html) and the [Blob Storage](https://docs.cloudfoundry.org/concepts/high-availability.html#blobstore) section of the _High Availability in Cloud Foundry_ topic.
+The internal WebDAV blobstore cannot be scaled horizontally, not even for availability purposes, because of its reliance on the `singleton-blobstore` VM's persistent disk for file storage. For this reason, it is not recommended for environments that require high availability. For these environments, you should use an external blobstore. For more information, see [Cloud Controller Blobstore Configuration](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html) in the open source Cloud Foundry documentation and the [Blob Storage](https://docs.cloudfoundry.org/concepts/high-availability.html#blobstore) section of the _High Availability in PAS_ topic.
 
 The internal WebDAV blobstore can be scaled vertically, so scaling up the number of CPUs or adding faster disk storage can improve the performance of the internal WebDAV blobstore if it is under high load.
 
