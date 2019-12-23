@@ -131,14 +131,13 @@ To configure the **CredHub** pane:
 
 1. Under **CredHub database location**, select the location of your CredHub database. PAS includes this CredHub database for services to store their service instance credentials.
     * **PAS database**: If you select this option, CredHub uses the same database as other PAS components, whether the database is internal or external. You configure this database in the **Databases** pane.
-      <p class="note"><strong>Note:</strong> If you deploy PAS on GCP, you must select <strong>PAS database</strong>. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a> in the <em>Pivotal Application Service v2.4 Release Notes</em>.
     * **Other external database**: If you select this option, configure the following fields:
         * **Hostname:** Enter the IP address of your database server.
         * **TCP port:** Enter the port of your database server, such as `3306`.
         * **Username:** Enter a unique username that can access your CredHub database on the database server.
         * **Password:** Enter the password for the provided username.
         * **Database CA certificate:** This certificate is used when encrypting traffic to and from the database.
-        * **Disable hostname verification:** Enable this checkbox to disable hostname verification for TLS connections to the targeted database server. You cannot disable hostname verification for TLS connections to Postgres databases.
+        * **Disable hostname verification:** Enable this checkbox to disable hostname verification for TLS connections to the targeted database server. You cannot disable hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
       <div class="note"><strong>Note:</strong> If you deploy PAS on AWS using Terraform, you can locate the following values in your Terraform output:
           <ul>
             <li><strong>Hostname:</strong> <code>rds\_address</code></li>
@@ -198,8 +197,6 @@ In the **Databases** pane, you can configure PAS to use an internal MySQL databa
 
 ### <a id='internal-db'></a> Internal Database Configuration
 
-<p class="note"><strong>Note:</strong> For Runtime CredHub to work on GCP installations, you must use internal MySQL. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a> in the <em>Pivotal Application Service v2.4 Release Notes</em>.</p>
-
 <p class="note"><strong>Note:</strong> For GCP installations, Pivotal recommends selecting <strong>External</strong> and using Google Cloud SQL. Only use internal MySQL for non-production or test installations on GCP.</p>
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
@@ -208,8 +205,6 @@ In the **Databases** pane, you can configure PAS to use an internal MySQL databa
 To configure high availability for your internal MySQL databases, see [Configure Internal MySQL](#internal-mysql).
 
 ### <a id='create-dbs'></a> External System Database Configuration
-
-<p class="note"><strong>Note:</strong> If you use external MySQL, you cannot use Runtime CredHub. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a> in the <em>Pivotal Application Service v2.4 Release Notes</em>.</p>
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/ert_database_external" %>
