@@ -137,7 +137,7 @@ To configure the **CredHub** pane:
         * **Username:** Enter a unique username that can access your CredHub database on the database server.
         * **Password:** Enter the password for the provided username.
         * **Database CA certificate:** This certificate is used when encrypting traffic to and from the database.
-        * **Disable hostname verification:** Enable this checkbox to disable hostname verification for TLS connections to the targeted database server. You cannot disable hostname verification for TLS connections to Postgres databases.
+        * **Disable hostname verification:** Enable this checkbox to disable hostname verification for TLS connections to the targeted database server. You cannot disable hostname verification for TLS connections to Postgres databases. You must select this option if you are configuring an external database on GCP or Azure.
       <div class="note"><strong>Note:</strong> If you deploy PAS on AWS using Terraform, you can locate the following values in your Terraform output:
           <ul>
             <li><strong>Hostname:</strong> <code>rds\_address</code></li>
@@ -205,8 +205,6 @@ In the **Databases** pane, you can configure PAS to use an internal MySQL databa
 To configure high availability for your internal MySQL databases, see [Configure Internal MySQL](#internal-mysql).
 
 ### <a id='create-dbs'></a> External System Database Configuration
-
-<p class="note"><strong>Note:</strong> If you use external MySQL, you cannot use Runtime CredHub. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/runtime-rn.html#external-credhub">CredHub Database Cannot Be External on GCP</a> in the <em>Pivotal Application Service v2.4 Release Notes</em>.</p>
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/ert_database_external" %>
