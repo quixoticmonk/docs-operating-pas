@@ -186,7 +186,7 @@ You can find the above heuristic failures in the following log files:
 
 ### How to Scale
 
-The internal WebDAV blobstore cannot be scaled horizontally, not even for availability purposes, because of its reliance on the `singleton-blobstore` VM's persistent disk for file storage. For this reason, it is not recommended for environments that require high availability. For these environments, you should use an external blobstore. For more information, see [Cloud Controller Blobstore Configuration](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html) and the [Blob Storage](https://docs.cloudfoundry.org/concepts/high-availability.html#blobstore) section of the _High Availability in Cloud Foundry_ topic.
+The internal WebDAV blobstore cannot be scaled horizontally, not even for availability purposes, because of its reliance on the `singleton-blobstore` VM's persistent disk for file storage. For this reason, it is not recommended for environments that require high availability. For these environments, you should use an external blobstore. For more information, see [Cloud Controller Blobstore Configuration](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html) and the [Blob Storage](https://docs.cloudfoundry.org/concepts/high-availability.html#blobstore) section of the _High Availability in PAS_ topic.
 
 The internal WebDAV blobstore can be scaled vertically, so scaling up the number of CPUs or adding faster disk storage can improve the performance of the internal WebDAV blobstore if it is under high load.
 
