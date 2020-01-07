@@ -169,7 +169,7 @@ $ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/system_report/task_usages" -k -v \
   <tr>
     <td><code>maximum_concurrent_tasks</code></td>
     <td>The maximum number of tasks simultaneously running at any given time during the specified period.</td>
-    <td>Each time a task is started or stopped, a new record of the current number of running tasks is created. The max concurrent value then comes from the record with the maximum value over the desired time range.</td>
+    <td>Each time a task is started or stopped, a new record of the current number of running tasks is created. The maximum concurrent value then comes from the record with the maximum value over the desired time range.</td>
   </tr>
   <tr>
     <td><code>task_hours</code></td>
@@ -284,32 +284,32 @@ $ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/system_report/service_usages" -k -v
   </tr>
   <tr>
     <td><code>usages.duration_in_hours</code></td>
-    <td>The duration in hours service instances ran within a month and year</td>
+    <td>The duration in hours service instances ran within a month and year.</td>
     <td>Service instance start and stop events are processed into summary records, grouped by month and year, and summed.</td>
   </tr>
   <tr>
     <td><code>usages.average_instances</code></td>
-    <td>The average number of service instances ran within a month and year</td>
+    <td>The average number of service instances ran within a month and year.</td>
     <td><code>duration_in_hours</code> divided by the number of hours for a month or year.</td>
   </tr>
   <tr>
     <td><code>usages.maximum_instances</code></td>
-    <td>The maximum number of simultaneously running service instances within a month and year</td>
+    <td>The maximum number of simultaneously running service instances within a month and year.</td>
     <td>Usage Service walks through all service instance records for a month and year.</td>
   </tr>
   <tr>
     <td><code>plans.usages.duration_in_hours</code></td>
-    <td>The duration in hours service instances of a plan type ran within a month and year</td>
+    <td>The duration in hours service instances of a plan type ran within a month and year.</td>
     <td><code>usages.duration_in_hours</code> filtered by plan type.</td>
   </tr>
   <tr>
     <td><code>plans.usages.average_instances</code></td>
-    <td>The average number of service instances of a plan type that ran within a month and year</td>
+    <td>The average number of service instances of a plan type that ran within a month and year.</td>
     <td><code>usages.average_instances</code> filtered by plan type.</td>
   </tr>
   <tr>
     <td><code>plans.usages.maximum_instances</code></td>
-    <td>The maximum number of simultaneously running service instances of a plan type within a month and year</td>
+    <td>The maximum number of simultaneously running service instances of a plan type within a month and year.</td>
     <td><code>usages.maximum_instances</code> filtered by plan type.</td>
   </tr>
 </table>
