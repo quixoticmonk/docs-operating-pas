@@ -3,13 +3,11 @@ title: Reporting App, Task, and Service Instance Usage
 owner: BAM
 ---
 
-
-
 This topic describes how to use the Cloud Foundry Command Line Interface (cf CLI) to retrieve historical system- and org-level usage information about your apps, tasks, and service instances through the Cloud Controller and Usage Service APIs.
 
 Usage reports are compiled from the `/v2/app_usage_events` endpoint. For more information, see [List all App Usage Events](https://apidocs.cloudfoundry.org/6.7.0/app_usage_events/list_all_app_usage_events.html) in the Cloud Foundry API documentation.
 
-You can also access usage information by using Apps Manager. For more information, see the [Reporting Instance Usage with Apps Manager](accounting-report-apps-man.html) topic.
+You can also access usage information by using Apps Manager. For more information, see [Reporting Instance Usage with Apps Manager](accounting-report-apps-man.html).
 
 To retrieve current app and event information from the Cloud Controller, see [Retrieving App and Event Information](https://docs.cloudfoundry.org/running/managing-cf/app-event.html) in the open-source Cloud Foundry documentation.
 
@@ -241,7 +239,7 @@ $ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/app_usages?start=2018-010-01&end=20
 
 </pre>
 
-This beta API endpoint may change; please try it out and help Pivotal make it better.
+This beta API endpoint may change.
 
 
 ## <a id="individual_org"></a> Obtain Org Usage Information
@@ -389,7 +387,7 @@ Where `YOUR-SYSTEM-DOMAIN` is the system domain of your PAS environment.
 
 ## <a id="monitor-usage-service"></a> Monitor Usage Service
 
-Pivotal recommends monitoring usage service at regular intervals with a recurring CI task or 3rd party monitoring tool. Usage service runs asynchronous jobs such as fetching usage events from the Cloud Controller API. 
+Pivotal recommends monitoring usage service at regular intervals with a recurring CI task or third-party monitoring tool. Usage service runs asynchronous jobs such as fetching usage events from the Cloud Controller API. 
 
 Use the following curl command to check for failed jobs:
 
