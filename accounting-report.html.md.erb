@@ -3,11 +3,9 @@ title: Reporting App, Task, and Service Instance Usage
 owner: BAM
 ---
 
-
-
 This topic describes how to use the Cloud Foundry Command Line Interface (cf CLI) to retrieve historical system- and org-level usage information about your apps, tasks, and service instances through the Cloud Controller and Usage Service APIs.
 
-You can also access usage information by using Apps Manager. For more information, see the [Reporting Instance Usage with Apps Manager](accounting-report-apps-man.html) topic.
+You can also access usage information by using Apps Manager. For more information, see [Reporting Instance Usage with Apps Manager](accounting-report-apps-man.html).
 
 To retrieve current app and event information from the Cloud Controller, see [Retrieving App and Event Information](https://docs.cloudfoundry.org/running/managing-cf/app-event.html) in the open-source Cloud Foundry documentation.
 
@@ -24,7 +22,7 @@ uaac member add usage_service.audit USERNAME
 
 Pivotal strongly recommends monitoring Usage Service at regular intervals with a recurring CI task or third-party monitoring tool.
 
-One important reason to monitor Usage Service is that reports are generated based on app and service events fetched from the Cloud Controller. Events are dumped from the Cloud Controller database after 31 days. This means that if the Usage Service fails to fetch events for a period greater than 31 days, events can be permanently lost, and Usage Service will be unable to construct a complete history of usage on the foundation. Event fetching could fail for a number of reasons, such as platform downtime and revoked credentials. Monitoring can help to catch these errors early and prevent incorrect data from propagating.
+One important reason to monitor Usage Service is that reports are generated based on app and service events fetched from the Cloud Controller. Events are dumped from the Cloud Controller database after 31 days. This means that if the Usage Service fails to fetch events for a period greater than 31 days, events can be permanently lost, and Usage Service cannot construct a complete history of usage on the foundation. Event fetching could fail for a number of reasons, such as platform downtime and revoked credentials. Monitoring can help to catch these errors early and prevent incorrect data from propagating.
 
 Use the following endpoints to monitor Usage Service:
 
@@ -401,7 +399,7 @@ $ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/organizations/YOUR-ORG-GUID/app_usa
 }
 </pre>
 
-You may see results with "instance_count": 0.  This happens when a v3 app is pushed but has processes that aren’t scaled up.  The memory configuration and duration are still stored and can be useful for resource management.  Apps with '0' instances are not counted in the App Usages System Report above.
+You may see results with "instance_count": 0.  This happens when a v3 app is pushed but has processes that are not scaled up. The memory configuration and duration are still stored and can be useful for resource management. Apps with '0' instances are not counted in the App Usages System Report above.
 
 ### <a id='org-task-usage'></a> Task Usage
 
