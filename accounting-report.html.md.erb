@@ -22,9 +22,9 @@ uaac member add usage_service.audit USERNAME
 
 ## <a id="monitor-usage-service"></a> Monitor Usage Service
 
-Pivotal strongly recommends monitoring Usage Service at regular intervals with a recurring CI task or 3rd party monitoring tool.
+Pivotal strongly recommends monitoring Usage Service at regular intervals with a recurring CI task or third-party monitoring tool.
 
-One important reason to monitor Usage Service is that reports are generated based on app and service events fetched from the Cloud Controller. Events are dumped from the Cloud Controller database after 31 days. This means that if the Usage Service fails to fetch events for a period greater than 31 days, events can be permanently lost, and Usage Service will be unable to construct a complete history of usage on the foundation. Event fetching could fail for a number of reasons, including platform downtime, revoked credentials, etc. Monitoring can help to catch these errors early and prevent incorrect data from propagating.
+One important reason to monitor Usage Service is that reports are generated based on app and service events fetched from the Cloud Controller. Events are dumped from the Cloud Controller database after 31 days. This means that if the Usage Service fails to fetch events for a period greater than 31 days, events can be permanently lost, and Usage Service will be unable to construct a complete history of usage on the foundation. Event fetching could fail for a number of reasons, including platform downtime and revoked credentials. Monitoring can help to catch these errors early and prevent incorrect data from propagating.
 
 Use the following endpoints to monitor Usage Service:
 
