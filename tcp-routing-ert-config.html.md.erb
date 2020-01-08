@@ -25,7 +25,9 @@ TCP routing is disabled by default.
 
 To enable TCP routing:
 
-1. Go to the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. Under **Enable TCP requests to apps through specific ports on the TCP router**, select **Enable TCP routing**.
+1. Go to the **Networking** pane of the <%= vars.app_runtime_abbr %> tile.
+
+1. Under **Enable TCP requests to apps through specific ports on the TCP router**, select **Enable TCP routing**.
 
 1. For **TCP router IPs**, enter the IP addresses to assign to the TCP routers. You can enter multiple values as a comma-separated list or as a range. For example, `10.254.0.1, 10.254.0.2` or `10.254.0.1-10.254.0.2`. The addresses must be within your subnet CIDR block. These are the same IP addresses with which you configured your load balancer in the [Pre-Deployment Steps](../adminguide/enabling-tcp-routing.html#pre-deploy) section of the _Enabling TCP Routing_ topic, unless you configured DNS to resolve the TCP domain name directly to an IP for the TCP router. 
 
