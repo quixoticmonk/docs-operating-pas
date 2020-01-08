@@ -1,12 +1,22 @@
 ---
-breadcrumb: <%= vars.product_name %> Documentation
+breadcrumb: <%= vars.platform_name %> Documentation
 title: Configuring TCP Routing in PAS
 owner: Routing
 ---
 
-This topic describes how to enable the TCP routing feature in a Pivotal Application Service (PAS) deployment.
+This topic describes how to enable the TCP routing feature in a <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) deployment.
 
 <p class='note breaking'><strong>Breaking Change:</strong> If you have mutual TLS app identity verification enabled, Envoy only recognizes communications from the Gorouter. Therefore, TCP no longer works.</p>
+
+
+## <a id="overview"></a> Overview
+
+TCP routing enables apps that require inbound requests on non-HTTP protocols to run on <%= vars.platform_name %>.
+
+
+## <a id="prerequisite"></a> Prerequisite
+
+Before enabling TCP routing, review the pre-deployment steps that describe required networking infrastructure changes. For more information, see the [Pre-Deployment Steps](../adminguide/enabling-tcp-routing.html#pre-deploy) section of the _Enabling TCP Routing_ topic.
 
 
 ## <a id="enable-tcp"></a> Enable TCP Routing
