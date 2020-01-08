@@ -21,15 +21,14 @@ Before enabling TCP routing, review the pre-deployment steps that describe requi
 
 ## <a id="enable-tcp"></a> Enable TCP Routing
 
-TCP Routing enables apps to be run on <%= vars.product_name %> that require inbound requests on non-HTTP protocols. Before enabling TCP routing, review the [Pre-Deployment Steps](../adminguide/enabling-tcp-routing.html) that describe required networking infrastructure changes.
-
 <%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/tcp_routing_enable" %><a id='tcp-routing-enable'></a>
 
 
 ## <a id="disable-tcp"></a> Disable TCP Routing
 
-To disable TCP routing after enabling it:
+To disable TCP routing:
 
-1. Under **Enable TCP requests to apps through specific ports on the TCP router**, select **Disable TCP routing**.
+1. In the **Networking** pane of the <%= vars.app_runtime_abbr %> tile, under **Enable TCP requests to apps through specific ports on the TCP router**, select **Disable TCP routing**.
 
 1. Manually remove the TCP routing domain.
+
