@@ -1,14 +1,14 @@
 ---
-title: Configuring Logging in Pivotal Platform
+title: Configuring Logging in PAS
 owner: APM
 ---
 
-This topic describes the types of logs that <%= vars.platform_name %> generates. It also explains how to forward system logs to an external aggregator service, how to scale Loggregator component VMs to keep up with app log volume, and how to manage app traffic logging. For more information about Loggregator components, see [Loggregator Architecture](../loggregator/architecture.html).
+This topic describes the types of logs that <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) generates. It also explains how to forward system logs to an external aggregator service, how to scale Loggregator component VMs to keep up with app log volume, and how to manage app traffic logging. For more information about Loggregator components, see [Loggregator Architecture](../loggregator/architecture.html).
 
 
 ## <a id='types'></a> System Logs, App Logs, App Traffic Logs
 
-<%= vars.platform_name %> generates two types of logs, _system logs_ from <%= vars.platform_name %> components and _app logs_ from hosted apps, as differentiated in the table below:
+<%= vars.app_runtime_abbr %> generates two types of logs, _system logs_ from <%= vars.app_runtime_abbr %> components and _app logs_ from hosted apps, as differentiated in the table below:
 
 <table id='log-types' border="1" class="nice" >
   <tr>
@@ -52,7 +52,7 @@ Log Cache is a Loggregator feature that lets you filter and query app logs throu
 
 To access cached logs with the Log Cache CLI plugin, you must first download and install the plugin.
 
-To download the the Log Cache CLI plugin, see the [cf CLI Plugins](https://plugins.cloudfoundry.org/#log-cache) page on the Cloud Foundry website. 
+To download the the Log Cache CLI plugin, see the [cf CLI Plugins](https://plugins.cloudfoundry.org/#log-cache) page on the Cloud Foundry website.
 
 One you have installed the plugin, the basic command to access cached app logs is:
 
@@ -66,7 +66,7 @@ Some ways you can use Log Cache to filter app logs are:
 
 * `--end-time`: Displays the end of the cache or the end of a time period you specify. Results display as a UNIX timestamp, in nanoseconds. Pair with `--start-time` to view logs within a time period.
 
-* `--json`: Output logs in JSON. 
+* `--json`: Output logs in JSON.
 
 * `--follow`: Append exported logs to `stdout`.
 
@@ -74,7 +74,7 @@ For more information on using the Log Cache CLI, see [Log Cache CLI: Usage](http
 
 ### <a id="log-cache-api-examples"></a> Example Uses of the Log Cache API
 
-The Log Cache API is hosted on <%= vars.platform_name %>, and references your system domain to return responses. The root URL for API calls is `https://log-cache.[YOUR-SYSTEM-DOMAIN]`.
+The Log Cache API is hosted on <%= vars.app_runtime_abbr %>, and references your system domain to return responses. The root URL for API calls is `https://log-cache.[YOUR-SYSTEM-DOMAIN]`.
 
 The basic call to access and filter cached app logs is:
 
@@ -82,7 +82,7 @@ The basic call to access and filter cached app logs is:
 GET ht<span>tps:</span>//log-cache.[YOUR-SYSTEM-DOMAIN]/v1/read/[SOURCE-ID]
 ```
 
-Append the following parameters to the `GET` to customize app logs: 
+Append the following parameters to the `GET` to customize app logs:
 
 * `start_time`: Displays the start of the cache or the start of a time period you specify. Results display as a UNIX timestamp, in nanoseconds. Pair with `end_time` to view logs within a time period.
 
@@ -110,7 +110,7 @@ For more information, see the [Including Container Metrics in Syslog Drains](../
 
 ## <a id='scaling'></a> Scale Loggregator
 
-Apps constantly generate app logs and <%= vars.platform_name %> platform components constantly generate component metrics. The Loggregator system combines these data streams and handles them as follows. For more information, see [Loggregator Architecture](../loggregator/architecture.html). 
+Apps constantly generate app logs and <%= vars.app_runtime_abbr %> platform components constantly generate component metrics. The Loggregator system combines these data streams and handles them as follows. For more information, see [Loggregator Architecture](../loggregator/architecture.html).
 
 * The Loggregator agent running on each component or app VM collects and sends this data out to Doppler components.
 
@@ -118,7 +118,7 @@ Apps constantly generate app logs and <%= vars.platform_name %> platform compone
 
 * The Traffic Controller serves the aggregated data stream through the Firehose WebSocket endpoint.
 
-Follow the instructions below to scale the Loggregator system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.platform_name %>](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/monitoring/).
+Follow the instructions below to scale the Loggregator system. For guidance on monitoring and capacity planning, see [Monitoring <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/monitoring/).
 
 ### <a id="instances"></a> Add Component VM Instances
 
@@ -126,7 +126,7 @@ To add component VM instances for Loggregator components:
 
 1. From the PAS tile, select **Resource Config**.
 
-1. Increase the number in the **Instances** column of the component you want to scale. You can add instances for the following Loggregator components: 
+1. Increase the number in the **Instances** column of the component you want to scale. You can add instances for the following Loggregator components:
 	* **Loggregator Traffic Controller**
 		<p class="note"><strong>Note:</strong> The Reverse Log Proxy (RLP) BOSH job is colocated on the Traffic Controller VM. If you want to scale Loggregator to handle more logs for syslog drains, you can add instances of the Traffic Controller. For more information, see <a href="../loggregator/architecture.html">Loggregator Architecture</a>.</p>
 		<p class="note"><strong>Note:</strong> The BOSH System Metrics Forwarder</a> job is colocated on the Traffic Controller VM. If you want to scale Loggregator to handle more BOSH component metrics, you can add instances of the Traffic Controller. For more information, see the <a href="../loggregator/architecture.html#bosh-metrics">Related BOSH Components</a> section of the <em>Loggregator Architecture</em> topic.</p>
@@ -195,8 +195,8 @@ You can determine whether a denied-packet log resulted from a container networki
 
 ### <a id="scope-app-traffic-log"></a> Global vs. ASG-Level App Traffic Logging
 
-<%= vars.platform_name %> supports two mechanisms for enabling app traffic logging. Setting **Log traffic** to **Enable** in Ops Manager enables app traffic logging globally for all ASGs and container policies. Setting the `log` property of an ASG to `true` enables app traffic logging at the individual ASG level. For more information about setting the `log` property of an ASG to `true, see the [The Structure and Attributes of ASGs](../concepts/asg.html#creating-groups) section of the _App Security Groups_ topic.
+<%= vars.app_runtime_abbr %> supports two mechanisms for enabling app traffic logging. Setting **Log traffic** to **Enable** in Ops Manager enables app traffic logging globally for all ASGs and container policies. Setting the `log` property of an ASG to `true` enables app traffic logging at the individual ASG level. For more information about setting the `log` property of an ASG to `true, see the [The Structure and Attributes of ASGs](../concepts/asg.html#creating-groups) section of the _App Security Groups_ topic.
 
-Because these two mechanisms operate independently, <%= vars.platform_name %> generates duplicate logs when app traffic logging is enabled globally and an ASG's `log` property is set to `true`. To avoid duplicate logs, Pivotal recommends setting the `log` property to `false` for all ASGs, or leaving it out entirely, when app traffic logging is enabled globally. For more information, see [App Traffic Logging](#app-traffic-log).
+Because these two mechanisms operate independently, <%= vars.app_runtime_abbr %> generates duplicate logs when app traffic logging is enabled globally and an ASG's `log` property is set to `true`. To avoid duplicate logs, Pivotal recommends setting the `log` property to `false` for all ASGs, or leaving it out entirely, when app traffic logging is enabled globally. For more information, see [App Traffic Logging](#app-traffic-log).
 
 To focus on specific ASGs for log analysis, Pivotal recommends enabling app traffic logs globally and using a logging platform to filter traffic logs by ASG, rather than setting `log` at the individual ASG level.
