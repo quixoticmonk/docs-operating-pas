@@ -7,31 +7,11 @@ This topic describes how to deploy service mesh for Pivotal Application Service 
 
 For more information about service mesh, see [Service Mesh (Beta)](../adminguide/service-mesh.html).
 
-
-## <a id="configuring-pas"></a> Enable in PAS
-
-To deploy service mesh, configure PAS as follows:
-
-1. Select **Networking - Service Mesh** in the PAS tile.
-
-1. Under **Service mesh (beta)**, select **Enable**. 
-
-1. For **IP addresses for Istio router**, do the following depending on your IaaS:
-	* **vSphere**: Enter static IPs for the Istio routers. You must configure your load balancer with these IPs as well. 
-	* **Other**: Leave this field blank. 
-
-1. For **External domain**, enter the domain for Istio routers. The default domain is `mesh.app-domain.com`.
-
-1. For **Istio router TLS keypairs**, complete the following fields. You can add more than one keypair if desired using the **Add** button.
-	* **Name**: Enter a name for the keypair. 
-	* **Certificate and private key for Istio router**: Enter the private key and certificate for TLS handshakes with clients. These must be in PEM block format. 
-
-1. Click **Save**. 
-
+These instructions involve the use of the `om` CLI. For more information about `om`, see [pivotal-cf/om](https://github.com/pivotal-cf/om) in GitHub.
 
 ## <a id="create-load-balancer"></a> Create a Load Balancer
 
-To configure a load balancer for service mesh, do the following. The exact procedure varies by IaaS. 
+To configure a load balancer for service mesh, do the following. The exact procedure varies by IaaS.
 
 1. Create a load balancer with:
 	* A static IP
@@ -43,14 +23,96 @@ To configure a load balancer for service mesh, do the following. The exact proce
 
 1. Navigate to your DNS provider and create a DNS name that resolves to the IP of the load balancer:
 	* If you did not configure the **External Domain** field in the PAS tile, create the DNS name using the default value of `*.mesh.YOUR-CF-APPS-DOMAIN`. 
-	*  If you configured the **External Domain** field in the PAS tile, create the DNS name using the value you configured. 
+	*  If you configured the **External Domain** field in the PAS tile, create the DNS name using the value you configured.
 
-## <a id="resource-config"></a> Add Load Balancer to Resource Config
 
-If your deployment is on an IaaS other than vSphere, do the following after you create your load balancer:
+## <a id="configuring-pas"></a> Enable in PAS
 
-1. Select **Resource Config** in the PAS tile. 
+To deploy service mesh, configure PAS as follows:
 
-1. In the **Load Balancer** column of the **istio-router** row, enter the name of the load balancer you created. 
+1. Get the staged product configuration using the `om` cli: `om staged-config --product-name=cf > /tmp/staged-config.yml`
 
-1. Click **Apply Changes**. 
+1. Create an ops file to enable istio by running the following command:
+```
+cat <<EOF > /tmp/enable-istio.yml
+- type: replace
+  path: /product-properties/.properties.istio?
+  value:
+    value: enable
+    selected_option: enable
+
+- type: replace
+  path: /product-properties/.istio_router.static_ips?
+  value:
+    value: ((istio_static_ips))
+
+- type: replace
+  path: /product-properties/.properties.istio_domain?
+  value:
+    value: ((istio_domain))
+
+- type: replace
+  path: /product-properties/.properties.istio_frontend_tls_keypairs?
+  value:
+    value: ((istio_frontend_tls_keypairs))
+
+- type: replace
+  path: /resource-config/istio_router/elb_names
+  value: ((istio_router_lb_names))
+
+- type: replace
+  path: /resource-config/istio_router/instances
+  value: ((istio_router_instances))
+
+- type: replace
+  path: /resource-config/istio_control/instances
+  value: ((istio_control_instances))
+
+- type: replace
+  path: /resource-config/route_syncer/instances
+	value: ((route_syncer_instances))
+EOF
+```
+
+1. Create a base vars-file using the following command:
+```
+cat <<EOF > /tmp/enable-istio-vars.yml
+istio_domain: mesh.app-domain.com
+istio_static_ips:
+istio_router_lb_names:
+  - tcp:loadbalancer-cf-ws
+istio_router_instances: 1
+istio_control_instances: 1
+route_syncer_instances: 1
+istio_frontend_tls_keypairs:
+  - name: My-Certificate
+    certificate:
+      cert_pem: |
+        -----BEGIN CERTIFICATE-----
+        -----END CERTIFICATE-----
+      private_key_pem: |
+        -----BEGIN RSA PRIVATE KEY-----
+        -----END RSA PRIVATE KEY-----
+EOF
+```
+
+1. For `istio_domain`, enter the domain for Istio routers. The default domain is `mesh.app-domain.com`.
+
+1. For `istio_static_ips`, do the following depending on your IaaS:
+	* **vSphere**: Enter a comma separated string of static IPs for the Istio routers. You must configure your load balancer with these IPs as well.
+	* **Other**: Leave this field blank.
+
+1. If your deployment is on a IaaS other than vSpehere, for `istio_router_lb_names`, enter the name of the loud balancer you created.
+
+1. For `istio_router_instances`, `istio_control_instances`, and `route_syncer_instances`, choose the number of instances to deploy of each.
+
+1. For `istio_frontend_tls_keypairs`, complete the following fields. You can add more than one keypair if desired using the **Add** button.
+	* **Name**: Enter a name for the keypair.
+	* **Certificate and private key for Istio router**: Enter the private key and certificate for TLS handshakes with clients. These must be in PEM block format.
+
+1. Apply the config changes with:
+```
+om configure-product -c /tmp/staged-config.yml -o /tmp/enable-istio.yml -l /tmp/enable-istio-vars.yml
+```
+
+1. Run Apply Changes in the OpsMan UI or with `om apply-changes`.
