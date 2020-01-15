@@ -195,7 +195,7 @@ You can determine whether a denied-packet log resulted from a container networki
 
 ### <a id="scope-app-traffic-log"></a> Global vs. ASG-Level App Traffic Logging
 
-<%= vars.app_runtime_abbr %> supports two mechanisms for enabling app traffic logging. Setting **Log traffic** to **Enable** in Ops Manager enables app traffic logging globally for all ASGs and container policies. Setting the `log` property of an ASG to `true` enables app traffic logging at the individual ASG level. For more information about setting the `log` property of an ASG to `true, see the [The Structure and Attributes of ASGs](../concepts/asg.html#creating-groups) section of the _App Security Groups_ topic.
+<%= vars.app_runtime_abbr %> supports two mechanisms for enabling app traffic logging. Setting **Log traffic** to **Enable** in Ops Manager enables app traffic logging globally for all ASGs and container policies. Setting the `log` property of an ASG to `true` enables app traffic logging at the individual ASG level. For more information about setting the `log` property of an ASG to `true`, see [The Structure and Attributes of ASGs](../concepts/asg.html#creating-groups).
 
 Because these two mechanisms operate independently, <%= vars.app_runtime_abbr %> generates duplicate logs when app traffic logging is enabled globally and an ASG's `log` property is set to `true`. To avoid duplicate logs, Pivotal recommends setting the `log` property to `false` for all ASGs, or leaving it out entirely, when app traffic logging is enabled globally. For more information, see [App Traffic Logging](#app-traffic-log).
 
