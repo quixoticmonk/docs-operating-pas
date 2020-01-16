@@ -3,16 +3,16 @@ title: Configuring PAS
 owner: PAS Releng
 ---
 
-This topic describes how to configure Pivotal Application Service (PAS) as part of deploying <%= vars.product_name  %>.
+This topic describes how to configure Pivotal Application Service (PAS) as part of deploying <%= vars.platform_name %>.
 
 
 ## <a id='prereqs'></a> Prerequisites
 
 Before beginning this procedure, you must:
 
-* Ensure that you have successfully completed the steps to prepare your environment for <%= vars.product_name %> and install and configure the BOSH Director. For more information, see the [Ops Manager configuration topic for your IaaS](https://docs.pivotal.io/platform/ops-manager/<%= vars.current_major_version.sub('.', '-') %>/index.html).
+* Ensure that you have successfully completed the steps to prepare your environment for <%= vars.platform_name %> and install and configure the BOSH Director. For more information, see the [Ops Manager configuration topic for your IaaS](https://docs.pivotal.io/platform/ops-manager/<%= vars.current_major_version.sub('.', '-') %>/index.html).
 
-* If you plan to install the <%= vars.product_name %> IPsec add-on, you must do so before installing any other tiles. Pivotal recommends installing IPsec immediately after Pivotal Ops Manager and before installing the PAS Runtime tile. For more information, see [Installing the IPsec Add-On for <%= vars.product_name %>](http://docs.pivotal.io/addon-ipsec/installing.html).
+* If you plan to install the <%= vars.platform_name %> IPsec add-on, you must do so before installing any other tiles. Pivotal recommends installing IPsec immediately after Pivotal Ops Manager and before installing the PAS Runtime tile. For more information, see [Installing the IPsec Add-On for <%= vars.platform_name %>](http://docs.pivotal.io/addon-ipsec/installing.html).
 
 
 ## <a id='om-add'></a> Add PAS to Ops Manager
@@ -27,7 +27,7 @@ To add the PAS tile to your Ops Manager Installation Dashboard:
   1. Click **Pivotal Application Service** to download the PAS `.pivotal` file.
   1. Click **Small Footprint PAS** to download the Small Footprint PAS `.pivotal` file. For more information, see [Getting Started with Small Footprint PAS](./small-footprint.html).
 
-1. Navigate to the <%= vars.product_name %> Ops Manager Installation Dashboard.
+1. Navigate to the <%= vars.platform_name %> Ops Manager Installation Dashboard.
 
 1. Click **Import a Product** to add your tile to Ops Manager. For more information, see [Adding and Deleting Products](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/add-delete.html).
 
@@ -76,7 +76,7 @@ For additional guidance based on your installation method, see the following tab
 		</tr>
 		<tr>
 			<td>Manual</td>
-			<td>Enter the domains you created when preparing your environment for <%= vars.product_name %>.</td>
+			<td>Enter the domains you created when preparing your environment for <%= vars.platform_name %>.</td>
 		</tr>
 		<tr>
 			<td>Terraform</td>
@@ -176,7 +176,7 @@ To configure the **CredHub** pane:
         * **Partition serial number:** Enter the serial number of the HSM partition.
         * **HSM certificate:** Enter the certificate for the HSM server. The HSM presents this certificate to CredHub to establish a two-way TLS connection.
 
-1. If your deployment uses any <%= vars.product_name %> services that support storing service instance credentials in CredHub and you want to enable this feature, enable the **Secure service instance credentials** checkbox.
+1. If your deployment uses any <%= vars.platform_name %> services that support storing service instance credentials in CredHub and you want to enable this feature, enable the **Secure service instance credentials** checkbox.
 
 1. Click **Save**.
 
@@ -191,9 +191,9 @@ For more information about using CredHub for securing service instance credentia
 
 ## <a id='sys-db'></a> Configure Databases
 
-In the **Databases** pane, you can configure PAS to use an internal MySQL database provided with <%= vars.product_name %>, or you can configure an external database provider for the databases required by PAS.
+In the **Databases** pane, you can configure PAS to use an internal MySQL database provided with <%= vars.platform_name %>, or you can configure an external database provider for the databases required by PAS.
 
-<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/upgrading-pcf.html">Upgrading <%= vars.product_name %></a>.</p>
+<p class="note"><strong>Note:</strong> If you are performing an upgrade, do not modify your existing internal database configuration, or you may lose data. You must migrate your existing data first before changing the configuration. For additional upgrade information, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/upgrading-pcf.html">Upgrading <%= vars.platform_name %></a>.</p>
 
 ### <a id='internal-db'></a> Internal Database Configuration
 
