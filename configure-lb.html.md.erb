@@ -97,11 +97,10 @@ To configure the Gorouter or HAProxy to AWS Elastic Load Balancers, do the follo
 1. In the PAS tile, click **Resource Config**.
 
 1. Enter the name of your SSH load balancer.
-  <%= image_tag("aws/resource-config-lb.png") %>
   1. Show the **LOAD BALANCERS** field underneath the job that handles SSH requests.  This depends on the PAS release you are using:
       - **PAS**: Click the icon next to the **Diego Brain** job name to expand the row.
       - **Small Footprint Runtime**: Click the icon next to the **Control** job name to expand the row.
-  2. In the **LOAD BALANCERS** field, enter the name of your SSH load balancer: `<%= vars.product_name_lc %>-ssh-elb`.
+  1. In the **LOAD BALANCERS** field, enter the name of your SSH load balancer: `<%= vars.product_name_lc %>-ssh-elb`.
 
 1. Click to expand the **Router** row, and fill in the **LOAD BALANCERS** field with a value determined by the type of load balancer you are using:
   * **Application Load Balancer**: Enter the name of the target group of your web load balancer, prefixed with `alb:`: `alb:<%= vars.product_name_lc %>-web-elb-target-group`. The prefix indicates to Ops Manager that you entered the name of a target group, and is required for AWS Application Load Balancers or Network Load Balancers.  
@@ -118,11 +117,9 @@ To configure the Gorouter to Azure Load Balancers, do the following:
 
 1. Select **Resource Config**.
 
-  1. Ensure a `Standard` VM type is selected for the **Router** VM. The PAS deployment fails if you select a `Basic` VM type.
+1. Ensure a `Standard` VM type is selected for the **Router** VM. The PAS deployment fails if you select a `Basic` VM type.
 
-1. Click the icon next to the **Router** job name to expand the row,
-showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath. 
-	<%= image_tag("azure/resource-config-lb.png") %>
+1. Click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath.
 
 1. Enter the value of `web_lb_name` from your Terraform output in the **Resource Config** pane under **LOAD BALANCERS** for the **Router** job.
 
@@ -148,9 +145,7 @@ To configure the Gorouter to Azure Load Balancers, do the following:
 1. Retrieve the name(s) of your external ALB by navigating to the Azure portal, clicking **All resources**, and locating your **Load balancer** resource.
 <p class="note"><strong>Note:</strong> The Azure portal sometimes displays the names of resources with incorrect capitalization. Always use the Azure CLI to retrieve the correctly capitalized name of a resource. `az network lb list`</p>
 
-1. In the PAS tile > **Resource Config** pane, click the icon next to the **Router** job name to expand the row,
-showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath.
-	<%= image_tag("azure/resource-config-lb.png") %>
+1. In the PAS tile > **Resource Config** pane, click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath.
 
 1. Enter the name of your external ALB in the field under **LOAD BALANCERS**.
 
@@ -179,9 +174,6 @@ To Configure Gorouter to GCP Load Balancers, do the following:
 showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath. 
 
 1. In the the **LOAD BALANCERS** field, enter a comma-delimited list consisting of the values of `ws_router_pool` and `http_lb_backend_name` from your Terraform output. For example, `tcp:<%= vars.product_name_lc %>-cf-ws,http:<%= vars.product_name_lc %>-httpslb`. These are the names of the TCP WebSockets and HTTP(S) load balancers for your deployment.
-
-    <%= image_tag("gcp/resource-config-lb.png") %>
-    
     <p class="note"><strong>Note:</strong> Do not add a space between key/value pairs in the <code>LOAD BALANCER</code> field or it will fail.</p>
     <p class="note"><strong>Note:</strong> If you are using HAProxy in your deployment, then enter the above load balancer values in the <code>LOAD BALANCERS</code> field of the <strong>HAProxy</strong> row instead of the <strong>Router</strong> row. For a high availability configuration, scale up the HAProxy job to more than one instance.</p>
 
@@ -245,8 +237,6 @@ showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneat
 Unless you are using your own load balancer, you must provide HAProxy with public IP addresses to use as floating IP addresses. This lets the HAProxy route traffic into the OpenStack private subnet.
 
 1. Click **Resource Config**.
-
-    <%= image_tag("images/resource_config.png") %>
     
 1. Click the icon next to the **HAProxy** job name to expand the row, showing the **FLOATING IPS** field underneath.
 
