@@ -213,9 +213,6 @@ To Configure Gorouter to GCP Load Balancers, do the following:
 showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath. 
 
 1. In the the **LOAD BALANCERS** field, enter a comma-delimited list consisting of the name of your TCP WebSockets load balancer and the name of your HTTP(S) load balancer backend with the protocol prepended. For example, `tcp:MY-<%= vars.platform_code %>-wss-logs,http:MY-<%= vars.platform_code %>-http-lb-backend`.
-
-    <%= image_tag("gcp/resource-config-lb.png") %>
-    
     <p class="note"><strong>Note:</strong> Do not add a space between key/value pairs in the <code>LOAD BALANCER</code> field or it will fail.</p>
     <p class="note"><strong>Note:</strong> If you are using HAProxy in your deployment, then enter the above load balancer values in the <code>LOAD BALANCERS</code> field of the <strong>HAProxy</strong> row instead of the <strong>Router</strong> row. For a high availability configuration, scale up the HAProxy job to more than one instance.</p>
 
