@@ -187,7 +187,7 @@ To configure the Gorouter to use GCP load balancers:
 
 1. Click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath. 
 
-1. In the the **LOAD BALANCERS** field, enter a comma-separated list consisting of the values of `ws_router_pool` and `http_lb_backend_name` from your Terraform output. For example, `tcp:<%= vars.platform_name_lc %>-cf-ws,http:<%= vars.platform_name_lc %>-httpslb`. These are the names of the TCP WebSockets and HTTP(S) load balancers for your deployment.
+1. In the **LOAD BALANCERS** field, enter a comma-separated list consisting of the values of `ws_router_pool` and `http_lb_backend_name` from your Terraform output. For example, `tcp:<%= vars.platform_name_lc %>-cf-ws,http:<%= vars.platform_name_lc %>-httpslb`. These are the names of the TCP WebSockets and HTTP(S) load balancers for your deployment.
     <p class="note"><strong>Note:</strong> Do not add a space between key and value pairs in the <code>LOAD BALANCER</code> field, or it fails.</p>
     <p class="note"><strong>Note:</strong> If you are using HAProxy in your deployment, then enter the above load balancer values in the <code>LOAD BALANCERS</code> field of the <strong>HAProxy</strong> row instead of the <strong>Router</strong> row. For a high-availability configuration, scale up the HAProxy job to more than one instance.</p>
 
@@ -225,7 +225,7 @@ To configure the Gorouter to use GCP load balancers:
 
 1. Click the icon next to the **Router** job name to expand the row, showing a **LOAD BALANCERS** field and **INTERNET CONNECTED** checkbox underneath. 
 
-1. In the the **LOAD BALANCERS** field, enter a comma-separated list consisting of the name of your TCP WebSockets load balancer and the name of your HTTP(S) load balancer back end with the protocol prepended. For example, `tcp:<%= vars.platform_code %>-wss-logs,http:<%= vars.platform_code %>-http-lb-backend`.
+1. In the **LOAD BALANCERS** field, enter a comma-separated list consisting of the name of your TCP WebSockets load balancer and the name of your HTTP(S) load balancer back end with the protocol prepended. For example, `tcp:<%= vars.platform_code %>-wss-logs,http:<%= vars.platform_code %>-http-lb-backend`.
     <p class="note"><strong>Note:</strong> Do not add a space between key and value pairs in the <code>LOAD BALANCER</code> field, or it fails.</p>
     <p class="note"><strong>Note:</strong> If you are using HAProxy in your deployment, enter the above load balancer values in the <code>LOAD BALANCERS</code> field of the <strong>HAProxy</strong> row instead of the <strong>Router</strong> row. For a high-availability configuration, scale up the HAProxy job to more than one instance.</p>
 
