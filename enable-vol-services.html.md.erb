@@ -12,9 +12,7 @@ A volume service gives apps access to a persistent filesystem, such as NFS or SM
 
 Developers can then use the Cloud Foundry Command Line Interface (cf CLI) to create service instances of the volume service and bind them to their apps. For more information, see [Using an External File System (Volume Services)](../devguide/services/using-vol-services.html).
 
-<div class="note"><p style="margin-top: 0"><strong>Note:</strong>
-You must have an NFS or SMB server running to test NFS or SMB volume services. The <%= vars.app_runtime_abbr %> tile packages the necessary software to provide application connectivity to remote newtwork attached storage (NAS), but Pivotal does not supply the NAS itself.</p>
-</div>
+<p class="note"><strong>Note:</strong> You must have a running NFS or SMB server to test NFS or SMB volume services. <%= vars.app_runtime_abbr %> packages the necessary software to provide app connectivity to remote network-attached storage (NAS), but does not supply the NAS itself.</p>
 
 
 ## <a id='nfs-enable'></a> Enable NFS Volume Services
