@@ -13,11 +13,9 @@ For more information about service mesh, see [Service Mesh (Beta)](../adminguide
 To deploy service mesh for <%= vars.app_runtime_abbr %>, you must download and install the `om` CLI. To download and install `om`, see the [Om](https://github.com/pivotal-cf/om) repository on GitHub.
 
 
-## <a id="create-load-balancer"></a> Create a Load Balancer
+## <a id="create-load-balancer"></a> Configure Load Balancer
 
 To configure a load balancer for service mesh:
-
-<p class='note'><strong>Note:</strong> The exact procedure varies by IaaS.</p>
 
 1. Create a load balancer with:
 	* A static IP
@@ -29,10 +27,10 @@ To configure a load balancer for service mesh:
 
 1. Navigate to your DNS provider and create a DNS name that resolves to the IP of the load balancer:
 	* If you did not configure the **External domain** field in the **Networking - Service Mesh (Beta)** pane of the <%= vars.app_runtime_abbr %> tile, create the DNS name using the default value of `*.mesh.APPS-DOMAIN`, where `APPS-DOMAIN` is the name of the external domain. 
-	*  If you configured the **External domain** field in the **Networking - Service Mesh (Beta)** pane of the <%= vars.app_runtime_abbr %> tile, create the DNS name using the value you configured.
+	* If you configured the **External domain** field in the **Networking - Service Mesh (Beta)** pane of the <%= vars.app_runtime_abbr %> tile, create the DNS name using the value you configured.
 
 
-## <a id="configuring-pas"></a> Enable in <%= vars.app_runtime_abbr %>
+## <a id="configuring-pas"></a> Deploy Service Mesh in <%= vars.app_runtime_abbr %>
 
 To deploy service mesh:
 
@@ -138,6 +136,6 @@ To deploy service mesh:
 
 1. Run:
 
-	``
+	```
 	om apply-changes
 	```
