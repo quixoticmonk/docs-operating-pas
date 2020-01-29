@@ -92,6 +92,8 @@ To configure the **App Containers** pane:
   * (Optional) For **LDAP server CA certificate**, you can enter a certificate if your LDAP server supports TLS and you want to enable TLS connections from the NFS driver to your LDAP server. Paste in the root certificate from your CA certificate or your self-signed certificate.
   <p class='note'><strong>Note:</strong> UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate.</p>
 
+1. (Optional) To limit the number of log lines an app instance can generate per second, select **Enable** under **App log rate limit** and enter the **Maximum app log lines per second** you want to configure. <%= vars.recommended_by %> recommends a minimum value of 100. This feature is disabled by default. Disabling this feature may cause an app instance to overload the Loggregator Agent with logs, which may result in the Loggregator Agent dropping logs for other app instances. Otherwise, it may report inaccurate app metrics in the cf CLI or increase the CPU usage on the Diego Cell VM. If you configure a log rate limit, you can monitor the `AppInstanceExceededLogRateLimitCount` metric for the number of app instances that exceed the log rate limit.
+
 1. Click **Save**.
 
 ### <a id='syslog'></a> System Logging
@@ -164,13 +166,13 @@ To configure the **Compute and Networking Isolation** pane:
 1. Select **Compute and Networking Isolation**.
 
 1. Choose whether to enable or disable compute isolation under **Compute isolation**.
-    * To disable compute isolation, select **Disable**. Select this option if you do not require compute isolation and you are deploying the Pivotal Isolation Segment tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the PAS control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups. 
+    * To disable compute isolation, select **Disable**. Select this option if you do not require compute isolation and you are deploying the Pivotal Isolation Segment tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the <%= vars.app_runtime_abbr %> control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups. 
     * To enable compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment.
     <p class='note'><strong>Note:</strong> If you disable compute isolation, you must set <strong>Router sharding mode</strong> to <strong>No Isolation Segment</strong>.</p>
 
 1. Enable or disable networking isolation by selecting a sharding mode under **Router sharding mode**. For more information, see the [Sharding Routers for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) section of the _Routing for Isolation Segments_ topic.
   * **Isolation Segment only**: The routers for the tile acknowledge requests only from apps deployed within the Diego Cells of the tile. All other requests fail.
-  * **No Isolation Segment**: The routers for the tile reject requests for any isolation segment. Choose this option to add a group of routers for the PAS tile, such as when you want a private point of entry for the system domain.
+  * **No Isolation Segment**: The routers for the tile reject requests for any isolation segment. Choose this option to add a group of routers for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain.
 
 ### <a id='after_config'></a> After Tile Configuration
 
