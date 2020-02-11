@@ -8,9 +8,9 @@ This topic describes how to install the Pivotal Isolation Segment tile, which al
 
 Installing the tile installs a single isolation segment. However, you can install multiple isolation segments using the Replicator tool documented in [Step 4](#copy).
 
-After installing the tile, you must follow the procedure in the [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) section of the _Managing Isolation Segments_ topic to create the isolation segment in the Cloud Controller database (CCDB). The topic also includes information about managing an isolation segment.
+After installing the tile, you must follow the procedure in [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_ to create the isolation segment in the Cloud Controller database (CCDB). The topic also includes information about managing an isolation segment.
 
-For more information about how isolation segments work, see the [Isolation Segments](../concepts/security.html#isolation-segments) section of the _<%= vars.app_runtime_abbr %> Security_ topic.
+For more information about how isolation segments work, see [Isolation Segments](../concepts/security.html#isolation-segments) in _<%= vars.app_runtime_abbr %> Security_.
 
 
 ## <a id='routing'></a> Step 1: (Optional) Configure Routing
@@ -74,7 +74,7 @@ To configure the **App Containers** pane:
 
 1. (Optional) You can configure <%= vars.app_runtime_abbr %> to run app instances in Docker containers by provided a comma-separated list of their IP address ranges in the **Private Docker insecure registry allow list** field. For more information, see [Using Docker Registries](../opsguide/docker-registry.html).
 
-1. Under **Segment name**, enter the name of your isolation segment. This name must be unique across your <%= vars.platform_name %> deployment. You use this name when performing the steps in the [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) section of the _Managing Isolation Segments_ topic to create the isolation segment in the Cloud Controller database (CCDB).
+1. Under **Segment name**, enter the name of your isolation segment. This name must be unique across your <%= vars.platform_name %> deployment. You use this name when following the steps in [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_ to create the isolation segment in the Cloud Controller database (CCDB).
 
 1. Select your preference for **Docker images disk cleanup scheduling on Diego Cell VMs**. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm should keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../opsguide/config-cell-cleanup.html).
 
@@ -125,7 +125,7 @@ To configure the **System Logging** pane:
 
 1. (Optional) To specify a custom syslog rule, enter it in the **Custom rsyslog configuration** field in RainerScript syntax. For more information about customizing syslog rules, see [Customizing Syslog Rules](./custom-syslog-rules.html). For more information about RainerScript, see the [RainerScript](http://www.rsyslog.com/doc/v8-stable/rainerscript/index.html) documentation.
 
-1. Select the **Enable system metrics** checkbox to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/develop/docs/system-metrics-agent.md#vm-metrics) in GitHub. When you enable this checkbox, ensure that you open port `9100` for the isolation segment. For more information, see the [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) section of the _Routing for Isolation Segments_ topic.
+1. Select the **Enable system metrics** checkbox to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/develop/docs/system-metrics-agent.md#vm-metrics) in GitHub. When you enable this checkbox, ensure that you open port `9100` for the isolation segment. For more information, see [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) in _Routing for Isolation Segments_.
 
 1. Click **Save.**
 
@@ -168,7 +168,7 @@ To configure the **Compute and Networking Isolation** pane:
     * To enable compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment.
     <p class='note'><strong>Note:</strong> If you disable compute isolation, you must set <strong>Router sharding mode</strong> to <strong>No Isolation Segment</strong>.</p>
 
-1. Enable or disable networking isolation by selecting a sharding mode under **Router sharding mode**. For more information, see the [Sharding Routers for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) section of the _Routing for Isolation Segments_ topic.
+1. Enable or disable networking isolation by selecting a sharding mode under **Router sharding mode**. For more information, see [Sharding Routers for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
   * **Isolation Segment only**: The routers for the tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
   * **No Isolation Segment**: The routers for the tile reject requests for any isolation segment.
     Choose this option to add a group of routers for the PAS tile, such as when you want a private point of entry for the system domain
@@ -193,7 +193,7 @@ If you want to create multiple isolation segments, you can copy the Pivotal Isol
 
 To create multiple isolation segments:
 
-1. Download the Replicator tool from the **Pivotal Isolation Segment** page of [Pivotal Network](https://network.pivotal.io/products/isolation-segment).
+1. Download the Replicator tool from the [<%= vars.segment_runtime_full %>](https://network.pivotal.io/products/isolation-segment) page of Pivotal Network.
 
 1. Navigate to the directory where you downloaded the Replicator tool.
 
@@ -214,4 +214,4 @@ To create multiple isolation segments:
 
 ### <a id='upgrading-replicas'></a> Upgrading Replicated Tiles
 
-For information about upgrading replicated Pivotal Isolation Segment tiles, see the [Upgrading Replicated Tiles](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/upgrading-products.html#replica-tiles) section of the _Upgrading <%= vars.app_runtime_abbr %> and Other Pivotal Platform Products_ topic.
+For information about upgrading replicated <%= vars.segment_runtime_full %> tiles, see [Upgrading Replicated Tiles](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/upgrading-products.html#replica-tiles) in _Upgrading <%= vars.app_runtime_abbr %> and Other <%= vars.platform_name %> Products_.
