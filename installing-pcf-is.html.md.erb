@@ -166,26 +166,38 @@ To configure the **Compute and Networking Isolation** pane:
 1. Select **Compute and Networking Isolation**.
 
 1. Choose whether to enable or disable compute isolation under **Compute isolation**.
-    * To disable compute isolation, select **Disable**. Select this option if you do not require compute isolation and you are deploying the <%= vars.segment_runtime_full %> tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the <%= vars.app_runtime_abbr %> control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups. 
-    * To enable compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment.
-    <p class='note'><strong>Note:</strong> If you disable compute isolation, you must set <strong>Router sharding mode</strong> to <strong>No Isolation Segment</strong>.</p>
+  * To disable compute isolation, select **Disable**. Select this option if you do not require compute isolation and you are deploying the <%= vars.segment_runtime_full %> tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the <%= vars.app_runtime_abbr %> control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups. 
+  * To enable compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment.
+    <p class='note'><strong>Note:</strong> If you disable compute isolation, you must set <strong>Router sharding mode</strong> to <strong>No isolation segment</strong>.</p>
 
-1. Enable or disable networking isolation by selecting a sharding mode under **Router sharding mode**. For more information, see [Sharding Routers for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
-  * **Isolation Segment only**: The routers for the tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
-  * **No Isolation Segment**: The routers for the tile reject requests for any isolation segment.
-    Choose this option to add a group of routers for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain
-    or to configure a group of routers to receive requests from your corporate intranet.
+1. Enable or disable networking isolation by selecting a sharding mode under **Router sharding mode**. For more information, see [Sharding Gorouters for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
+  * **Isolation segment only**: The Gorouters for the tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
+  * **No isolation segment**: The Gorouters for the tile reject requests for any isolation segment. Choose this option to add a group of Gorouters for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain or to configure a group of Gorouters to receive requests from your corporate intranet.
+
+### <a id='smoke-tests'></a> Smoke Tests
+
+In the **Smoke Tests** pane, you choose where to run smoke tests. The Smoke Tests errand runs basic functionality tests against your isolation segment after an installation or update. In the **Errands** pane, you can choose whether or not to run the Smoke Tests errand.
+
+To configure the **Smoke Tests** pane:
+
+1. Select **Smoke Tests**.
+
+1. (Optional) In **Domain**, enter the name of the apps domain you want <%= vars.segment_runtime_full %> to use when running smoke tests.
+  * If you want either the <%= vars.app_runtime_abbr %> or <%= vars.segment_runtime_full %> Gorouters to route to the isolation segment, enter the apps domain you configured in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile.
+  * If you want separate routing for the isolation segment, enter a different apps domain.
+
+1. If you have a shared apps domain, select **A temporary space within the system org**, which creates a temporary space within the system org for running smoke tests and deletes the space afterwards. Otherwise, select **A specified org and space** and complete these fields to specify where you want to run smoke tests:
+  * For **Org**, enter the org you want <%= vars.segment_runtime_full %> to use when running smoke tests.
+  * For **Space**, enter the space you want <%= vars.segment_runtime_full %> to use when running smoke tests.
+
+1. Click **Save**.
 
 ### <a id='after_config'></a> After Tile Configuration
 
 After you configure the <%= vars.segment_runtime_full %> tile:
 
-1. Create the isolation segment in the Cloud Controller database (CCDB) by following the procedure
-   in [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_.
-
-    <p class='note'><strong>Note:</strong> If you previously ran the smoke tests as a post-deploy errand,
-   the isolation segment might already have been created.
-   </p>
+1. Create the isolation segment in the Cloud Controller database (CCDB) by following the procedure in [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_.
+    <p class='note'><strong>Note:</strong> If you run smoke tests as a post-deploy errand in the <%= vars.segment_runtime_full %> tile, the smoke tests check if your isolation segment exists within the Cloud Controller database (CCDB). If not, the smoke tests create it within the CCDB. This eliminates the need to manually create an isolation segment with the <code>cf create-isolation-segment</code> command. For more information about running smoke tests, see <a href="#smoke-tests">Smoke Tests</a>.</p>
 
 1. Return to the Ops Manager Installation Dashboard.
 
@@ -214,8 +226,8 @@ To create multiple isolation segments:
   	```
     Where:
   	* `TILE-NAME` is a unique name you provide for the new <%= vars.segment_runtime_full %> tile. The name must be ten characters or less and only contain alphanumeric characters, dashes, underscores, and spaces.
-  	* `/PATH/TO/ORIGINAL` is the absolute path to the original <%= vars.segment_runtime_full %> tile you downloaded from Pivotal Network.
-  	* `/PATH/TO/COPY` is the absolute path for the copy that the Replicator tool produces.
+  	* `/PATH/TO/ORIGINAL.pivotal` is the absolute path to the original <%= vars.segment_runtime_full %> tile you downloaded from Pivotal Network.
+  	* `/PATH/TO/COPY.pivotal` is the absolute path for the copy that the Replicator tool produces.
 
 1. Follow the procedures in this topic using the new `.pivotal` file, starting with [Step 1](#routing).
 
