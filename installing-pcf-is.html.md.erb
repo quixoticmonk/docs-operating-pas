@@ -159,7 +159,7 @@ To configure the **Resource Config** pane:
 
 In the **Compute and Networking Isolation** pane, you can enable or disable compute isolation and configure router sharding for isolation segments. _Compute isolation_ is when an app runs on compute resources - such as clusters, resource pools, and servers - that are isolated from other resources by a network partition or firewall. _Networking isolation_, or router sharding, is when traffic to an app instance uses a dedicated route that is isolated from routes used by other app instances by a network partition or firewall rule.
 
-In the <%= vars.segment_runtime_full %> tile, you cannot enable compute isolation and disable networking isolation at the same time. This is because networking isolation configures the route by which traffic goes to the <%= vars.segment_runtime_full %> tile. Both compute and networking isolation are enabled by default.
+In the <%= vars.segment_runtime_full %> tile, you cannot disable compute isolation and enable networking isolation at the same time. This is because networking isolation configures the route by which traffic goes to the <%= vars.segment_runtime_full %> tile. Both compute and networking isolation are enabled by default.
 
 To configure the **Compute and Networking Isolation** pane:
 
