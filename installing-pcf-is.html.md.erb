@@ -184,6 +184,8 @@ The table below describes the three ways to configure the **Compute and Networki
 | Using compute isolation and network isolation | Enabled | Isolation segment only | Enabled | <%= vars.segment_runtime_full %> has its own load balancer and uses a different domain from <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
 | Using compute isolation only | Enabled | No isolation segment | Disabled | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
 
+If you configure the **Compute and Networking Isolation** pane in a way that is incompatible with how you configured the **Routers reject requests for Isolation Segments** checkbox in the <%= vars.app_runtime_abbr %> tile, the smoke tests fail.
+
 ### <a id='smoke-tests'></a> Smoke Tests
 
 In the **Smoke Tests** pane, you choose where to run smoke tests. The Smoke Tests errand runs basic functionality tests against both the <%= vars.app_runtime_abbr %> and <%= vars.segment_runtime_full %> tiles after an installation or update. In the **Errands** pane, you can choose whether or not to run the Smoke Tests errand.
