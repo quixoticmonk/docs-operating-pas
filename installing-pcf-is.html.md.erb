@@ -57,12 +57,12 @@ To configure the **Assign AZ and Networks** pane:
 
 1. Click **Save**.
 
-### <a id='networking'></a> Networking
+### <a id='networking'></a> Configure Networking
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/networking-is" %>
 
-### <a id='application_containers'></a> App Containers
+### <a id='application_containers'></a> Configure App Containers
 
 In the **App Containers** pane, you enable microservice frameworks, private Docker registries, and other services that support your apps at the container level.
 
@@ -96,7 +96,7 @@ To configure the **App Containers** pane:
 
 1. Click **Save**.
 
-### <a id='syslog'></a> System Logging
+### <a id='syslog'></a> Configure System Logging
 
 In the **System Logging** pane, you can configure system logging in <%= vars.app_runtime_abbr %> to forward log messages from <%= vars.app_runtime_abbr %> component VMs to an external service. <%= vars.recommended_by %> recommends forwarding logs to an external service for use in troubleshooting. If you do not fill these fields, platform logs are not forwarded but remain available on the component VMs and for download through Ops Manager.
 
@@ -129,14 +129,14 @@ To configure the **System Logging** pane:
 
 1. Select the **Enable system metrics** checkbox to emit system-level metrics about all VMs in the deployment. For a list of the VM metrics that the System Metric Agent emits, see [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/develop/docs/system-metrics-agent.md#vm-metrics) in GitHub. When you enable this checkbox, ensure that you open port `9100` for the isolation segment. For more information, see [Configure Firewall Rules](../adminguide/routing-is.html#config-firewall) in _Routing for Isolation Segments_.
 
-1. Click **Save.**
+1. Click **Save**.
 
-### <a id='advanced_features'></a> Advanced Features
+### <a id='advanced_features'></a> Configure Advanced Features
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/advanced-features" %>
 
-### <a id='compute-networking-isolation'></a> Compute and Networking Isolation
+### <a id='compute-networking-isolation'></a> Configure Compute and Networking Isolation
 
 In the **Compute and Networking Isolation** pane, you can enable or disable compute isolation and configure router sharding for isolation segments. _Compute isolation_ is when an app runs on compute resources - such as clusters, resource pools, and servers - that are isolated from other resources by a network partition or firewall. _Networking isolation_, or router sharding, is when traffic to an app instance uses a dedicated route that is isolated from routes used by other app instances by a network partition or firewall rule.
 
@@ -157,27 +157,25 @@ To configure the **Compute and Networking Isolation** pane:
 
 #### <a id='compute-networking-isolation-configs'></a> Options for Configuring Compute and Networking Isolation
 
-The most common use case for compute and networking isolation is enabling both, as well as the **Routers reject requests for Isolation Segments** checkbox in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. This routes traffic between an isolation segment and a block of compute resources that is dedicated solely to that isolation segment, while ensuring that no traffic is routed through the <%= vars.app_runtime_abbr %> Gorouters.
-
-If you want the Gorouters for both <%= vars.segment_runtime_full %> and <%= vars.app_runtime_abbr %> to handle traffic for your isolated apps, you can enable both compute and networking isolation and disable the **Routers reject requests for Isolation Segments** checkbox in <%= vars.app_runtime_abbr %>. You can also use either the same apps domain you configured in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile, or a different one you configure with the DNS for the load balancer for the <%= vars.segment_runtime_full %> Gorouters. This configuration is useful if you want to configure isolated compute resources for your apps but do not have additional networking restrictions.
-
-If you have a foundation with additional compute resource blocks, but no additional Gorouters for <%= vars.segment_runtime_full %> configured in the **Resource Config** pane, you can enable compute isolation, disable networking isolation, and disable the **Routers reject requests for Isolation Segments** checkbox in <%= vars.app_runtime_abbr %>. The <%= vars.app_runtime_abbr %> load balancer and apps domain route requests from your isolated apps. This configuration enables you to move Diego Cells out of <%= vars.app_runtime_abbr %> and into isolation segments, so you can upgrade <%= vars.app_runtime_abbr %> first and your <%= vars.segment_runtime_full %> tiles as time permits. This allows you to upgrade a large foundation in pieces, making it easier to upgrade within scheduled maintenance windows.
-
-#### <a id='compute-networking-isolation-smoke-tests'></a> Configure Compute and Networking Isolation to Allow Successful Smoke Tests
-
 The table below describes the three ways to configure the **Compute and Networking Isolation** pane and the **Routers reject requests for Isolation Segments** checkbox in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile that allow smoke tests to run successfully:
 
 | Use case | Compute isolation | Router sharding mode | Routers reject requests for Isolation Segments (<%= vars.app_runtime_abbr %> tile) | Other requirements | Scaling recommendations |
 | -------- | ----------------- | -------------------- | ---------------------------------------------------------------------------------- | ------------------ | ----------------------- |
-| Using compute isolation and extra <%= vars.segment_runtime_full %> Gorouters | Enabled | Isolation segment only | Disabled | <%= vars.segment_runtime_full %> has its own load balancer and uses the same domain as <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
 | Using compute isolation and network isolation | Enabled | Isolation segment only | Enabled | <%= vars.segment_runtime_full %> has its own load balancer and uses a different domain from <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
+| Using compute isolation and extra <%= vars.segment_runtime_full %> Gorouters | Enabled | Isolation segment only | Disabled | <%= vars.segment_runtime_full %> has its own load balancer and uses the same domain as <%= vars.app_runtime_abbr %> | Apps in the isolation segment should have their own Diego Cells and Gorouters. |
 | Using compute isolation only | Enabled | No isolation segment | Disabled | <%= vars.segment_runtime_full %> uses <%= vars.app_runtime_abbr %> load balancer and domain | Scale <%= vars.segment_runtime_full %> Gorouters to 0. |
 
-If you configure the **Compute and Networking Isolation** pane in a way that is incompatible with how you configured the **Routers reject requests for Isolation Segments** checkbox in the <%= vars.app_runtime_abbr %> tile, the smoke tests fail.
+The use cases outlined in the table above are described below:
 
-For more information about each use case, see [Options for Configuring Compute and Networking Isolation](#compute-networking-isolation-configs).
+* The most common use case for compute and networking isolation is enabling both, as well as the **Routers reject requests for Isolation Segments** checkbox in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. This routes traffic between an isolation segment and a block of compute resources that is dedicated solely to that isolation segment, while ensuring that no traffic is routed through the <%= vars.app_runtime_abbr %> Gorouters.
 
-### <a id='smoke-tests'></a> Smoke Tests
+* If you want the Gorouters for both <%= vars.segment_runtime_full %> and <%= vars.app_runtime_abbr %> to handle traffic for your isolated apps, you can enable both compute and networking isolation and disable the **Routers reject requests for Isolation Segments** checkbox in <%= vars.app_runtime_abbr %>. You can also use either the same apps domain you configured in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile, or a different one you configure with the DNS for the load balancer for the <%= vars.segment_runtime_full %> Gorouters. This configuration is useful if you want to configure isolated compute resources for your apps but do not have additional networking restrictions.
+
+* If you have a foundation with additional compute resource blocks, but no additional Gorouters for <%= vars.segment_runtime_full %> configured in the **Resource Config** pane, you can enable compute isolation, disable networking isolation, and disable the **Routers reject requests for Isolation Segments** checkbox in <%= vars.app_runtime_abbr %>. The <%= vars.app_runtime_abbr %> load balancer and apps domain route requests from your isolated apps. This configuration enables you to move Diego Cells out of <%= vars.app_runtime_abbr %> and into isolation segments, so you can upgrade <%= vars.app_runtime_abbr %> first and your <%= vars.segment_runtime_full %> tiles as time permits. This allows you to upgrade a large foundation in pieces, making it easier to upgrade within scheduled maintenance windows.
+
+<p class='note warning'><strong>Warning:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Routers reject requests for Isolation Segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described above, the smoke tests fail. If you want to deploy the tile anyway, you must disable the <strong>Smoke Tests</strong> errand in the <strong>Errands</strong> pane of the <%= vars.app_runtime_abbr %> tile. <%= vars.recommended_by %> does not recommend disabling smoke tests.</p>
+
+### <a id='smoke-tests'></a> Configure Smoke Tests
 
 In the **Smoke Tests** pane, you choose where to run smoke tests. The Smoke Tests errand runs basic functionality tests against both the <%= vars.app_runtime_abbr %> and <%= vars.segment_runtime_full %> tiles after an installation or update. In the **Errands** pane, you can choose whether or not to run the Smoke Tests errand.
 
@@ -195,9 +193,9 @@ To configure the **Smoke Tests** pane:
 
 1. Click **Save**.
 
-<p class='note warning'><strong>Warning:</strong> These smoke tests may fail if you configure the <strong>Compute and Networking Isolation</strong> pane in a way that is incompatible with how you configured the <strong>Routers reject requests for Isolation Segments</strong> checkbox in the <strong>Networking</strong> pane of the <%= vars.app_runtime_abbr %> tile. For more information, see <a href="#compute-networking-isolation-smoke-tests">Configure Compute and Networking Isolation to Allow Successful Smoke Tests</a>.</p>
+<p class='note warning'><strong>Warning:</strong> These smoke tests fail if you configure the <strong>Compute and Networking Isolation</strong> pane in a way that is incompatible with how you configured the <strong>Routers reject requests for Isolation Segments</strong> checkbox in the <strong>Networking</strong> pane of the <%= vars.app_runtime_abbr %> tile. For more information, see <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>.</p>
 
-### <a id='resources'></a> Configure Router Resources
+### <a id='resources'></a> Configure Resources
 
 In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic.
 
@@ -221,7 +219,7 @@ To configure the **Resource Config** pane:
 After you configure the <%= vars.segment_runtime_full %> tile:
 
 1. Create the isolation segment in the Cloud Controller database (CCDB) by following the procedure in [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_.
-    <p class='note'><strong>Note:</strong> If you run smoke tests as a post-deploy errand in the <%= vars.segment_runtime_full %> tile, the smoke tests check if your isolation segment exists within the Cloud Controller database (CCDB). If not, the smoke tests create it within the CCDB. This eliminates the need to manually create an isolation segment with the <code>cf create-isolation-segment</code> command. For more information about running smoke tests, see <a href="#smoke-tests">Smoke Tests</a>.</p>
+    <p class='note'><strong>Note:</strong> If you run smoke tests as a post-deploy errand in the <%= vars.segment_runtime_full %> tile, the smoke tests check if your isolation segment exists within the Cloud Controller database (CCDB). If not, the smoke tests create it within the CCDB. This eliminates the need to manually create an isolation segment with the <code>cf create-isolation-segment</code> command. For more information about running smoke tests, see <a href="#smoke-tests">Configure Smoke Tests</a>.</p>
 
 1. Return to the Ops Manager Installation Dashboard.
 
