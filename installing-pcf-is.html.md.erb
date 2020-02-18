@@ -138,21 +138,28 @@ To configure the **System Logging** pane:
 
 In the **Compute and Networking Isolation** pane, you can enable or disable compute isolation and configure router sharding for isolation segments. _Compute isolation_ is when an app runs on compute resources - such as clusters, resource pools, and servers - that are isolated from other resources by a network partition or firewall. _Networking isolation_, or router sharding, is when traffic to an app instance uses a dedicated route that is isolated from routes used by other app instances by a network partition or firewall rule.
 
-In the <%= vars.segment_runtime_full %> tile, compute isolation and networking isolation must be configured or disabled simultaneously. This is because networking isolation configures the route by which traffic goes to the <%= vars.segment_runtime_full %> tile. Both are enabled by default.
+In the <%= vars.segment_runtime_full %> tile, you cannot disable compute isolation and enable networking isolation at the same time. This is because networking isolation configures the route by which traffic goes to the <%= vars.segment_runtime_full %> tile. Both compute and networking isolation are enabled by default.
 
 To configure the **Compute and Networking Isolation** pane:
 
 1. Select **Compute and Networking Isolation**.
 
 1. Choose whether to enable or disable compute isolation under **Compute isolation**.
-    * To disable compute isolation, select **Disable**. Select this option if you do not require compute isolation and you are deploying the <%= vars.segment_runtime_full %> tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the PAS control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups. 
-    * To enable compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment.
-    <p class='note'><strong>Note:</strong> If you disable compute isolation, you must set <strong>Router sharding mode</strong> to <strong>No Isolation Segment</strong>.</p>
+  * To disable compute isolation, select **Disable**. Select this option if you do not require compute isolation and you are deploying the <%= vars.segment_runtime_full %> tile for the purpose of making upgrades more manageable. For example, if you have a <%= vars.app_runtime_abbr %> tile with a large volume of Diego Cells. This approach helps separate the upgrade of the <%= vars.app_runtime_abbr %> control plane from the upgrade of the Diego Cells. Further, it splits the upgrade of the Diego Cells into smaller groups. 
+  * To enable compute isolation, select **Enable** and enter a placement tag for your Diego Cells in the **Segment name** field. This placement tag identifies the Diego Cells that run in your isolation segment.
+    <p class='note'><strong>Note:</strong> If you disable compute isolation, you must set <strong>Router sharding mode</strong> to <strong>No isolation segment</strong>. Otherwise, the <%= vars.segment_runtime_full %> tile fails to schedule the apps in your isolation segment.</p>
 
-1. Enable or disable networking isolation by selecting a sharding mode under **Router sharding mode**. For more information, see [Sharding Routers for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
-  * **Isolation Segment only**: The routers for the tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
-  * **No Isolation Segment**: The routers for the tile reject requests for any isolation segment.
-    Choose this option to add a group of routers for the PAS tile, such as when you want a private point of entry for the system domain or to configure a group of routers to receive requests from your corporate intranet.
+1. Enable or disable networking isolation by selecting a sharding mode under **Router sharding mode**. For more information, see [Sharding Gorouters for Isolation Segments](../adminguide/routing-is.html#sharding-routers-isolation-segment) in _Routing for Isolation Segments_.
+  * **Isolation segment only**: The Gorouters for the <%= vars.app_runtime_abbr %> tile acknowledge requests only for apps deployed within the Diego Cells of the tile. All other requests fail.
+  * **No isolation segment**: The Gorouters for the <%= vars.app_runtime_abbr %> tile reject requests for any isolation segment. Choose this option to add a group of Gorouters for the <%= vars.app_runtime_abbr %> tile, such as when you want a private point of entry for the system domain or to configure a group of Gorouters to receive requests from your corporate intranet.
+
+#### <a id='compute-networking-isolation-configs'></a> Options for Configuring Compute and Networking Isolation
+
+The most common use case for compute and networking isolation is enabling both, as well as the **Routers reject requests for Isolation Segments** checkbox in the **Networking** pane of the <%= vars.app_runtime_abbr %> tile. This routes traffic between an isolation segment and a block of compute resources that is dedicated solely to that isolation segment, while ensuring that no traffic is routed through the <%= vars.app_runtime_abbr %> Gorouters.
+
+If you want the Gorouters for both <%= vars.segment_runtime_full %> and <%= vars.app_runtime_abbr %> to handle traffic for your isolated apps, you can enable both compute and networking isolation and disable the **Routers reject requests for Isolation Segments** checkbox in <%= vars.app_runtime_abbr %>. You can also use either the same apps domain you configured in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile, or a different one you configure with the DNS for the load balancer for the <%= vars.segment_runtime_full %> Gorouters. This configuration is useful if you want to configure isolated compute resources for your apps but do not have additional networking restrictions.
+
+If you have a foundation with additional compute resource blocks, but no additional Gorouters for <%= vars.segment_runtime_full %> configured in the **Resource Config** pane, you can enable compute isolation, disable networking isolation, and disable the **Routers reject requests for Isolation Segments** checkbox in <%= vars.app_runtime_abbr %>. The <%= vars.app_runtime_abbr %> load balancer and apps domain route requests from your isolated apps. This configuration enables you to move Diego Cells out of <%= vars.app_runtime_abbr %> and into isolation segments, so you can upgrade <%= vars.app_runtime_abbr %> first and your <%= vars.segment_runtime_full %> tiles as time permits. This allows you to upgrade a large foundation in pieces, making it easier to upgrade within scheduled maintenance windows.
 
 ### <a id='resources'></a> Configure Router Resources
 
