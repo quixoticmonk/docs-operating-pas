@@ -8,7 +8,7 @@ This topic describes how to install the <%= vars.segment_runtime_full %> tile, w
 
 Installing the tile installs a single isolation segment. However, you can install multiple isolation segments using the Replicator tool documented in [Step 4](#copy).
 
-After installing the tile, you must follow the procedure in [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_ to create the isolation segment in the Cloud Controller database (CCDB). The topic also includes information about managing an isolation segment.
+After installing the tile, you must follow the procedure in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_ to create the isolation segment in the Cloud Controller database (CCDB). The topic also includes information about managing an isolation segment.
 
 For more information about how isolation segments work, see [Isolation Segments](../concepts/security.html#isolation-segments) in _<%= vars.app_runtime_abbr %> Security_.
 
@@ -218,7 +218,7 @@ To configure the **Resource Config** pane:
 
 After you configure the <%= vars.segment_runtime_full %> tile:
 
-1. Register the isolation segment in the Cloud Controller database (CCDB) by following the procedure in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_.
+1. Register the isolation segment in the CCDB by following the procedure in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_.
     <p class='note'><strong>Note:</strong> If you run smoke tests as a post-deploy errand in the <%= vars.segment_runtime_full %> tile, the smoke tests check if your isolation segment in registered in the Cloud Controller database (CCDB). If not, the smoke tests register it in the CCDB. This eliminates the need to manually register the isolation segment with the <code>cf create-isolation-segment</code> command. For more information about running smoke tests, see <a href="#smoke-tests">Configure Smoke Tests</a>.</p>
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
