@@ -32,7 +32,7 @@ To install the <%= vars.segment_runtime_full %> tile:
 
 1. Download the product file from the [<%= vars.segment_runtime_full %>](https://network.pivotal.io/products/isolation-segment) page of Pivotal Network.
 
-1. Navigate to your Ops Manager URL in a browser to log in to the Ops Manager Installation Dashboard.
+1. Navigate to your <%= vars.ops_manager %> URL in a browser to log in to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click **Import a Product** and select the downloaded product file.
 
@@ -87,7 +87,7 @@ To configure the **App Containers** pane:
   * For **LDAP service account user**, enter the username of the service account in LDAP that manages volume services.
   * For **LDAP service account password**, enter the password for the service account.
   * For **LDAP server host**, enter the hostname or IP address of the LDAP server.
-  * For **LDAP server port**, enter the LDAP server port number. If you do not specify a port number, Ops Manager uses 389.
+  * For **LDAP server port**, enter the LDAP server port number. If you do not specify a port number, <%= vars.ops_manager %> uses 389.
   * For **LDAP user search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name. <br>For example, a domain named `cloud.example.com` typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`.
   * (Optional) For **LDAP server CA certificate**, you can enter a certificate if your LDAP server supports TLS and you want to enable TLS connections from the NFS driver to your LDAP server. Paste in the root certificate from your CA certificate or your self-signed certificate.
   <p class='note'><strong>Note:</strong> UAA can only parse one certificate entered into this field. If you enter multiple certificates, UAA only uses the first one you entered and ignores the rest. You only need to include one root certificate or self-signed certificate.</p>
@@ -98,7 +98,7 @@ To configure the **App Containers** pane:
 
 ### <a id='syslog'></a> Configure System Logging
 
-In the **System Logging** pane, you can configure system logging in <%= vars.app_runtime_abbr %> to forward log messages from <%= vars.app_runtime_abbr %> component VMs to an external service. <%= vars.recommended_by %> recommends forwarding logs to an external service for use in troubleshooting. If you do not fill these fields, platform logs are not forwarded but remain available on the component VMs and for download through Ops Manager.
+In the **System Logging** pane, you can configure system logging in <%= vars.app_runtime_abbr %> to forward log messages from <%= vars.app_runtime_abbr %> component VMs to an external service. <%= vars.recommended_by %> recommends forwarding logs to an external service for use in troubleshooting. If you do not fill these fields, platform logs are not forwarded but remain available on the component VMs and for download through <%= vars.ops_manager %>.
 
 To configure the **System Logging** pane:
 
@@ -218,10 +218,10 @@ To configure the **Resource Config** pane:
 
 After you configure the <%= vars.segment_runtime_full %> tile:
 
-1. Create the isolation segment in the Cloud Controller database (CCDB) by following the procedure in [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_.
-    <p class='note'><strong>Note:</strong> If you run smoke tests as a post-deploy errand in the <%= vars.segment_runtime_full %> tile, the smoke tests check if your isolation segment exists within the Cloud Controller database (CCDB). If not, the smoke tests create it within the CCDB. This eliminates the need to manually create an isolation segment with the <code>cf create-isolation-segment</code> command. For more information about running smoke tests, see <a href="#smoke-tests">Configure Smoke Tests</a>.</p>
+1. Register the isolation segment in the Cloud Controller database (CCDB) by following the procedure in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_.
+    <p class='note'><strong>Note:</strong> If you run smoke tests as a post-deploy errand in the <%= vars.segment_runtime_full %> tile, the smoke tests check if your isolation segment in registered in the Cloud Controller database (CCDB). If not, the smoke tests register it in the CCDB. This eliminates the need to manually register the isolation segment with the <code>cf create-isolation-segment</code> command. For more information about running smoke tests, see <a href="#smoke-tests">Configure Smoke Tests</a>.</p>
 
-1. Return to the Ops Manager Installation Dashboard.
+1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click **Review Pending Changes**, then **Apply Changes** to deploy the tile.
 
