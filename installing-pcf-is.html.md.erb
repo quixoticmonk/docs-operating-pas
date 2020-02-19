@@ -74,7 +74,7 @@ To configure the **App Containers** pane:
 
 1. (Optional) You can configure <%= vars.app_runtime_abbr %> to run app instances in Docker containers by provided a comma-separated list of their IP address ranges in the **Private Docker insecure registry allow list** field. For more information, see [Using Docker Registries](../opsguide/docker-registry.html).
 
-1. Under **Segment name**, enter the name of your isolation segment. This name must be unique across your <%= vars.platform_name %> deployment. You use this name when following the steps in [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_ to create the isolation segment in the Cloud Controller database (CCDB).
+1. Under **Segment name**, enter the name of your isolation segment. This name must be unique across your <%= vars.platform_name %> deployment. You use this name when following the steps in [Register an Isolation Segment](../adminguide/isolation-segments.html#register-an-is) in _Managing Isolation Segments_ to create the isolation segment in the CCDB.
 
 1. Select your preference for **Docker images disk cleanup scheduling on Diego Cell VMs**. If you choose **Clean up disk space once usage fills disk**, enter a value in MB for **Reserved disk space for other jobs**. This is the amount of space the garbage collection algorithm should keep free for other jobs. For more information about the configuration options and how to configure a reserved amount, see [Configuring Diego Cell Disk Cleanup Scheduling](../opsguide/config-cell-cleanup.html).
 
@@ -206,11 +206,11 @@ To configure the **Resource Config** pane:
 1. If you are using a dedicated router for your isolation segment, follow the instructions below.
   <p class="note"><strong>Note:</strong> The configuration settings available in <strong>Resource Config</strong> vary depending on your IaaS.</p>
   * **If you have the Load Balancers column in your Resource Config**:
-      * Enter the wildcard DNS entry attached to your load balancer into the **Router** row under **Load Balancers**.
+      1. Enter the wildcard DNS entry attached to your load balancer into the **Router** row under **Load Balancers**.
   * **If you do not have the Load Balancers column in your Resource Config**:
-      * Navigate to the **Networking** section of the **<%= vars.segment_runtime_full %>** tile.
-      * Specify **Router IPs**.
-      * Attach the IP addresses to your load balancer manually.
+      1. Navigate to the **Networking** pane.
+      1. Specify **Router IPs**.
+      1. Attach the IP addresses to your load balancer manually.
 
 1. If you are not using HAProxy for this isolation segment, set the number of **Instances** to `0`.
 
