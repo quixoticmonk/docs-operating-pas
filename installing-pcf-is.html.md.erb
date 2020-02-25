@@ -15,9 +15,9 @@ For more information about how isolation segments work, see [Isolation Segments]
 
 ## <a id='routing'></a> Step 1: (Optional) Configure Routing
 
-By default, the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) Gorouter handles traffic for your isolation segment. However, you can deploy a dedicated router for your isolation segment instead. For information about configuring and managing routing for isolation segments, see [Routing for Isolation Segments](../adminguide/routing-is.html).
+By default, the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) Gorouter handles traffic for your isolation segment. However, you can deploy a dedicated Gorouter for your isolation segment instead. For information about configuring and managing routing for isolation segments, see [Routing for Isolation Segments](../adminguide/routing-is.html).
 
-To deploy a dedicated router:
+To deploy a dedicated Gorouter:
 
 1. Add a load balancer in front of the <%= vars.app_runtime_abbr %> Gorouter. The steps to do this depend on your IaaS, but the setup of the load balancer should mirror the setup of the load balancer for the <%= vars.app_runtime_abbr %> Gorouter that you configured in the <%= vars.app_runtime_abbr %> tile.
 
@@ -134,7 +134,7 @@ To configure the **System Logging** pane:
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/advanced-features" %>
 
-### <a id='resources'></a> Configure Router Resources
+### <a id='resources'></a> Configure Gorouter Resources
 
 In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic.
 
@@ -142,13 +142,13 @@ To configure the **Resource Config** pane:
 
 1. Select **Resource Config**.
 
-1. If you are using a dedicated router for your isolation segment, follow the instructions below.
+1. If you are using a dedicated Gorouter for your isolation segment, follow the instructions below.
   <p class="note"><strong>Note:</strong> The configuration settings available in <strong>Resource Config</strong> vary depending on your IaaS.</p>
   * **If you have the Load Balancers column in your Resource Config**:
       1. Enter the wildcard DNS entry attached to your load balancer into the **Router** row under **Load Balancers**.
   * **If you do not have the Load Balancers column in your Resource Config**:
       1. Navigate to the **Networking** pane.
-      1. Specify **Router IPs**.
+      1. Specify **Gorouter IPs**.
       1. Attach the IP addresses to your load balancer manually.
 
 1. If you are not using HAProxy for this isolation segment, set the number of **Instances** to `0`.
