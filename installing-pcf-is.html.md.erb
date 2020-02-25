@@ -160,7 +160,7 @@ The use cases outlined in the table above are described below:
 
 * If your foundation has additional compute resource blocks, but no additional Gorouters for <%= vars.segment_runtime_full %> configured in the **Resource Config** pane, you can enable compute isolation, disable networking isolation, and disable the **Gorouters reject requests for isolation segments** checkbox in <%= vars.app_runtime_abbr %>. The <%= vars.app_runtime_abbr %> load balancer and apps domain route requests from your isolated apps. This configuration enables you to move Diego Cells out of <%= vars.app_runtime_abbr %> and into isolation segments, so you can upgrade <%= vars.app_runtime_abbr %> first and your <%= vars.segment_runtime_full %> tiles as time permits. This allows you to upgrade a large foundation in pieces, making it easier to upgrade within scheduled maintenance windows.
 
-<p class='note warning'><strong>Warning:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described above, the smoke tests fail. To deploy the tile anyway, you must disable the <strong>Smoke Tests</strong> errand in the <strong>Errands</strong> pane of the <%= vars.app_runtime_abbr %> tile. <%= vars.recommended_by %> does not recommend disabling smoke tests.</p>
+<p class='note warning'><strong>Warning:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described above, the smoke tests fail. To deploy the tile anyway, you must disable the Smoke Tests errand in the <strong>Errands</strong> pane of the <%= vars.app_runtime_abbr %> tile. <%= vars.recommended_by %> does not recommend disabling smoke tests. To configure the Smoke Tests errand, see <a href="#errands">Configure Errands</a>.</p>
 
 #### <a id='pane-config'></a> Configure Pane
 
@@ -179,7 +179,7 @@ To configure the **Compute and Networking Isolation** pane:
 
 ### <a id='smoke-tests'></a> Configure Smoke Tests
 
-In the **Smoke Tests** pane, you configure the org and space where smoke tests are run. In the org and space you configure in the **Smoke Tests** pane, the Smoke Tests errand pushes an app to a <%= vars.platform_name %> org to run basic functionality tests against both the <%= vars.app_runtime_abbr %> and <%= vars.segment_runtime_full %> tiles after an installation or update. In the **Errands** pane, you can choose whether or not to run the Smoke Tests errand.
+In the **Smoke Tests** pane, you configure the org and space where smoke tests are run. In the org and space you configure in the **Smoke Tests** pane, the Smoke Tests errand pushes an app to a <%= vars.platform_name %> org to run basic functionality tests against both the <%= vars.app_runtime_abbr %> and <%= vars.segment_runtime_full %> tiles after an installation or update. In the **Errands** pane, you can choose whether or not to run the Smoke Tests errand. To configure the **Smoke Tests** errand, see [Configure Errands](#errands).
 
 To configure the **Smoke Tests** pane:
 
@@ -195,7 +195,27 @@ To configure the **Smoke Tests** pane:
 
 1. Click **Save**.
 
-<p class='note warning'><strong>Warning:</strong> These smoke tests fail if you configure the <strong>Compute and Networking Isolation</strong> pane in a way that is incompatible with how you configured the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <strong>Networking</strong> pane of the <%= vars.app_runtime_abbr %> tile. For more information, see <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>.</p>
+<p class='note warning'><strong>Warning:</strong> If you configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>, the smoke tests fail.</p>
+
+### <a id='errands'></a> Configure Errands
+
+Errands are scripts that <%= vars.ops_manager %> runs automatically when it installs or uninstalls a product, such as a new version of <%= vars.app_runtime_abbr %>. There are two types of errands: _post-deploy errands_ run after the product is installed, and _pre-delete errands_ run before the product in uninstalled.
+
+By default, <%= vars.ops_manager %> always runs all errands.
+
+In the **Errands** pane, you can change these run rules. For each errand, you can select **On** to run it always or **Off** to never run it.
+
+For more information about how <%= vars.ops_manager %> manages errands, see [Managing Errands in <%= vars.ops_manager %>](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/managing_errands.html).
+
+* **Smoke Test Errand** verifies that your deployment can:
+    * Push, scale, and delete apps
+    * Create and delete orgs and spaces
+    <div class="note warning"><strong>Warning:</strong> You should disable the Smoke Test errand if:
+      <ul>
+        <li>You configure the <strong>Compute and Networking Isolation</strong> pane and the <strong>Gorouters reject requests for isolation segments</strong> checkbox in the <%= vars.app_runtime_abbr %> tile in a manner other than the use cases described in <a href="#compute-networking-isolation-configs">Options for Configuring Compute and Networking Isolation</a>. Otherwise, apps fail to schedule in <%= vars.segment_runtime_full %>.</li>
+        <li>Both the V2 and V1 Firehoses are disabled in <%= vars.app_runtime_abbr %>. Otherwise, the deploy fails.</li>
+      </ul>
+    </div>
 
 ### <a id='resources'></a> Configure Resources
 
