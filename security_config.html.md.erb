@@ -16,7 +16,7 @@ When you deploy <%= vars.platform_name %>, you must configure the TLS terminatio
 
 To choose and configure the TLS termination option for your deployment, see [TLS Termination Options for HTTP Routing](../adminguide/securing-traffic.html#ssl_options) in _Securing Traffic into <%= vars.app_runtime_abbr %>_.
 
-<%=vars.ssl_haproxy_2%>
+<%= vars.ssl_haproxy_2 %>
 
 
 ## <a id="certs"></a> Obtain TLS Certificates
@@ -26,6 +26,7 @@ To secure traffic into <%= vars.platform_name %>, you must obtain at least one T
 For additional IaaS-specific certificate requirements:
 
 * **AWS:** [Certificate Requirements on AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/aws.html#aws_certs)
+
 * **GCP:** [Certificate Requirements on GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/gcp.html#gcp_certs)
 
 
@@ -53,7 +54,7 @@ In either case for either self-signed or trusted single certificates, apply thes
 * If you are using a single domain configuration, use these values as the `Subject Alternative Name` of the certificate, where `DOMAIN` is your registered wildcard domain:
     * `*.login.sys.DOMAIN.com`
     * `*.uaa.sys.DOMAIN.com`
-    <p class="note"><strong>Note:</strong> TLS certificates generated for wildcard DNS records only work for a single domain name component or component fragment. For example, a certificate generated for <code>*.DOMAIN.com</code> does not work for <code>*.apps.DOMAIN.com</code> and <code>*.sys.DOMAIN.com</code>. The certificate must have both <code>*.apps.DOMAIN.com</code> and <code>*.sys.DOMAIN.com</code> attributed to it. </p>
+    <p class="note"><strong>Note:</strong> TLS certificates generated for wildcard DNS records only work for a single domain name component or component fragment. For example, a certificate generated for <code>*.DOMAIN.com</code> does not work for <code>*.apps.DOMAIN.com</code> and <code>*.sys.DOMAIN.com</code>. The certificate must have both <code>*.apps.DOMAIN.com</code> and <code>*.sys.DOMAIN.com</code> attributed to it.</p>
     
 ### <a id="ert_certgen"></a> Generate an RSA Certificate in <%= vars.app_runtime_abbr %>
 
