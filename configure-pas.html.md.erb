@@ -108,8 +108,15 @@ For additional guidance based on your installation method, see the following tab
 
 ## <a id='app-security'></a> Configure App Security Groups
 
-<%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
-<%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/application_security_group" %>
+Setting appropriate ASGs is critical for a secure deployment. To acknowledge that you are responsible for setting the
+appropriate ASGs after the <%= vars.app_runtime_abbr %> deployment completes:
+
+1. Select **App Security Groups**.
+1. In the **Type "X" to acknowledge this requirement** field, enter `X`.
+1. Click **Save**.
+
+For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting
+ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../opsguide/app-sec-groups.html).
 
 ## <a id='auth-config'></a> Configure Authentication and Enterprise SSO
 
