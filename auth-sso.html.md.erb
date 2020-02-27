@@ -41,7 +41,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML identity provider:
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
 1. Select the **Domains** pane and record your system domain.
-    ![domains.png](The page header says "Domains". Below this header is the text "For help configuring these fields, see the Configure Domains section of the Configuring <%= vars.app_runtime_abbr %> topic in the <%= vars.platform_name %> documentation," with "Configure Domain" in blue letters to denote a clickable link. Below this text are two fields labeled "System domain" and "Apps domain", with red asterisks to denote that they are required fields. The "System domain" field contains the ghost text "system.example.com". The "Apps domain" field contains the ghost text "apps.example.com". At the bottom of the image is a rectangular blue button labeled "Save".") %>
+    ![domains.png](The page header says "Domains". Below this header is the text "For help configuring these fields, see the Configure Domains section of the Configuring PAS topic in the Pivotal Platform documentation," with "Configure Domain" in blue letters to denote a clickable link. Below this text are two fields labeled "System domain" and "Apps domain", with red asterisks to denote that they are required fields. The "System domain" field contains the ghost text "system.example.com". The "Apps domain" field contains the ghost text "apps.example.com". At the bottom of the image is a rectangular blue button labeled "Save".") %>
 
 1. Select the **Authentication and Enterprise SSO** pane.
 
@@ -87,24 +87,24 @@ To configure a SAML identity provider to designate <%= vars.app_runtime_abbr %> 
 1. Download the service provider metadata from `https://login.YOUR-SYSTEM-DOMAIN/saml/metadata`. For configuration instructions, see the documentation from your identity provider.
 
 1. See the table below for information about certain industry-standard identity providers and how to integrate them with <%= vars.app_runtime_abbr %>:
-<table border="1">
-  <tr>
-    <th>Solution Name</th>
-    <th>Integration Guide</th>
-  </tr>
-  <tr>
-    <td><a href='http://www.ca.com/us/securecenter/ca-single-sign-on.aspx'>CA Single Sign-On aka CA SiteMinder</a></td>
-    <td><a href="./ca-sso-config.html">Link</a></td>
-  </tr>
-  <tr>
-    <td><a href='https://www.pingidentity.com/en/products/pingfederate.html'>Ping Federate</a></td>
-    <td><a href="./ping-federate-sso-configuration.html">Link</a></td>
-  </tr>
-  <tr>
-    <td><a href='https://technet.microsoft.com/en-us/windowsserver/dd448613.aspx'>Active Directory Federation Services</a></td>
-    <td><a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/opsguide/adfs-sso-configuration.html">Link</a></td>
-  </tr>
-</table>
+    <table border="1">
+      <tr>
+        <th>Solution Name</th>
+        <th>Integration Guide</th>
+      </tr>
+      <tr>
+        <td><a href='http://www.ca.com/us/securecenter/ca-single-sign-on.aspx'>CA Single Sign-On aka CA SiteMinder</a></td>
+        <td><a href="./ca-sso-config.html">Link</a></td>
+      </tr>
+      <tr>
+        <td><a href='https://www.pingidentity.com/en/products/pingfederate.html'>Ping Federate</a></td>
+        <td><a href="./ping-federate-sso-configuration.html">Link</a></td>
+      </tr>
+      <tr>
+        <td><a href='https://technet.microsoft.com/en-us/windowsserver/dd448613.aspx'>Active Directory Federation Services</a></td>
+        <td><a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/opsguide/adfs-sso-configuration.html">Link</a></td>
+      </tr>
+    </table>
 
 <p class="note"><strong>Note:</strong> Some identity providers allow uploads of service provider metadata. Other providers require you to manually enter the service provider metadata into a form. If your identity provider requires manual entry but is not listed above, see <a href="./ca-sso-config.html">CA SiteMinder SSO Integration Guide</a>.</p>
 
