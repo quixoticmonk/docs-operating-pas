@@ -15,7 +15,7 @@ If your enterprise user store is exposed as a SAML or LDAP Identity Provider for
 
 For information about managing user identity and pre-provisioning user roles with SAML or LDAP, see [Adding Existing SAML or LDAP Users to a <%= vars.platform_name %> Deployment](./external-user-management.html).
 
-For an explanation of the process used by the UAA Server when it attempts to authenticate a user through LDAP, see [Configuring LDAP Integration with <%= vars.platform_name %>](https://community.pivotal.io/s/article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry) in the Pivotal Knowledge Base.
+For an explanation of the process used by the UAA server when it attempts to authenticate a user through LDAP, see [Configuring LDAP Integration with <%= vars.platform_name %>](https://community.pivotal.io/s/article/Configuring-LDAP-Integration-with-Pivotal-Cloud-Foundry) in the Pivotal Knowledge Base.
 
 <p class='note'><strong>Note:</strong> When integrating with an external identity provider, such as LDAP, authentication within the UAA becomes chained. An authentication attempt with a user's credentials is first attempted against the UAA user store before the external provider, LDAP. For more information, see <a href="https://github.com/cloudfoundry/uaa/blob/master/docs/UAA-LDAP.md#chained-authentication">Chained Authentication</a> in the <em>User Account and Authentication LDAP Integration</em> GitHub documentation.</p>
 
@@ -62,7 +62,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML identity provider:
 
 1. Select the **Name ID format** for your SAML identity provider. This translates to `username` in <%= vars.app_runtime_abbr %>. The default is **Email Address**.
 
-1. For **Email domain(s)**, enter a comma-separated list of the email domains for external users who will receive invitations to Apps Manager.
+1. For **Email domains**, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
 
 1. For **First name attribute** and **Last name attribute**, enter the attribute names in your SAML database that correspond to the first and last names in each user record. For example, `first_name` and `last_name`. This field is case-sensitive. 
 
@@ -123,7 +123,7 @@ To integrate the UAA with one or more LDAP servers:
 
 1. Under **Configure your UAA user account store with either internal or external authentication mechanisms**, select **LDAP server**.
 
-1. For **Server URL(s)**, enter the URL that points your LDAP server. For multiple LDAP servers, enter a space-separated list. Each URL must include one of the following protocols:
+1. For **Server URLs**, enter the URL that points your LDAP server. For multiple LDAP servers, enter a space-separated list. Each URL must include one of the following protocols:
     * `ldap://`: This specifies that the LDAP server uses an unencrypted connection.
     * `ldaps://`: This specifies that the LDAP server uses SSL for an encrypted connection and requires that the LDAP server holds a trusted certificate or that you import a trusted certificate to the JVM truststore.
 
@@ -159,7 +159,7 @@ This is required if you are mapping LDAP groups to an admin role. To map the gro
 
 1. For **Email attribute**, enter the attribute name in your LDAP directory that corresponds to the email address in each user record. For example, `mail`.
 
-1. For **Email domain(s)**, enter a comma-separated list of the email domains for external users who will receive invitations to Apps Manager.
+1. For **Email domains**, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
 
 1. For **LDAP referrals**, select how the UAA handles LDAP server referrals out to other external user stores. The UAA can: 
     * **Automatically follow any referrals**.
