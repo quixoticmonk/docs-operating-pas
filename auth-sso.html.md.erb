@@ -84,7 +84,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML identity provider:
 
 To configure a SAML identity provider to designate <%= vars.app_runtime_abbr %> as a service provider:
 
-1. Download the service provider metadata from `https://login.YOUR-SYSTEM-DOMAIN/saml/metadata`. For configuration instructions, see the documentation from your identity provider.
+1. Download the service provider metadata from `https://login.SYSTEM-DOMAIN/saml/metadata`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane. For configuration instructions, see the documentation from your identity provider.
 
 1. See the table below for information about certain industry-standard identity providers and how to integrate them with <%= vars.app_runtime_abbr %>:
     <table border="1">
@@ -128,8 +128,8 @@ To integrate the UAA with one or more LDAP servers:
     * `ldaps://`: This specifies that the LDAP server uses SSL for an encrypted connection and requires that the LDAP server holds a trusted certificate or that you import a trusted certificate to the JVM truststore.
 
 1. For **LDAP credentials**, enter the LDAP distinguished name (DN) and password for binding to the LDAP server. For example: `cn=administrator,ou=Users,dc=example,dc=com`
-    <p class="note"><strong>Note:</strong> Pivotal recommends that you provide LDAP credentials that grant read-only permissions on the LDAP search base and the LDAP group search base. Additionally, if the bind user belongs to a different search base, you must use the full DN.</p>
-    <p class="note warning"><strong>Warning:</strong> Pivotal recommends against reusing LDAP service accounts across environments. LDAP service accounts should not be subject to manual lockouts, such as lockouts that result from users utilizing the same account. Also, LDAP service accounts should not be subject to automated deletions, since disruption to these service accounts could prevent user logins.</p>
+    <p class="note"><strong>Note:</strong> <%= vars.recommended_by %> recommends that you provide LDAP credentials that grant read-only permissions on the LDAP search base and the LDAP group search base. Additionally, if the bind user belongs to a different search base, you must use the full DN.</p>
+    <p class="note warning"><strong>Warning:</strong> <%= vars.recommended_by %> recommends against reusing LDAP service accounts across environments. LDAP service accounts should not be subject to manual lockouts, such as lockouts that result from users utilizing the same account. Also, LDAP service accounts should not be subject to automated deletions, since disruption to these service accounts could prevent user logins.</p>
 
 1. For **User search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name.
 <br><br>
