@@ -41,18 +41,18 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML identity provider:
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
 1. Select the **Domains** pane and record your system domain.
-    <%= image_tag("domains.png", alt: "The page header says 'Domains'. Below this header is the text 'For help configuring these fields, see the Configure Domains section of the Configuring <%= vars.app_runtime_abbr %> topic in the <%= vars.platform_name %> documentation,' with 'Configure Domain' in blue letters to denote a clickable link. Below this text are two fields labeled 'System domain' and 'Apps domain', with red asterisks to denote that they are required fields. The 'System domain' field contains the ghost text 'system.example.com'. The 'Apps domain' field contains the ghost text 'apps.example.com'. At the bottom of the image is a rectangular blue button labeled 'Save'.") %>
+    ![domains.png](The page header says "Domains". Below this header is the text "For help configuring these fields, see the Configure Domains section of the Configuring PAS topic in the Pivotal Platform documentation," with "Configure Domain" in blue letters to denote a clickable link. Below this text are two fields labeled "System domain" and "Apps domain", with red asterisks to denote that they are required fields. The "System domain" field contains the ghost text "system.example.com". The "Apps domain" field contains the ghost text "apps.example.com". At the bottom of the image is a rectangular blue button labeled "Save".") %>
 
 1. Select the **Authentication and Enterprise SSO** pane.
 
 1. Select **SAML identity provider**.
-    <%= image_tag("sso-ert.png", alt: "At the top of the image is the text 'Configure your UAA user account store with either internal or external authentication mechanisms:', with a red asterisk to denote that it is a required field. Below this text is a radio button labeled 'Internal UAA' and a selected radio button labeled 'SAML identity provider'. Below the 'SAML identity provider' button are two fields with red asterisks labeled 'Provider name' and 'Display name'. Next is a text area labeled 'Provider metadata'. Next is a field labeled 'Provider metadata URL'. Next is a dropdown labeled 'Name ID format', with a red asterisk, with the 'Email Address' option selected. Next are five fields labeled, from top to bottom: 'Email domain(s)', 'First name attribute', 'Last name attribute', 'Email attribute', and 'External groups attribute'. Next is an enabled checkbox labeled 'Sign authentication requests'. Next is a disabled checkbox labeled 'Require signed assertions'.") %>
+    ![sso-ert.png](At the top of the image is the text "Configure your UAA user account store with either internal or external authentication mechanisms:", with a red asterisk to denote that it is a required field. Below this text is a radio button labeled "Internal UAA" and a selected radio button labeled "SAML identity provider". Below the "SAML identity provider" button are two fields with red asterisks labeled "Provider name" and "Display name". Next is a text area labeled "Provider metadata". Next is a field labeled "Provider metadata URL". Next is a dropdown labeled "Name ID format", with a red asterisk, with the "Email Address" option selected. Next are five fields labeled, from top to bottom: "Email domain(s)", "First name attribute", "Last name attribute", "Email attribute", and "External groups attribute". Next is an enabled checkbox labeled "Sign authentication requests". Next is a disabled checkbox labeled "Require signed assertions".)
     <p class='note'><strong>Note:</strong> You must manually disable a SAML identity provider created by <%= vars.app_runtime_abbr %> when you no longer require it.</p>
 
 1. Set the **Provider name**. This is a unique name you create for the identity provider. This name can include only alphanumeric characters, `+`, `_`, and `-`. You should not change this name after deployment because all external users use it to link to the provider.
 
 1. Enter a **Display name**. Your provider display name appears as a link on your Pivotal login page, which you can access at `https://login.YOUR-SYSTEM-DOMAIN`.
-    <%= image_tag("login-page.png") %>
+    ![login-page.png](At the top of the image is the Pivotal logo in large teal letters. Below the logo is the text "Welcome!" in medium-sized letters. Below this text are two fields on top of each other. The top field contains the text "pi", followed by a black rectangle to redact the rest of the username. The bottom field contains eleven small circles, indicating hidden characters. Below these fields is a blue, rectangular button labeled "SIGN IN" in white letters. Below this button is a horizontal line break.)
 
 1. Retrieve the metadata from your identity provider and copy it into either the **Provider metadata** or the **Provider metadata URL** fields, depending on whether your identity provider exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.recommended_by %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. You can do this in either of the following ways:
     * If your identity provider exposes a metadata URL, provide the metadata URL.
@@ -87,24 +87,24 @@ To configure a SAML identity provider to designate <%= vars.app_runtime_abbr %> 
 1. Download the service provider metadata from `https://login.YOUR-SYSTEM-DOMAIN/saml/metadata`. For configuration instructions, see the documentation from your identity provider.
 
 1. See the table below for information about certain industry-standard identity providers and how to integrate them with <%= vars.app_runtime_abbr %>:
-<table border="1">
-  <tr>
-    <th>Solution Name</th>
-    <th>Integration Guide</th>
-  </tr>
-  <tr>
-    <td><a href='http://www.ca.com/us/securecenter/ca-single-sign-on.aspx'>CA Single Sign-On aka CA SiteMinder</a></td>
-    <td><a href="./ca-sso-config.html">Link</a></td>
-  </tr>
-  <tr>
-    <td><a href='https://www.pingidentity.com/en/products/pingfederate.html'>Ping Federate</a></td>
-    <td><a href="./ping-federate-sso-configuration.html">Link</a></td>
-  </tr>
-  <tr>
-    <td><a href='https://technet.microsoft.com/en-us/windowsserver/dd448613.aspx'>Active Directory Federation Services</a></td>
-    <td><a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/opsguide/adfs-sso-configuration.html">Link</a></td>
-  </tr>
-</table>
+    <table border="1">
+      <tr>
+        <th>Solution Name</th>
+        <th>Integration Guide</th>
+      </tr>
+      <tr>
+        <td><a href='http://www.ca.com/us/securecenter/ca-single-sign-on.aspx'>CA Single Sign-On aka CA SiteMinder</a></td>
+        <td><a href="./ca-sso-config.html">Link</a></td>
+      </tr>
+      <tr>
+        <td><a href='https://www.pingidentity.com/en/products/pingfederate.html'>Ping Federate</a></td>
+        <td><a href="./ping-federate-sso-configuration.html">Link</a></td>
+      </tr>
+      <tr>
+        <td><a href='https://technet.microsoft.com/en-us/windowsserver/dd448613.aspx'>Active Directory Federation Services</a></td>
+        <td><a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/opsguide/adfs-sso-configuration.html">Link</a></td>
+      </tr>
+    </table>
 
 <p class="note"><strong>Note:</strong> Some identity providers allow uploads of service provider metadata. Other providers require you to manually enter the service provider metadata into a form. If your identity provider requires manual entry but is not listed above, see <a href="./ca-sso-config.html">CA SiteMinder SSO Integration Guide</a>.</p>
 
@@ -119,7 +119,7 @@ To integrate the UAA with one or more LDAP servers:
 
 1. In the left navigation menu, select the **Authentication and Enterprise SSO** pane.
 
-    <%=image_tag("uaa/ldap-config.png", alt: "There is a selected radio button labeled 'LDAP server'. Below this is a field labeled 'Server URL(s)', with a red asterisk to denote that it is a required field. It contains the ghost text 'ldaps://example.com'. Next is a set of two fields under the label 'LDAP credentials', with a red asterisk. The first contains the ghost text 'Username', and the second contains the ghost text 'Password'. Next is a field labeled 'User search base', with a red asterisk, containing the ghost text 'ou=Groups,dc=example,dc=com'. Next is a field labeled 'User search field', with a red asterisk, containing the text 'cn={0}'. Next is a field labeled 'Group search base', containing the ghost text 'ou=Groups,dc=example,dc=com'. Next is a field labeled 'Group search filter', with a red asterisk, containing the text 'member={0}'. Next is a field labeled 'Group maximum search depth ( min: 1, max: 10)', containing the text '1'. Next is a text area labeled 'Server SSL certificate'. Next are two fields labeled 'First name attribute' and 'Last name attribute'. Next is a field labeled 'Email attribute', with a red asterisk, containing the text 'mail'. Next is a field labeled 'Email domain(s)'. Next is a dropdown labeled 'LDAP referrals', with a red asterisk, with the option 'Automatically follow any referrals' selected.")%>
+    ![../uaa/ldap-config.png](There is a selected radio button labeled "LDAP server". Below this is a field labeled "Server URL(s)", with a red asterisk to denote that it is a required field. It contains the ghost text "ldaps://example.com". Next is a set of two fields under the label "LDAP credentials", with a red asterisk. The first contains the ghost text "Username", and the second contains the ghost text "Password". Next is a field labeled "User search base", with a red asterisk, containing the ghost text "ou=Groups,dc=example,dc=com". Next is a field labeled "User search field", with a red asterisk, containing the text "cn={0}". Next is a field labeled "Group search base", containing the ghost text "ou=Groups,dc=example,dc=com". Next is a field labeled "Group search filter", with a red asterisk, containing the text "member={0}". Next is a field labeled "Group maximum search depth ( min: 1, max: 10)", containing the text "1". Next is a text area labeled "Server SSL certificate". Next are two fields labeled "First name attribute" and "Last name attribute". Next is a field labeled "Email attribute", with a red asterisk, containing the text "mail". Next is a field labeled "Email domain(s)". Next is a dropdown labeled "LDAP referrals", with a red asterisk, with the option "Automatically follow any referrals" selected.")
 
 1. Under **Configure your UAA user account store with either internal or external authentication mechanisms**, select **LDAP server**.
 
