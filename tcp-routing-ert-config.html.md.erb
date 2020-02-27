@@ -16,7 +16,7 @@ TCP routing enables apps that require inbound requests on non-HTTP protocols to 
 
 ## <a id="prerequisite"></a> Prerequisite
 
-Before enabling TCP routing, review the pre-deployment steps that describe required networking infrastructure changes. For more information, see the [Pre-Deployment Steps](../adminguide/enabling-tcp-routing.html#pre-deploy) section of the _Enabling TCP Routing_ topic.
+Before enabling TCP routing, review the pre-deployment steps that describe required networking infrastructure changes. For more information, see [Pre-Deployment Steps](../adminguide/enabling-tcp-routing.html#pre-deploy) in _Enabling TCP Routing_.
 
 
 ## <a id="enable-tcp"></a> Enable TCP Routing
@@ -34,7 +34,7 @@ To enable TCP routing:
 1. Under **Enable TCP requests to apps through specific ports on the TCP router**, select **Enable TCP routing**.
     <p class='note'><strong>Note:</strong> If you have mutual TLS app identity verification enabled, app containers accept incoming communication only from the Gorouter. This disables TCP routing.</p>
 
-1. For **TCP routing ports**, enter one or more ports to which the load balancer forwards requests. To support multiple TCP routes, Pivotal recommends allocating multiple ports. Do one of the following:
+1. For **TCP routing ports**, enter one or more ports to which the load balancer forwards requests. To support multiple TCP routes, <%= vars.recommended_by %> recommends allocating multiple ports. Do one of the following:
     * To allocate a single port or range of ports, enter a single port or a range of ports.  
     	<p class="note"><strong>Note:</strong> If you configured AWS for <%= vars.app_runtime_abbr %> manually, enter <code>1024-1123</code> which corresponds to the rules you created for <code><%= vars.product_name_lc %>-tcp-elb</code>.</p>
     * To allocate a list of ports:
@@ -66,7 +66,7 @@ To enable TCP routing:
    	   		<td>
             	<ol>
    	   		   		<li> Return to the top of the <strong>Networking</strong> pane.</li>
-                  	<li>In the <strong>TCP router IPs</strong> field, ensure that you have entered IP addresses that are within your subnet CIDR block. These are the same IP addresses you configured your load balancer with in the <a href="../adminguide/enabling-tcp-routing.html#pre-deploy">Pre-Deployment Steps</a> section of the <em>Enabling TCP Routing</em> topic, unless you configured DNS to resolve the TCP domain name directly to an IP you have chosen for the TCP router.</li>
+                  	<li>In the <strong>TCP router IPs</strong> field, ensure that you have entered IP addresses that are within your subnet CIDR block. These are the same IP addresses you configured your load balancer with in <a href="../adminguide/enabling-tcp-routing.html#pre-deploy">Pre-Deployment Steps</a> in <em>Enabling TCP Routing</em>, unless you configured DNS to resolve the TCP domain name directly to an IP you have chosen for the TCP router.</li>
                	</ol>
    	   		</td>
       	</tr>
@@ -77,7 +77,7 @@ To enable TCP routing:
 
 To disable TCP routing:
 
-1. Navigate to the <%= vars.ops_manager_full %> Installation Dashboard.
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
