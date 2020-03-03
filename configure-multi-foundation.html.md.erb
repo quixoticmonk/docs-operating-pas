@@ -43,49 +43,12 @@ To configure multi-foundation support in Apps Manager:
 	- `FOUNDATION_SYSTEM_DOMAIN` is the system domain of the foundation. The system domain is listed in the **Domains** pane of the PAS tile.
 	- `metricsUrl` is an optional field. If <%= vars.platform_name %> Metrics is installed on the foundation, provide the <%= vars.platform_name %> Metrics URL.
 
-### <a id="redirects"></a> Add Redirects in UAA
+1. For **Redirect URIs**, enter a comma separated list of the URI for each additional foundation on which you enabled multi-foundation support. Use the following format for each URI: 
 
-The Apps Manager UAA clients on each foundation you want to manage must include a redirect to the foundation on which you enabled multi-foundation support. This allows Apps Manager to redirect to the other foundations and back when authenticating with UAA. For more information about UAA clients and configuring valid redirect URIs, see the [Client.redirect-uri](../uaa/uaa-concepts.html#redirect-uri) section in the _UAA Concepts_ topic. 
-
-To add redirects:
-
-1. Install the UAA CLI. See the [CloudFoundry UAA Command Line Client](https://github.com/cloudfoundry/cf-uaac) repository in GitHub.
-
-1. Record the UAA admin client credentials password for a foundation you want to manage with Apps Manager: 
-	1. In the PAS tile **Credentials** tab, for **Admin Client Credentials**, click **Link to Credentials**.
-	1. Record the value in the `password` field.
-
-1. Target UAA on the foundation:
-
-    ```
-    uaac target uaa.FOUNDATION_SYSTEM_DOMAIN.com
-    ```
-    Where `FOUNDATION_SYSTEM_DOMAIN` is the system domain of the foundation.
-
-1. Generate a token for the UAA admin client:
-
-	```    
-    uaac token client get admin -s ADMIN_CLIENT_PASSWORD
-    ```
-    Where `ADMIN_CLIENT_PASSWORD` is the **Admin Client Credentials** password you recorded in step 2.
-
-1. Record the UAA redirect URIs. To view the redirect URIs on the UAA `apps_manager_js` client:
-
-    ```
-    uaac client get apps_manager_js
-    ```
-
-1. Add the URI of the foundation on which you enabled multi-foundation support to the `apps_manager_js` client:
-
-    ```
-    uaac client update apps_manager_js --redirect_uri \
-        'PREVIOUS_REDIRECT_URIS,https://apps.FOUNDATION_SYSTEM_DOMAIN.com/**'
-    ```
-    Where: 
-    - `PREVIOUS_REDIRECT_URIS` is one or more redirect URIs that you recorded in the previous step. Include the previous redirect URIs in the command to ensure they are not overwritten.
-    - `FOUNDATION_SYSTEM_DOMAIN` is the system domain of foundation on which you enabled multi-foundation support.
-
-1. Repeat steps 2 through 6 for each foundation you want to manage with Apps Manager. 
+   ```
+   https://apps.FOUNDATION_SYSTEM_DOMAIN.com/**
+   ```
+   Where FOUNDATION_SYSTEM_DOMAIN is the system domain of the foundation on which you enabled multi-foundation support.
 
 ### <a id="certificates"></a> Add Trusted Certificate Authorities
 
