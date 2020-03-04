@@ -43,14 +43,16 @@ To configure multi-foundation support in Apps Manager:
 	- `FOUNDATION_SYSTEM_DOMAIN` is the system domain of the foundation. The system domain is listed in the **Domains** pane of the PAS tile.
 	- `metricsUrl` is an optional field. If <%= vars.platform_name %> Metrics is installed on the foundation, provide the <%= vars.platform_name %> Metrics URL.
 
-1. For PAS versions v2.8.4 and later, in the **Redirect URIs** field, enter a comma-separated list of the URI for each
-additional foundation on which you enabled multi-foundation support. Use the following format for each URI: 
+1. Do one of the following, depending on your version of PAS:
+    * **For PAS versions v2.8.4 and later:** in the **Redirect URIs** field, enter a comma-separated list of the URI for each
+    additional foundation on which you enabled multi-foundation support. Use the following format for each URI: 
 
-    ```
-    https://apps.FOUNDATION_SYSTEM_DOMAIN.com/**
-    ```
-    Where `FOUNDATION_SYSTEM_DOMAIN` is the system domain of the foundation on which you enabled multi-foundation
-    support.
+        ```
+        https://apps.FOUNDATION_SYSTEM_DOMAIN.com/**
+        ```
+        Where `FOUNDATION_SYSTEM_DOMAIN` is the system domain of the foundation on which you enabled multi-foundation
+        support.
+    * **For PAS versions v2.8.3 and earlier:** follow the procedure in [Add Redirects in UAA (For PAS v2.8.3 and earlier)](#redirects) to add redirects for each foundation you want to manage with Apps Manager. 
 
 ### <a id="redirects"></a> Add Redirects in UAA (For PAS v2.8.3 and earlier)
 
