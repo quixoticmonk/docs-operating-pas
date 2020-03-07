@@ -8,7 +8,7 @@ This topic describes how and when to scale BOSH jobs in CAPI, and includes detai
 
 ## <a id='cloud_controller_ng'></a> cloud\_controller\_ng
 
-The `cloud_controller_ng` Ruby process is the primary job in CAPI. It, along with `nginx_cc`, powers the Cloud Controller API that all users of Pivotal Application Service (PAS) interact with. In addition to serving external clients, `cloud_controller_ng` also provides APIs for internal components within PAS, such as Loggregator and Networking subsystems.
+The `cloud_controller_ng` Ruby process is the primary job in CAPI. It, along with `nginx_cc`, powers the Cloud Controller API that all users of <%= vars.app_runtime_full %> interact with. In addition to serving external clients, `cloud_controller_ng` also provides APIs for internal components within <%= vars.app_runtime_abbr %>, such as Loggregator and Networking subsystems.
 
 <p class='note'><strong>Note:</strong> Running <code>bosh instances --vitals</code> returns CPU values. The CPU User value corresponds with the <code>system.cpu.user</code> metric and is scaled by the number of CPUs. For example, on a 4-core <code>api</code> VM, a <code>cloud_controller_ng</code> process that is using 100% of a core is listed as using 25% in the <code>system.cpu.user</code> metric.</p>
 
@@ -44,7 +44,7 @@ You can find the above heuristic failures in the following log files:
 
 Before and after scaling Cloud Controller API VMs, you should verify that the Cloud Controller database is not overloaded. All Cloud Controller processes are backed by the same database, so heavy load on the database impacts API performance regardless of the number of Cloud Controllers deployed. Cloud Controller supports both PostgreSQL and MySQL, so there is no specific scaling guidance for the database.
 
-In PAS deployments with internal MySQL clusters, a single MySQL database VM with CPU usage over ~80% can be considered overloaded. When this happens, the MySQL VMs must be scaled up to prevent the added load of additional Cloud Controllers exacerbating the issue.
+In <%= vars.app_runtime_abbr %> deployments with internal MySQL clusters, a single MySQL database VM with CPU usage over ~80% can be considered overloaded. When this happens, the MySQL VMs must be scaled up to prevent the added load of additional Cloud Controllers exacerbating the issue.
 
 Cloud Controller API VMs should primarily be scaled horizontally. Scaling up the number of cores on a single VM is not effective. This is because Ruby's Global Interpreter Lock (GIL) limits the `cloud_controller_ng` process so that it can only effectively use a single CPU core on a multi-core machine.
 
@@ -157,7 +157,7 @@ Both of these jobs are singletons, so extra instances are for failover HA rather
 
 ## <a id='blobstore_nginx'></a> blobstore\_nginx
 
-The internal WebDAV blobstore that comes included with PAS by default. It is used by the platform to store `packages`, staged `droplets`, `buildpacks`, and cached app resources. Files are typically uploaded to the internal blobstore through the Cloud Controller local workers and downloaded by Diego when app instances are started.
+The internal WebDAV blobstore that comes included with <%= vars.app_runtime_abbr %> by default. It is used by the platform to store `packages`, staged `droplets`, `buildpacks`, and cached app resources. Files are typically uploaded to the internal blobstore through the Cloud Controller local workers and downloaded by Diego when app instances are started.
 
 ### When to Scale
 
@@ -186,7 +186,7 @@ You can find the above heuristic failures in the following log files:
 
 ### How to Scale
 
-The internal WebDAV blobstore cannot be scaled horizontally, not even for availability purposes, because of its reliance on the `singleton-blobstore` VM's persistent disk for file storage. For this reason, it is not recommended for environments that require high availability. For these environments, you should use an external blobstore. For more information, see [Cloud Controller Blobstore Configuration](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html) in the open source Cloud Foundry documentation and the [Blob Storage](https://docs.cloudfoundry.org/concepts/high-availability.html#blobstore) section of the _High Availability in PAS_ topic.
+The internal WebDAV blobstore cannot be scaled horizontally, not even for availability purposes, because of its reliance on the `singleton-blobstore` VM's persistent disk for file storage. For this reason, it is not recommended for environments that require high availability. For these environments, you should use an external blobstore. For more information, see [Cloud Controller Blobstore Configuration](https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html) in the open source Cloud Foundry documentation and the [Blob Storage](https://docs.cloudfoundry.org/concepts/high-availability.html#blobstore) section of the _High Availability in <%= vars.app_runtime_abbr %>_ topic.
 
 The internal WebDAV blobstore can be scaled vertically, so scaling up the number of CPUs or adding faster disk storage can improve the performance of the internal WebDAV blobstore if it is under high load.
 
