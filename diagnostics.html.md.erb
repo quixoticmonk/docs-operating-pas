@@ -1,4 +1,3 @@
-ne#encoding: utf-8
 ---
 title: Diagnosing Problems in Pivotal Platform
 owner: Ops Manager
@@ -6,7 +5,9 @@ owner: Ops Manager
 
 <% current_page.data.title = "Diagnosing Problems in " + vars.platform_name %>
 
-This topic provides guidance for diagnosing issues encountered during a [<%= vars.platform_name %>](https://network.pivotal.io/products/pivotal-cf) installation.
+This topic provides guidance for diagnosing issues encountered during an <%= vars.platform_name %>
+
+installation.
 
 Besides whether products install successfully or not, an important consideration when diagnosing issues is communication between VMs deployed by <%= vars.platform_name %>. Depending on what products you install, communication takes the form of messaging, routing, or both. If they go wrong, an installation can fail. For example, in an Pivotal Application Service (PAS) installation the <%= vars.platform_name %> VM tries to push a test app to the cloud during post-installation testing. The installation fails if the resulting traffic cannot be routed to the HA Proxy load balancer.
 
