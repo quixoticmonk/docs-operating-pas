@@ -10,16 +10,16 @@ This topic describes how to globally configure proxy settings for all apps in yo
 
 ## <a id='set-env-variables'></a> Set Environment Variables
 
-To globally configure proxy settings for <%= vars.platform_name %> apps, you must set three environment variables for both the staging environment variable group and the running environment variable group. 
+To globally configure proxy settings for <%= vars.platform_name %> apps, you must set three environment variables for both the staging environment variable group and the running environment variable group.
 
 For more information about variable groups, see the [Environment Variable Groups](../devguide/deploy-apps/environment-variable.html#evgroups) section of the _PAS Environment Variables_ topic.
 
 This procedure explains how to set proxy information for both staging and running apps. However, you can set proxy settings for only staging or only running apps.
 
-To globally configure proxy settings for <%= vars.platform_name %> apps: 
+To globally configure proxy settings for <%= vars.platform_name %> apps:
 
 1. Target your Cloud Controller with the cf CLI. If you have not installed the cf CLI, see [Installing the cf CLI](../cf-cli/install-go-cli.html). Run:
-    
+
     ```
     cf api api.YOUR-SYSTEM-DOMAIN
     ```
@@ -39,7 +39,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
     Where:
     * `http_proxy`: Set this value to the proxy to use for HTTP requests.
     * `https_proxy`: Set this value to the proxy to use for HTTPS requests. In most cases, this is the same as `http_proxy`.
-    * `no_proxy`: Set this value to a comma-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.recommended_by %> recommends this value contains the domain `.cf.internal`, which is used by the platform to communicate with CredHub.
+    * `no_proxy`: Set this value to a comma-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain `.cf.internal`, which is used by the platform to communicate with CredHub.
 
     From now on, the proxy settings are applied to apps during staging.
 
@@ -51,7 +51,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
     <br>
     <br>
     To configure proxy settings for Java-based apps, use the following command instead, replacing the placeholder values. For `http.nonProxyHosts`, use a pipe-separated list rather than a comma-separated list. Run:
-    
+
     ```
     cf set-running-environment-variable-group '{"JAVA\_OPTS": "-Dhttp.proxyHost=YOUR-PROXY -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=NO-PROXY.EXAMPLE.COM"}'
     ```
@@ -96,9 +96,9 @@ Your app and language runtime may be case-sensitive. Try performing the steps in
 cf set-staging-environment-variable-group '{"HTTP\_PROXY": "<span>http:</span>//YOUR-PROXY:8080/", "HTTPS\_PROXY": "<span>http:</span>//YOUR-PROXY:8080/"}'.
 ```
 
-### <a id='check-proxy-settings'></a> Check Proxy Settings 
+### <a id='check-proxy-settings'></a> Check Proxy Settings
 
-If you have set up your proxy so that it can only send traffic to the Internet, a request to an internal resource like <%= vars.platform_name %> fails. You must set `no_proxy` so that traffic destined for <%= vars.platform_name %> and other internal resources is sent directly and does not go through the proxy. For instance, setting `no_proxy` to include your system and app domains will ensure that requests destined for those domains are sent directly. 
+If you have set up your proxy so that it can only send traffic to the Internet, a request to an internal resource like <%= vars.platform_name %> fails. You must set `no_proxy` so that traffic destined for <%= vars.platform_name %> and other internal resources is sent directly and does not go through the proxy. For instance, setting `no_proxy` to include your system and app domains will ensure that requests destined for those domains are sent directly.
 
 ### <a id='verify'></a> Verify Interpretation
 

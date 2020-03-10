@@ -1,6 +1,6 @@
 ---
 title: Configuring an F5 Load Balancer for PAS
-owner: <%= vars.product_name %> Documentation
+owner: <%= vars.platform_name %> Documentation
 ---
 
 This topic provides information for how to configure an [F5 BIG-IP Local Traffic Manager (LTM)](https://f5.com/products/big-ip/local-traffic-manager-ltm) as a load balancer for Pivotal Application Service (PAS).
@@ -14,7 +14,7 @@ This topic assumes you are familiar with the following concepts:
 * Creating admin users on the F5 load balancer
 * Creating F5 self-IPs, VLANs, and routes
 
-For guidance about the above topics, see [AskF5](https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM). 
+For guidance about the above topics, see [AskF5](https://support.f5.com/csp/knowledge-center/software/BIG-IP?module=BIG-IP%20LTM).
 
 <p class='note'><strong>Note:</strong> You must configure your F5 load balancer before installing PAS.</p>
 
@@ -34,16 +34,16 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
 1. Go to **iRules** and click **iRule List**.
 
 1. Create the following rules:
-    * **Name:** `cf-xforward-for`  
+    * **Name:** `cf-xforward-for`
        **Definition:** `when HTTP_REQUEST { HTTP::header insert X-Forwarded-For [IP::remote_addr] }`
-    * **Name:** `cf-xforward-proto-https`  
+    * **Name:** `cf-xforward-proto-https`
        **Definition:** `when HTTP_REQUEST { HTTP::header insert X-Forwarded-Proto "https" }`
-    * **Name:** `cf-xforward-proto-http`  
+    * **Name:** `cf-xforward-proto-http`
        **Definition:** `when HTTP_REQUEST { HTTP::header insert X-Forwarded-Proto "http" }`
 
 1. Go to **System**, then **File Management**, and click **SSL Certificate List**.
-  1. Import your PAS certificate and name it `<%= vars.product_name_lc %>-pas-cert`.
-  1. Import your PAS certificate key and name it `<%= vars.product_name_lc %>-pas-key`.
+  1. Import your PAS certificate and name it `<%= vars.platform_name_lc %>-pas-cert`.
+  1. Import your PAS certificate key and name it `<%= vars.platform_name_lc %>-pas-key`.
 
 1. Go to **Local Traffic** and click **Monitors**.
   1. Create a `gorouter` health monitor and give it the following parameters:
@@ -104,18 +104,18 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
 1. Create an SSL client profile.
     1. Go to Local **Traffic**, then **Profiles**, then **SSL**, and click **Client**.
     2. Create an SSL client profile and give it the following parameters:
-       * **Name:** `<%= vars.product_name_lc %>-ssl-client-certs-profile`
+       * **Name:** `<%= vars.platform_name_lc %>-ssl-client-certs-profile`
        * **Parent Profile:** `clientssl`
        * **Custom:** `[TRUE]`
        * Add a certificate key chain.
-           - **Certificate:** `<%= vars.product_name_lc %>-pas-cert`
-           - **Key:** `<%= vars.product_name_lc %>-pas-key`
+           - **Certificate:** `<%= vars.platform_name_lc %>-pas-cert`
+           - **Key:** `<%= vars.platform_name_lc %>-pas-key`
            <p class='note'><strong>Note:</strong> Your deployment may require additional root or intermediate certificates. You can select them here. Additionally, you can also enter passphrases for certificates.</p>
 
 1. Create four LTM virtual servers. One is required, while three are optional.
     1. Go to **Local Traffic**, click **Virtual Servers**, and click **Virtual Server List**.
     1. (Required) Create a virtual server for HTTPS access to Cloud Foundry API and apps and give it the following parameters:
-       * **Name:** `<%= vars.product_name_lc %>-https`
+       * **Name:** `<%= vars.platform_name_lc %>-https`
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `YOUR-<%= vars.platform_code %>-VIP`
@@ -126,14 +126,14 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
        * **Protocol Profile (Client):** `tcp_lan_optimized`
        * **Protocol Profile (Server):** (Use Client Profile)
        * **HTTP Profile:** `http`
-       * **SSL Profile:** `<%= vars.product_name_lc %>-ssl-client-certs-profile`
+       * **SSL Profile:** `<%= vars.platform_name_lc %>-ssl-client-certs-profile`
        * **VLAN and Tunnel Traffic:** `Enabled on YOUR-CONFIGURED-F5-VPN`
        * **Source Address Translation:** `Auto Map`
        <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
        * **Default Pool:** `gorouter_pool`
        * **iRules:** `cf-xforward-for` and `cf-xforward-proto-https`
     1. (Optional) Create a virtual server for HTTP access to <%= vars.platform_name %> apps and give it the following parameters:
-       * **Name:** `<%= vars.product_name_lc %>-http`
+       * **Name:** `<%= vars.platform_name_lc %>-http`
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `YOUR-<%= vars.platform_code %>-VIP`
@@ -151,7 +151,7 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
        * **Default Pool:** `gorouter_pool`
        * **iRules:** `cf-xforward-for` and `cf-xforward-proto-http`
     1. (Optional) Create a virtual server for `sshproxy`. This virtual server allows developers to SSH into Diego containers. Give it the following parameters:
-       * **Name:** `<%= vars.product_name_lc %>-sshproxy`
+       * **Name:** `<%= vars.platform_name_lc %>-sshproxy`
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `YOUR-SSH-PROXY-VIP`
@@ -168,7 +168,7 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
        <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
        * **Default Pool:** `diegobrain_pool`
     1. (Optional) Create a virtual server for `tcprouter`. This virtual server allows access to <%= vars.platform_name %> TCP app. Give it the following parameters:
-       * **Name:** `<%= vars.product_name_lc %>-tcprouter`
+       * **Name:** `<%= vars.platform_name_lc %>-tcprouter`
        * **Type:** `Standard`
        * **Source Address:** `0.0.0.0/0`
        * **Destination Address/Mask:** `[YOUR-TCP-ROUTER-VIP]`
@@ -184,7 +184,7 @@ This configuration terminates client SSL at the F5 and forward standard HTTP tra
        * **Source Address Translation:** `Auto Map`
        <p class='note'><strong>Note:</strong> This must be set in one-arm configurations.</p>
        * **Default Pool:** `tcprouter_pool`
- 
+
 Once you have completed configuration, check the **Network Map** located in **Local Traffic Menu**. Everything should be green.
 
 

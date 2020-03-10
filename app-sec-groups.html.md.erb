@@ -16,7 +16,7 @@ owner: Security
      }
 </style>
 
-This topic describes how to secure the component virtual machines (VMs) of your <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) deployment from being accessed by apps. 
+This topic describes how to secure the component virtual machines (VMs) of your <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) deployment from being accessed by apps.
 
 
 ## <a id='overview'></a> Overview
@@ -88,7 +88,7 @@ The procedure for securing your deployment with ASGs varies depending on your ne
     <tr>
       <td>One Network</td>
       <td><ul><li>One network for Ops Manager and the BOSH Director, Pivotal Application Service (PAS), and services.</li></ul>
-      <p class="note"><strong>Note:</strong> You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.product_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p>
+      <p class="note"><strong>Note:</strong> You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.platform_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p>
       </td>
     </tr>
     <tr>
@@ -178,7 +178,7 @@ To create ASGs that block apps from sending traffic to the networks that host Op
         ```
 
 1. To generate the default `public-networks.json` and `private-networks.json` files that contain your ASG rules, specifying the location of the `config.yml` file as input, run:
-  
+
     ```
     asg-creator create --config config.yml
     ```

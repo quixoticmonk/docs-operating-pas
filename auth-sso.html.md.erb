@@ -54,7 +54,7 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML identity provider:
 1. Enter a **Display name**. Your provider display name appears as a link on your Pivotal login page. You can access this link at `https://login.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane.
     ![At the top of the image is the Pivotal logo in large teal letters. Below the logo is the text "Welcome!" in medium-sized letters. Below this text are two fields on top of each other. The top field contains the text "pi", followed by a black rectangle to redact the rest of the username. The bottom field contains eleven small circles, indicating hidden characters. Below these fields is a blue, rectangular button labeled "SIGN IN" in white letters. Below this button is a horizontal line break.](login-page.png)
 
-1. Retrieve the metadata from your identity provider and copy it into either the **Provider metadata** or the **Provider metadata URL** fields, depending on whether your identity provider exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.recommended_by %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. You can do this in either of the following ways:
+1. Retrieve the metadata from your identity provider and copy it into either the **Provider metadata** or the **Provider metadata URL** fields, depending on whether your identity provider exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.company_name %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. You can do this in either of the following ways:
     * If your identity provider exposes a metadata URL, provide the metadata URL.
     * Download your identity provider metadata and paste this XML into the **Provider metadata** field.
     <p class='note'><strong>Note:</strong> You only need to select one of the above configurations. If you configure both, your identity provider defaults to the <strong>Provider metadata URL</strong>.</p>
@@ -64,11 +64,11 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML identity provider:
 
 1. For **Email domains**, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
 
-1. For **First name attribute** and **Last name attribute**, enter the attribute names in your SAML database that correspond to the first and last names in each user record. For example, `first_name` and `last_name`. This field is case-sensitive. 
+1. For **First name attribute** and **Last name attribute**, enter the attribute names in your SAML database that correspond to the first and last names in each user record. For example, `first_name` and `last_name`. This field is case-sensitive.
 
-1. For **Email attribute**, enter the attribute name in your SAML assertion that corresponds to the email address in each user record. For example, `EmailID`. This field is case-sensitive. 
+1. For **Email attribute**, enter the attribute name in your SAML assertion that corresponds to the email address in each user record. For example, `EmailID`. This field is case-sensitive.
 
-1. For **External groups attribute**, enter the attribute name in your SAML database that defines the groups that a user belongs to. For example, `group_memberships`. To map the groups from the SAML assertion to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_. This field is case-sensitive. 
+1. For **External groups attribute**, enter the attribute name in your SAML database that defines the groups that a user belongs to. For example, `group_memberships`. To map the groups from the SAML assertion to admin roles in <%= vars.app_runtime_abbr %>, see [Grant Admin Permissions to an External Group (SAML or LDAP)](../uaa/uaa-user-management.html#external-group) in _Creating and Managing Users with the UAA CLI (UAAC)_. This field is case-sensitive.
 
 1. By default, all SAML authentication requests from <%= vars.app_runtime_abbr %> are signed. To change this, disable the **Sign authentication requests** checkbox and configure your identity provider to verify SAML authentication requests.
 
@@ -128,8 +128,8 @@ To integrate the UAA with one or more LDAP servers:
     * `ldaps://`: This specifies that the LDAP server uses SSL for an encrypted connection and requires that the LDAP server holds a trusted certificate or that you import a trusted certificate to the JVM truststore.
 
 1. For **LDAP credentials**, enter the LDAP distinguished name (DN) and password for binding to the LDAP server. For example: `cn=administrator,ou=Users,dc=example,dc=com`
-    <p class="note"><strong>Note:</strong> <%= vars.recommended_by %> recommends that you provide LDAP credentials that grant read-only permissions on the LDAP search base and the LDAP group search base. Additionally, if the bind user belongs to a different search base, you must use the full DN.</p>
-    <p class="note warning"><strong>Warning:</strong> <%= vars.recommended_by %> recommends against reusing LDAP service accounts across environments. LDAP service accounts should not be subject to manual lockouts, such as lockouts that result from users utilizing the same account. Also, LDAP service accounts should not be subject to automated deletions, since disruption to these service accounts could prevent user logins.</p>
+    <p class="note"><strong>Note:</strong> <%= vars.company_name %> recommends that you provide LDAP credentials that grant read-only permissions on the LDAP search base and the LDAP group search base. Additionally, if the bind user belongs to a different search base, you must use the full DN.</p>
+    <p class="note warning"><strong>Warning:</strong> <%= vars.company_name %> recommends against reusing LDAP service accounts across environments. LDAP service accounts should not be subject to manual lockouts, such as lockouts that result from users utilizing the same account. Also, LDAP service accounts should not be subject to automated deletions, since disruption to these service accounts could prevent user logins.</p>
 
 1. For **User search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name.
 <br><br>
@@ -161,9 +161,9 @@ This is required if you are mapping LDAP groups to an admin role. To map the gro
 
 1. For **Email domains**, enter a comma-separated list of the email domains for external users who are to receive invitations to Apps Manager.
 
-1. For **LDAP referrals**, select how the UAA handles LDAP server referrals out to other external user stores. The UAA can: 
+1. For **LDAP referrals**, select how the UAA handles LDAP server referrals out to other external user stores. The UAA can:
     * **Automatically follow any referrals**.
-    * **Ignore referrals and return partial result**. 
+    * **Ignore referrals and return partial result**.
     * **Throw exception for each referral and abort**.
 
 1. Click **Save**.
