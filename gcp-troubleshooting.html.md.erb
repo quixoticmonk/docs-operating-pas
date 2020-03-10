@@ -3,18 +3,18 @@ title: Troubleshooting Pivotal Platform on GCP
 owner: Ops Manager
 ---
 
-<% current_page.data.title = "Troubleshooting " + vars.product_name + " on GCP" %>
+<% current_page.data.title = "Troubleshooting " + vars.platform_name + " on GCP" %>
 
-This topic describes how to troubleshoot known issues when deploying <%= vars.product_name  %> on Google Cloud Platform (GCP).
+This topic describes how to troubleshoot known issues when deploying <%= vars.platform_name %> on Google Cloud Platform (GCP).
 
 
-## <a id='sso'></a> Problems Connecting with Single Sign-On (SSO)
+## <a id='sso'></a> Problems Connecting with Single Sign-On (SSO) for VMware Tanzu
 
-Users may be unable to connect to applications running on <%= vars.product_name %> using SSO.
+Users may be unable to connect to applications running on <%= vars.platform_name %> using SSO for VMware Tanzu.
 
 ### Explanation
 
-SSO does not support multi-subnets.
+SSO for VMware Tanzu does not support multi-subnets.
 
 ### Solution
 
@@ -45,17 +45,17 @@ During installation of the PAS tile, the replication-canary job fails to start. 
 <pre>
 Started updating job mysql_monitor > mysql_monitor/0
 (48e7ec82-3cdf-41af-9d0f-90d1f12683c8) (canary). Failed: 'mysql_monitor/0
-(48e7ec82-3cdf-41af-9d0f-90d1f12683c8)' is not running after update. 
+(48e7ec82-3cdf-41af-9d0f-90d1f12683c8)' is not running after update.
 Review logs for failed jobs: replication-canary (00:05:13)
 
-Error 400007: 'mysql_monitor/0 (48e7ec82-3cdf-41af-9d0f-90d1f12683c8)' 
-is not running after update. 
+Error 400007: 'mysql_monitor/0 (48e7ec82-3cdf-41af-9d0f-90d1f12683c8)'
+is not running after update.
 Review logs for failed jobs: replication-canary
 </pre>
 
 ### Explanation
 
-This error can appear as a result of incorrect configuration of network traffic and missed communication between the Gorouter and a load balancer. 
+This error can appear as a result of incorrect configuration of network traffic and missed communication between the Gorouter and a load balancer.
 
 ### Solution
 

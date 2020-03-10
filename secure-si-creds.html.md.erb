@@ -12,7 +12,7 @@ The Pivotal Application Service (PAS) tile includes its own CredHub component, s
 
 Runtime CredHub exists to securely store service instance credentials. Previously, <%= vars.platform_name %> could only use the Cloud Controller database for storing these credentials.
 
-When developers want their app to use a service, such as those provided by the Spring Cloud Services tile for <%= vars.platform_name %>, they must bind their app to an instance of that service. Service bindings include credentials that developers can use to access the service from their app. For more information, see [Binding Credentials](../services/binding-credentials.html). 
+When developers want their app to use a service, such as those provided by the Spring Cloud Services for VMware Tanzu tile for <%= vars.platform_name %>, they must bind their app to an instance of that service. Service bindings include credentials that developers can use to access the service from their app. For more information, see [Binding Credentials](../services/binding-credentials.html).
 
 To ensure that service instance credentials are stored in runtime CredHub, you must configure PAS to enable this functionality. Not all services support the use of runtime CredHub.
 
@@ -39,29 +39,29 @@ The procedures in this document are only effective for services that support sto
     <td><a href="https://network.pivotal.io/products/p-cloudcache">Cloud Cache</a></td>
   </tr>
   <tr>
-    <td>CredHub Service Broker for <%= vars.platform_name %></td>
+    <td>CredHub Service Broker</td>
     <td>All</td>
     <td><a href="https://network.pivotal.io/products/credhub-service-broker">CredHub Service Broker for <%= vars.platform_name %></a></td>
   </tr>
   <tr>
-    <td>MySQL for <%= vars.platform_name %></td>
+    <td>MySQL for for VMware Tanzu</td>
     <td>v2.3 and later (available to user groups only)</td>
     <td><a href="https://network.pivotal.io/products/pivotal-mysql">MySQL for <%= vars.platform_name %></a></td>
   </tr>
   <tr>
-    <td>RabbitMQ for <%= vars.platform_name %></td>
+    <td>VMware RabbitMQ</td>
     <td>v1.12 and later</td>
     <td><a href="https://network.pivotal.io/products/p-rabbitmq">RabbitMQ for <%= vars.platform_name %></a></td>
   </tr>
   <tr>
-    <td>Redis for <%= vars.platform_name %></td>
+    <td>Redis for for VMware Tanzu</td>
     <td>v1.13 and later</td>
     <td><a href="https://network.pivotal.io/products/p-redis">Redis for <%= vars.platform_name %></a></td>
   </tr>
   <tr>
-    <td>Spring Cloud Services for <%= vars.platform_name %></td>
+    <td>Spring Cloud Services for for VMware Tanzu</td>
     <td>v1.5 and later</td>
-    <td><a href="https://network.pivotal.io/products/p-spring-cloud-services">Spring Cloud Services for <%= vars.platform_name %></a></td>
+    <td><a href="https://network.pivotal.io/products/p-spring-cloud-services">Spring Cloud Services for for VMware Tanzu</a></td>
   </tr>
 </table>
 
@@ -87,7 +87,7 @@ CredHub configuration options include:
 
 * Encryption keys stored internally, externally in a Hardware Security Module (HSM), or both
 
-To configure the PAS tile, see [Configuring PAS](../customizing/configure-pas.html). 
+To configure the PAS tile, see [Configuring PAS](../customizing/configure-pas.html).
 
 
 ## <a id='asgs'></a> Step 2: Create App Security Groups
@@ -106,7 +106,7 @@ To ensure the ASGs for your deployment allow apps to communicate with the runtim
 
 1. Record the CIDR for the PAS network.
 
-1. Create a file named `runtime-credhub.json` for specifying your ASG rules. Copy the content below into the file. Replace `YOUR-PAS-CIDR` with the CIDR you recorded in the previous step. 
+1. Create a file named `runtime-credhub.json` for specifying your ASG rules. Copy the content below into the file. Replace `YOUR-PAS-CIDR` with the CIDR you recorded in the previous step.
 
     ```
     [
@@ -124,14 +124,14 @@ To ensure the ASGs for your deployment allow apps to communicate with the runtim
     cf create-security-group runtime-credhub ~/workspace/runtime-credhub runtime-credhub.json
     ```
 
-1. Bind this ASG to your deployment or the specific space in which you want apps to access CredHub. For more information about binding ASGs, see the [Bind ASGs](../concepts/asg.html#binding-groups) section of the _App Security Groups_ topic. Ensure that apps deployed as part of the service tile installation process have access to CredHub in addition to the apps pushed to the platform by developers. For example, the Spring Cloud Services tile deploys the `spring-cloud-broker` app to the `p-spring-cloud-services` space of the `system` org. 
+1. Bind this ASG to your deployment or the specific space in which you want apps to access CredHub. For more information about binding ASGs, see the [Bind ASGs](../concepts/asg.html#binding-groups) section of the _App Security Groups_ topic. Ensure that apps deployed as part of the service tile installation process have access to CredHub in addition to the apps pushed to the platform by developers. For example, the Spring Cloud Services for VMware Tanzu tile deploys the `spring-cloud-broker` app to the `p-spring-cloud-services` space of the `system` org.
 
 1. Restart apps for the ASGs to take effect. Optionally, you can use the [app-restarter cf CLI plugin](https://github.com/cloudfoundry-incubator/app-restarter) to restart all apps in a particular space, org, or deployment.
 
 
-## <a id='service-instances'></a> Step 3: Unbind and Rebind Service Instances 
+## <a id='service-instances'></a> Step 3: Unbind and Rebind Service Instances
 
-For any service instance bindings that existed before runtime CredHub was supported for that service, you must work with your developers to unbind and rebind the service instances to their apps. If you do not unbind and rebind the service, apps continue functioning as normal and fetching credentials from the Cloud Controller database. 
+For any service instance bindings that existed before runtime CredHub was supported for that service, you must work with your developers to unbind and rebind the service instances to their apps. If you do not unbind and rebind the service, apps continue functioning as normal and fetching credentials from the Cloud Controller database.
 
 <p class="note"><strong>Note:</strong> This step is not required for bindings created after you installed the new version of the service tile that supports CredHub and you completed the procedures in steps 1 and 2 of this topic.</p>
 
@@ -146,7 +146,7 @@ To unbind and rebind your service instances to their apps:
     * `YOUR-APP` is the app to which you bound the service instance.
     * `YOUR-SERVICE-INSTANCE` is the service instance you want to unbind from the app.
 
-1. Rebind the service instance to the app by running: 
+1. Rebind the service instance to the app by running:
 
     ```
     cf bind-service YOUR-APP YOUR-SERVICE-INSTANCE
@@ -165,12 +165,12 @@ To unbind and rebind your service instances to their apps:
     <br>
     For help parsing the output of the `cf-env` command, see the [VCAP_SERVICES](../devguide/deploy-apps/environment-variable.html#VCAP-SERVICES) section of the _PAS Environment Variables_ topic.
 
-1. Restart the app to apply the service instance binding by running: 
- 
+1. Restart the app to apply the service instance binding by running:
+
     ```
     cf restart YOUR-APP
     ```
     Where `YOUR-APP` is the app to which you bound the service instance.
     <br>
     <br>
-    If you run `cf-env` again, you can see the `VCAP-SERVICES` environment variable now contains the credentials for the service instance binding. 
+    If you run `cf-env` again, you can see the `VCAP-SERVICES` environment variable now contains the credentials for the service instance binding.
