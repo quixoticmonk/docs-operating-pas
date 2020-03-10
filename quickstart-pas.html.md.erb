@@ -3,7 +3,7 @@ title: Quick Start PAS Configuration
 owner: Docs
 ---
 
-This topic describes how to minimally configure <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) for evaluation or testing purposes. It does not include optional configurations such as external databases or external file storage. 
+This topic describes how to minimally configure <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) for evaluation or testing purposes. It does not include optional configurations such as external databases or external file storage.
 
 For production deployments, <%= vars.recommended_by %> recommends following the procedure in [Configuring <%= vars.app_runtime_abbr %>](configure-pas.html).
 
@@ -17,7 +17,7 @@ Before beginning this procedure, ensure that you have successfully completed the
 
 To add <%= vars.app_runtime_abbr %> to <%= vars.ops_manager %>:
 
-1. If you have not already downloaded <%= vars.app_runtime_abbr %>, log in to [Pivotal Network](https://network.pivotal.io/products/pivotal-cf) and click **<%= vars.app_runtime_full %>**.
+1. If you have not already downloaded <%= vars.app_runtime_abbr %>, log in to [<%= vars.product_network %>](https://network.pivotal.io/products/pivotal-cf) and click **<%= vars.app_runtime_full %>**.
 
 1. From the **Releases** dropdown, select the release to install and choose one of the following:
   1. Click **<%= vars.app_runtime_full %>** to download the <%= vars.app_runtime_abbr %> `.pivotal` file.
@@ -34,11 +34,11 @@ To add <%= vars.app_runtime_abbr %> to <%= vars.ops_manager %>:
 
 To install <%= vars.app_runtime_abbr %> with minimal configuration:
 
-1. Follow the procedure in [Assign AZs and Networks](configure-pas.html#assign-azs-networks) in _Configuring <%= vars.app_runtime_abbr %>_. 
+1. Follow the procedure in [Assign AZs and Networks](configure-pas.html#assign-azs-networks) in _Configuring <%= vars.app_runtime_abbr %>_.
 
 1. Follow the procedure in [Configure Domains](configure-pas.html#domains) in _Configuring <%= vars.app_runtime_abbr %>_.
 
-1. Select **Networking**. 
+1. Select **Networking**.
 
 1. Under **Certificates and private keys for the Gorouter and HAProxy**, you must provide at least one certificate and private key name and certificate key pair for the Gorouter and HAProxy. The Gorouter and HAProxyu are enabled to receive TLS communication by default. You can configure multiple certificates for the Gorouter and HAProxy.
   <p class="note"><strong>Note:</strong> When providing custom certificates, enter them in this order: <code>wildcard</code>, <code>Intermediate</code>, <code>CA</code>. For more information, see <a href="https://www.digicert.com/ssl-support/pem-ssl-creation.htm">Creating a .pem File for SSL Certificate Installations</a> in the DigiCert documentation.</p>
@@ -48,19 +48,17 @@ To install <%= vars.app_runtime_abbr %> with minimal configuration:
 
 1. <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %><%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/ssl_verification" %>
 
-1. Disable the **HAProxy forwards all requests to the Gorouter over TLS** checkbox. By default, <%= vars.app_runtime_abbr %> does not deploy HAProxy. 
+1. Disable the **HAProxy forwards all requests to the Gorouter over TLS** checkbox. By default, <%= vars.app_runtime_abbr %> does not deploy HAProxy.
 
-1. Setting appropriate ASGs is critical for a secure deployment. To acknowledge that you are responsible for setting
-the appropriate ASGs after the <%= vars.app_runtime_abbr %> deployment completes:
+1. Setting appropriate ASGs is critical for a secure deployment. To acknowledge that you are responsible for setting the appropriate ASGs after the <%= vars.app_runtime_abbr %> deployment completes:
   1. Select **App Security Groups**.
   1. In the **Type "X" to acknowledge this requirement** field, enter `X`.
   1. Click **Save**.
   <br><br>
-  For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting
-ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../opsguide/app-sec-groups.html).
+  For more information about ASGs, see [App Security Groups](../concepts/asg.html). For more information about setting ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Components](../opsguide/app-sec-groups.html).
 
 1. Under **SAML service provider credentials**, enter a certificate and private key for the User Account and Authentication (UAA) server to use as a SAML service provider for signing outgoing SAML authentication requests. You can provide an existing certificate and private key from your trusted CA or generate a self-signed certificate. The domain `*.login.SYSTEM-DOMAIN` must be associated with the certificate, where `SYSTEM-DOMAIN` is the system domain you configured in the **Domains** pane.
-  <p class="note"><strong>Note:</strong> The Pivotal Single Sign-On Service and Pivotal Spring Cloud Services tiles require the <code>*.login.SYSTEM-DOMAIN</code>.</p>
+  <p class="note"><strong>Note:</strong> The Single Sign-On for VMware Tanzu service and Spring Cloud Services for VMware Tanzu tiles require the <code>*.login.SYSTEM-DOMAIN</code>.</p>
 
 1. Select **UAA**.
 
@@ -71,7 +69,7 @@ ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Compo
 1. Under **Internal encryption provider keys**, specify one or more keys to use for encrypting and decrypting the values stored in the CredHub database:
 	* **Name:** This is the name of the encryption key.
 	* **Key:** This key is used for encrypting all data. The key must be at least 20 characters long.
-  * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as **Primary**. Do not mark more than one key as **Primary**. 
+  * **Primary:** This checkbox is used for marking the key you specified above as the primary encryption key. You must mark one key as **Primary**. Do not mark more than one key as **Primary**.
 
 1. Go to the **Internal MySQL** pane.
 
@@ -79,7 +77,7 @@ ASGs, see [Restricting App Access to Internal <%= vars.app_runtime_abbr %> Compo
 
 1. Select **Resource Config**.
 
-1. In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html). 
+1. In the **Resource Config** pane, you must associate load balancers with the VMs in your deployment to enable traffic. For more information, see [Configure Load Balancing for <%= vars.app_runtime_abbr %>](configure-lb.html).
 
 
 ## <a id='complete'></a> Complete the <%= vars.app_runtime_abbr %> Installation
