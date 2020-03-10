@@ -7,14 +7,14 @@ owner: Ops Manager
 
 To use SSL termination in <%= vars.platform_name %>, you must configure the HAProxy load balancer or your own load balancer.
 
-<%= vars.recommended_by %> recommends that you use HAProxy in lab and test environments only. Production environments should instead use a highly-available customer-provided load balancing solution.
+<%= vars.company_name %> recommends that you use HAProxy in lab and test environments only. Production environments should instead use a highly-available customer-provided load balancing solution.
 
 Choose an SSL termination method to determine the steps you must take to configure <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
 
 
 ## <a id="haproxy"></a> Use the HAProxy Load Balancer
 
-<%= vars.platform_name %> deploys with a single instance of HAProxy for use in lab and test environments. You can use this HAProxy instance for SSL termination and load balancing to the <%= vars.app_runtime_abbr %> Gorouters. HAProxy can generate a self-signed certificate if you do not want to obtain a signed certificate from a well-known Certificate Authority (CA).
+<%= vars.platform_name %> deploys with a single instance of HAProxy for use in lab and test environments. You can use this HAProxy instance for SSL termination and load balancing to the <%= vars.app_runtime_abbr %> Gorouters. HAProxy can generate a self-signed certificate if you do not want to obtain a signed certificate from a well-known certificate authority (CA).
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial "/pcf/core/#{vars.current_major_version.sub('.', '-')}/known-issue-self-signed-certs" %>
 
@@ -47,7 +47,7 @@ To use the HAProxy load balancer:
 	```
 	This command should return your HAProxy IP address.
 
-1. Navigate to the <%= vars.ops_manager_full %> Installation Dashboard.
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
@@ -104,4 +104,4 @@ To use your own load balancer:
 
 1. Provide your SSL certificate in the **Certificates and private keys for the Gorouter and HAProxy** fields. For more information, see [Providing a Certificate for Your TLS Termination Point](./security_config.html).
 
-<p class='note'><strong>Note:</strong> When adding or removing <%= vars.platform_name %> Gorouters, you must update your load balancing solution configuration with the appropriate IP addresses.</p>
+<p class='note'><strong>Note:</strong> When adding or removing <%= vars.app_runtime_abbr %> Gorouters, you must update your load balancing solution configuration with the appropriate IP addresses.</p>
