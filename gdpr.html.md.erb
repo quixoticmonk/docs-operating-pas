@@ -332,15 +332,15 @@ By default, the [Gorouter](../concepts/architecture/router.html) logs include th
 
 #### <a id='disable-client-ip-logging'></a> Disable Client IP Logging
 
-In PPAS v2.0 and later and Elastic Runtime v1.12, operators can disable logging of client IP addresses in the Gorouter.
+In <%= vars.app_runtime_abbr %> v2.0 and later and Elastic Runtime v1.12, operators can disable logging of client IP addresses in the Gorouter.
 
 To disable logging of client IP addresses:
 
-1. Navigate to the Ops Manager Installation Dashboard and click the PAS or Elastic Runtime tile.
+1. Navigate to the Ops Manager Installation Dashboard and click the <%= vars.app_runtime_abbr %> or Elastic Runtime tile.
 
 1. Click **Networking**.
 
-1. Under **Logging of Client IPs in CF Router**, select one of the two options:
+1. Under **Logging of client IPs in the Gorouter**, select one of the two options:
 	* If the source IP address exposed by your load balancer is its own IP address, select **Disable logging of X-Forwarded-For header only**. 
 	* If the source IP address exposed by your load balancer belongs to the downstream client, select **Disable logging of both source IP and X-Forwarded-For header**.
 
@@ -377,7 +377,7 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 </tr>
 <tr>
 <th>Reports/Logs</th>
-<td>SSH proxy logs PAS user access.</td>
+<td>SSH proxy logs <%= vars.app_runtime_abbr %> user access.</td>
 <td>UAA user name and ID</td>
 <td>When the user authenticates for SSH access to an app.</td>
 <td>The data is stored in a log file collocated with the SSH proxy instance handling the authentication request. This log file may also have its contents forwarded to a remote syslog destination.</td>
@@ -393,7 +393,7 @@ Diego is the container management system for <%= vars.app_runtime_abbr %>. For m
 
 ### <a id='cf-notifications'></a> Notifications Service
 
-The Notifications Service enables operators to configure components of PAS to send emails to end users. For more information, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
+The Notifications Service enables operators to configure components of <%= vars.app_runtime_abbr %> to send emails to end users. For more information, see [Getting Started with the Notifications Service](../adminguide/notifications.html).
 
 <table>
 <tbody>
