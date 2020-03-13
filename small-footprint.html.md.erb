@@ -139,11 +139,11 @@ To troubleshoot a job that runs on the Control or Database VMs:
 
 1. Use BOSH to SSH into one of the Small Footprint <%= vars.app_runtime_abbr %> VMs. Run:
 
-		bosh -e BOSH-ENV -d TAS-DEPLOYMENT ssh VM-NAME/VM-GUID
+		bosh -e BOSH-ENV -d PAS-DEPLOYMENT ssh VM-NAME/VM-GUID
 
 	Where:
 	* `BOSH-ENV` is the name of your BOSH environment.
-	* `TAS-DEPLOYMENT` is the name of your Small Footprint <%= vars.app_runtime_abbr %> deployment.
+	* `PAS-DEPLOYMENT` is the name of your Small Footprint <%= vars.app_runtime_abbr %> deployment.
 	* `VM-NAME` is the name of your VM.
 	* `VM-GUID` is the GUID of your VM.
 
