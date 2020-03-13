@@ -10,16 +10,16 @@ Docker registries store Docker container images. <%= vars.platform_name %> uses 
 
 ## <a id='prerequisite'></a> Prerequisite: Enable Docker Support
 
-<%= vars.platform_name %> can only access Docker registries if an operator has enabled Docker support with the `cf enable-feature-flag diego_docker` command, as described in the [Enable Docker](../adminguide/docker.html#enable) section of the _Using Docker in PAS_ topic.
+<%= vars.platform_name %> can only access Docker registries if an operator has enabled Docker support with the `cf enable-feature-flag diego_docker` command, as described in the [Enable Docker](../adminguide/docker.html#enable) section of the _Using Docker in <%= vars.app_runtime_abbr %>_ topic.
 
 With Docker enabled, developers can push an app with a Docker image using the Cloud Foundry Command Line Interface (cf CLI). For more information, see [Deploying an App with Docker](../devguide/deploy-apps/push-docker.html).
 
 
 ## <a id='ops-man'></a> Use a CA Certificate
 
-If you provide your root CA certificate in the Ops Manager configuration:
+If you provide your root CA certificate in the <%= vars.ops_manager %> configuration:
 
-1. In the Ops Manager Installation Dashboard, click the **BOSH Director** tile.
+1. In the <%= vars.ops_manager %> Installation Dashboard, click the **BOSH Director** tile.
 
 1. Click **Security**.
 
@@ -30,8 +30,8 @@ If you provide your root CA certificate in the Ops Manager configuration:
 1. Click **Save**.
 
 1. Choose one of the following:
-  - If you are configuring Ops Manager for the first time, return to your specific IaaS installation instructions ([AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/aws.html), [Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/azure.html), [GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/gcp.html), [OpenStack](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/openstack.html), [vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/vsphere.html)) to continue the installation process.
-  - If you are modifying an existing Ops Manager installation, return to the Ops Manager Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
+  - If you are configuring <%= vars.ops_manager %> for the first time, return to your specific IaaS installation instructions ([AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/aws.html), [Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/azure.html), [GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/gcp.html), [OpenStack](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/openstack.html), [vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/vsphere.html)) to continue the installation process.
+  - If you are modifying an existing <%= vars.ops_manager %> installation, return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
 After configuration, BOSH propagates your CA certificate to all application containers in your deployment. You can then push and pull images from your Docker registries.
 
@@ -44,16 +44,18 @@ If you choose not to provide a CA certificate, you must provide the IP address o
 
 To configure an IP address allow list with the IP address of your Docker registry:
 
-1. Navigate to the Ops Manager Installation Dashboard.
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Click the **Pivotal Application Service** tile and select **App Containers**.
+1. Click the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile.
+
+1. Select **App Containers**.
   <%= image_tag("images/docker-registry-ert.png", alt: "At the top of the image is the text 'Docker images disk cleanup scheduling on Diego Cell VMs', with a red asterisk to denote that it is a required configuration. Below this text are three radio buttons: two radio buttons labeled 'Never clean up Diego Cell disk space' and 'Routinely clean up Diego Cell disk space', and a selected radio button labeled 'Clean up disk space once usage fills disk'. Below the selected radio button is a field labeled 'Reserved disk space for other jobs ( min: 15360 )', with a red asterisk, containing the text '15360'.") %>
 
 1. Select **Allow SSH access to app containers** to enable app containers to accept SSH connections. If you use a load balancer instead of HAProxy, you must open port 2222 on your load balancer to enable SSH traffic. To open an SSH connection to an app, a user must have Space Developer privileges for the space where the app is deployed. Operators can grant those privileges in Apps Manager or using the cf CLI.
 
 1. For **Private Docker insecure registry allow list**, provide the hostname or IP address and port that point to your private Docker registry. For example, enter `198.51.100.1:80` or `mydockerregistry.com:80`. Enter multiple entries in a comma-delimited sequence. SSL validation is ignored for private Docker image registries secured with self-signed certificates at these locations.
 
-1. Under **Docker images disk cleanup scheduling on Diego Cell VMs**, choose one of the options listed below. For more information about these options, see [Configuring Docker Images Disk-Cleanup Scheduling](./config-cell-cleanup.html).	
+1. Under **Docker images disk cleanup scheduling on Diego Cell VMs**, choose one of the options listed below. For more information about these options, see [Configuring Docker Images Disk-Cleanup Scheduling](./config-cell-cleanup.html).
 	* **Never clean up Diego Cell disk space**
 	* **Routinely clean up Diego Cell disk space**
 	* **Clean up disk space once threshold is reached**. If you choose this option, enter the amount of disk space limit the Diego Cell must reach before disk cleanup initiates under **Reserved disk space for other jobs**.
@@ -62,10 +64,10 @@ To configure an IP address allow list with the IP address of your Docker registr
 1. Click **Save**.
 
 1. Choose one of the following:
-	- If you are configuring PAS for the first time, return to your specific IaaS installation instructions ([AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/aws.html), [Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/azure.html), [GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/gcp.html), [OpenStack](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/openstack.html), [vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/vsphere.html)) to continue the installation process.
-	- If you are modifying an existing PAS installation, return to the Ops Manager Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
+	- If you are configuring <%= vars.app_runtime_abbr %> for the first time, return to your specific IaaS installation instructions ([AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/aws.html), [Azure](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/azure.html), [GCP](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/gcp.html), [OpenStack](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/openstack.html), [vSphere](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/customizing/vsphere.html)) to continue the installation process.
+	- If you are modifying an existing <%= vars.app_runtime_abbr %> installation, return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes**.
 
-After configuration, PAS allows Docker images to pass through the specified IP address without checking certificates.
+After configuration, <%= vars.app_runtime_abbr %> allows Docker images to pass through the specified IP address without checking certificates.
 
 
 ## <a id='proxy'></a> Configure <%= vars.platform_name %> to Access Proxies for Docker Registries
@@ -78,8 +80,8 @@ To configure <%= vars.platform_name %> to access a Docker registry through a pro
   <%= image_tag("install-dash-settings.png") %>
 
 1. On the **Update Proxy Settings** pane, complete one of the following fields:
-    + **HTTP proxy**: If you have an HTTP proxy server for your Docker registry, enter its IP address.  
-    + **HTTPS proxy**: If you have an HTTPS proxy server for your Docker registry, enter its IP address.  
+    + **HTTP proxy**: If you have an HTTP proxy server for your Docker registry, enter its IP address.
+    + **HTTPS proxy**: If you have an HTTPS proxy server for your Docker registry, enter its IP address.
     + **No proxy**: If you do not use a proxy server, enter the IP address for the Docker registry. This field may already contain proxy settings for the BOSH Director.
 
     Enter multiple IP addresses as a comma-separated list.
@@ -88,4 +90,4 @@ To configure <%= vars.platform_name %> to access a Docker registry through a pro
 
 1. Click **Update**.
 
-1. Return to the Ops Manager dashboard, click **Review Pending Changes**, and click **Apply Changes**.
+1. Return to the <%= vars.ops_manager %> dashboard, click **Review Pending Changes**, and click **Apply Changes**.
