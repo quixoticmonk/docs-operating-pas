@@ -19,7 +19,7 @@ Developers can then use the Cloud Foundry Command Line Interface (cf CLI) to cre
 
 To enable NFS volume services in <%= vars.app_runtime_abbr %>:
 
-1. Navigate to the Ops Manager Installation Dashboard.
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
@@ -33,17 +33,17 @@ To enable NFS volume services in <%= vars.app_runtime_abbr %>:
   * For **LDAP service account user**, enter either the full domain name for the service account or the username of the service account that manages volume services. This value must be what you enter when binding the account to your LDAP server.
   * For **LDAP service account password**, enter the password for the service account.
   * For **LDAP server host**, enter the hostname or IP address of the LDAP server.
-  * For **LDAP server port**, enter the LDAP server port number. If you do not specify a port number, Ops Manager uses 389.
+  * For **LDAP server port**, enter the LDAP server port number. If you do not specify a port number, <%= vars.ops_manager %> uses 389.
   * For **LDAP user search base**, enter the location in the LDAP directory tree from which any LDAP user search begins. The typical LDAP search base matches your domain name. For example, a domain named `cloud.example.com` typically uses the following LDAP user search base: `ou=Users,dc=example,dc=com`.
     <p class="note"><strong>Note:</strong> Additionally, your LDAP user records must be configured with an attribute <code>objectClass: User</code>, which is used by the NFS driver to identify records as user records. They must also have <code>uidNumber</code> and <code>gidNumber</code> fields, which are used to establish the correct UID for a named user.</p>
   * (Optional) For **LDAP server CA certificate**, you can enter a Certificate Authority (CA) certificate if your LDAP server supports TLS. Enter a certificate if you want to enable TLS connections from the NFS driver to your LDAP server. Paste in the root certificate from your CA certificate or your self-signed certificate.
 
 1. Click **Save**.
 
-1. Return to the Ops Manager Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes** to redeploy.
+1. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes** to redeploy.
 
 1. Using the cf CLI, enable access to the service by running:
-	
+
     ```
     cf enable-service-access nfs
     ```
@@ -62,7 +62,7 @@ After completing these steps, developers can use the cf CLI to create service in
 
 You can use ASGs and LDAP to secure your NFS server against traffic apps running on <%= vars.app_runtime_abbr %>:
 
-* **App Security Groups (ASGs):** Prevent apps from sending traffic directly to your NFS ports. Apps should never need to use NFS ports directly. Pivotal recommends defining an ASG that blocks direct access to your NFS server IP, especially ports 111 and 2049. For more information on setting up ASGs, see [App Security Groups](../concepts/asg.html).
+* **App Security Groups (ASGs):** Prevent apps from sending traffic directly to your NFS ports. Apps should never need to use NFS ports directly. <%= vars.company_name %> recommends defining an ASG that blocks direct access to your NFS server IP, especially ports 111 and 2049. For more information on setting up ASGs, see [App Security Groups](../concepts/asg.html).
 
 * **LDAP:** In addition to ASGs, secures the NFS volume service so that app developers cannot bind to the service using an arbitrary UID. App developers also cannot gain access to sensitive data. With LDAP support enabled, app developers must provide credentials for any user they want to bind as.
 
@@ -75,7 +75,7 @@ The Diego Cells running on <%= vars.app_runtime_abbr %> must be able to reach yo
 
 To enable SMB volume services in <%= vars.app_runtime_abbr %>:
 
-1. Navigate to the Ops Manager Installation Dashboard.
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
 1. Click the <%= vars.app_runtime_abbr %> tile.
 
@@ -85,16 +85,16 @@ To enable SMB volume services in <%= vars.app_runtime_abbr %>:
 
 1. Click **Save**.
 
-1. Select **Errands**. 
+1. Select **Errands**.
 
-1. Set the **SMB Broker Errand** to **On**. 
+1. Set the **SMB Broker Errand** to **On**.
 
 1. Click **Save**.
 
-1. Return to the Ops Manager Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes** to redeploy.
+1. Return to the <%= vars.ops_manager %> Installation Dashboard, click **Review Pending Changes**, and click **Apply Changes** to redeploy.
 
 1. Using the cf CLI, enable access to the service by running:
-	
+
     ```
     cf enable-service-access smb
     ```
