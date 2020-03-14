@@ -238,13 +238,13 @@ Now that you have bound new ASGs to determine outbound traffic rules, you no lon
 1. Unbind the default ASG from the staging set by running:
 
     ```
-    cf unbind-staging-security-group default\_security\_group
+    cf unbind-staging-security-group default_security_group
     ```
 
 1. Unbind the default ASG from the running set by running:
 
     ```
-    cf unbind-running-security-group default\_security\_group
+    cf unbind-running-security-group default_security_group
     ```
 
 ### <a name='restart'></a> Step 5: Restart your Apps
@@ -256,6 +256,6 @@ To restart all of the apps in your deployment:
 <p class="note"><strong>Note:</strong> You do not need to restart the apps in the <code>system</code> org.</p>
 
 1. Work with developers to restart a few of their apps individually and test that they still work correctly with the new ASGs in place. If an app does not work as expected, you likely must create another ASG that allows the app to send traffic to a service it requires.
-  <p class="note"><strong>Note:</strong> To quickly roll back to the original overly-permissive state, you can re-bind the <code>default\_security\_group</code> ASG to the <code>default-staging</code> and <code>default-running</code> sets. You must then restart your apps to re-apply the original ASGs.</p>
+  <p class="note"><strong>Note:</strong> To quickly roll back to the original overly-permissive state, you can re-bind the <code>default_security_group</code> ASG to the <code>default-staging</code> and <code>default-running</code> sets. You must then restart your apps to re-apply the original ASGs.</p>
 
 1. Restart the rest of the apps running on your deployment. Optionally, you can use the [app-restarter cf CLI plugin](https://github.com/cloudfoundry-incubator/app-restarter) to restart all apps in a particular space, org, or deployment.
