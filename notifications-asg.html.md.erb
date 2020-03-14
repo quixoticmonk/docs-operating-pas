@@ -34,15 +34,17 @@ The Notifications Service is deployed as a suite of apps to the `notifications-w
 
 To create an ASG for your SMTP server:
 
-1. Navigate to the Ops Manager **Installation Dashboard** and click the **Pivotal Application Service** (PAS) tile.
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+
+1. Click the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile.
 
 1. Select **Email Notifications**.
 
-1. Record the values in the **SMTP server address** and **SMTP server port** fields. 
+1. Record the values in the **SMTP server address** and **SMTP server port** fields.
 
 1. Using the **SMTP server address** you obtained in the previous step, find the IP addresses and protocol of your SMTP server from the service you are using. You might need to contact your service provider for this information.
 
-1. Create a `smtp-server.json` file. For `destination`, you must enter the IP address of your SMTP Server. 
+1. Create a `smtp-server.json` file. For `destination`, you must enter the IP address of your SMTP Server.
 
     ```
     [
@@ -68,9 +70,13 @@ If you are using the internal HAProxy as your load balancer, follow this procedu
 
 To create an ASG for a load balancer:
 
-1. Select **Networking** in the PAS tile.
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Record the values in the **HAProxy IPs** field. 
+1. Click the <%= vars.app_runtime_abbr %> tile.
+
+1. Select **Networking**.
+
+1. Record the values in the **HAProxy IPs** field.
 
 1. Create a `load-balancer-https.json` file. For `destination`, use the **HAProxy IPs** you recorded above.
 
@@ -96,13 +102,23 @@ To create an ASG for a load balancer:
 
 To create an ASG for an assigned network:
 
-1. Select **Assign AZs and Networks** in the PAS tile. 
+1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+
+1. Click the <%= vars.app_runtime_abbr %> tile.
+
+1. Select **Assign AZs and Networks**.
 
 1. Record the network selected in the **Network** dropdown.
 
-1. Record the **CIDR** in the **Create Networks** pane of the **BOSH Director** tile for the network you identified in the previous step. Ensure the subnet mask allows the space to access `p-mysql`, `p-rabbitmq`, and `p-redis`.
+1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 
-1. Create a file `assigned-network.json`. For the `destination`, enter the **CIDR** you recorded above. 
+1. Click the BOSH Director tile.
+
+1. Select *Create Networks**.
+
+1. Record the **CIDR** for the network you identified in **Assign AZs and Networks**. Ensure the subnet mask allows the space to access `p-mysql`, `p-rabbitmq`, and `p-redis`.
+
+1. Create a file `assigned-network.json`. For the `destination`, enter the **CIDR** you recorded above.
 
     ```
     [

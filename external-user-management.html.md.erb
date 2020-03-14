@@ -18,6 +18,7 @@ The following two ways exist to add existing SAML or LDAP users to your <%= vars
 To perform the procedures in this topic, you must have:
 
 * Admin access to the <%= vars.ops_manager %> Installation Dashboard for your <%= vars.platform_name %> deployment
+
 * The [Cloud Foundry Command Line Interface](../cf-cli/install-go-cli.html) (cf CLI) v6.23.0 or later
 
 
@@ -37,26 +38,32 @@ To add a SAML or LDAP user:
 1. Target the API endpoint for your <%= vars.platform_name %> deployment by running:
 
     ```
-    cf target https://api.YOUR-SYSTEM-DOMAIN
+    cf target https://api.SYSTEM-DOMAIN
     ```
-    Where `YOUR-SYSTEM-DOMAIN` is your system domain.
+    Where `SYSTEM-DOMAIN` is your system domain.
 
-1. Run `cf login` and provide credentials for an account with the [Admin user role](../concepts/roles.html#roles):
+1. Run:
+
+    ```
+    cf login
+    ```
+
+1. Provide credentials for an account with the Admin user role. For more information about the Admin user role, see [Roles and Permissions](../concepts/roles.html#roles) in _Orgs, Spaces, Roles, and Permissions_.
 
 1. Create the user in UAA by running:
 
     ```
-    cf create-user EXAMPLE-USERNAME --origin YOUR-PROVIDER-NAME
+    cf create-user USERNAME --origin PROVIDER-NAME
     ```
     Where:
-    * `EXAMPLE-USERNAME` is the username of the SAML or LDAP user you want to add.
-    * `YOUR-PROVIDER-NAME` is `ldap` for an LDAP user, or the name of the SAML provider you provided when configuring <%= vars.ops_manager %> for a SAML user.
+    * `USERNAME` is the username of the SAML or LDAP user you want to add.
+    * `PROVIDER-NAME` is `ldap` for an LDAP user, or the name of the SAML provider you provided when configuring <%= vars.ops_manager %> for a SAML user.
 
 ### <a id='user-role'></a> Step 2: Associate User with Org or Space Role
 
 After creating the SAML or LDAP user, you must associate the user with either an Org or Space role.
 
-For more information about roles, see the [Roles and Permissions](../concepts/roles.html#roles) section of the _Orgs, Spaces, Roles, and Permissions_ topic.
+For more information about roles, see [Roles and Permissions](../concepts/roles.html#roles) in _Orgs, Spaces, Roles, and Permissions_.
 
 #### <a id='org-role'></a> Associate User with Org Role
 
@@ -65,23 +72,22 @@ To associate the SAML or LDAP user with an Org role:
 1. Run:
 
     ```
-    cf set-org-role USERNAME YOUR-ORG ROLE
+    cf set-org-role USERNAME ORG ROLE
     ```
     Where:
     * `USERNAME` is the name of the SAML or LDAP user.
-    * `YOUR-ORG` is the name of your org.
+    * `ORG` is the name of your org.
+    * For `ROLE`, enter one of the following:
+      * `OrgManager`: Org Managers can invite and manage users, select and change plans, and set spending limits.
+      * `BillingManager`: Billing Managers can create and manage the billing account and payment information.
+      * `OrgAuditor`: Org Auditors have read-only access to Org information and reports.
+      <br>
+      <br>
+    For example:
 
-For `ROLE`, enter one of the following:
-
-* `OrgManager`: Org Managers can invite and manage users, select and change plans, and set spending limits.
-* `BillingManager`: Billing Managers can create and manage the billing account and payment information.
-* `OrgAuditor`: Org Auditors have read-only access to Org information and reports.
-
-For example:
-
-```
-cf set-org-role j.smith@example.com my-org OrgManager
-```
+      ```
+      cf set-org-role j.smith@example.com example-org OrgManager
+      ```
 
 #### <a id='space-role'></a> Associate User with Space Role
 
@@ -90,21 +96,20 @@ To associate the SAML or LDAP user with a Space role:
 1. Run:
 
     ```
-    cf set-space-role USERNAME YOUR-ORG YOUR-SPACE ROLE
+    cf set-space-role USERNAME ORG SPACE ROLE
     ```
     Where:
     * `USERNAME` is the name of the SAML or LDAP user.
-    * `YOUR-ORG` is the name of your org.
-    * `YOUR-SPACE` is the name of a space in your org.
+    * `ORG` is the name of your org.
+    * `SPACE` is the name of a space in your org.
+    * For `ROLE`, enter one of the following:
+      * `SpaceManager`: Space Managers can invite and manage users, and enable features for a given Space.
+      * `SpaceDeveloper`: Space Developers can create and manage apps and services, and see logs and reports.
+      * `SpaceAuditor`: Space Auditors can view logs, reports, and settings on this Space.
+      <br>
+      <br>
+    For example:
 
-For `ROLE`, enter one of the following:
-
-* `SpaceManager`: Space Managers can invite and manage users, and enable features for a given Space.
-* `SpaceDeveloper`: Space Developers can create and manage apps and services, and see logs and reports.
-* `SpaceAuditor`: Space Auditors can view logs, reports, and settings on this Space.
-
-For example:
-
-```
-cf set-space-role j.smith@example.com my-org my-space SpaceDeveloper
-```
+      ```
+      cf set-space-role j.smith@example.com example-org example-space SpaceDeveloper
+      ```
