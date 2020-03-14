@@ -5,7 +5,7 @@ owner: Identity
 
 <% current_page.data.title = "Adding Existing SAML or LDAP Users to an " + vars.platform_name + " Deployment" %>
 
-This topic describes the procedure for adding existing SAML or LDAP users to a <%= vars.platform_name %> deployment enabled with SAML or LDAP.
+This topic describes the procedure for adding existing SAML or LDAP users to an <%= vars.platform_name %> deployment enabled with SAML or LDAP.
 
 The following two ways exist to add existing SAML or LDAP users to your <%= vars.platform_name %> deployment:
 
@@ -17,7 +17,7 @@ The following two ways exist to add existing SAML or LDAP users to your <%= vars
 
 To perform the procedures in this topic, you must have:
 
-* Admin access to the Ops Manager Installation Dashboard for your <%= vars.platform_name %> deployment
+* Admin access to the <%= vars.ops_manager %> Installation Dashboard for your <%= vars.platform_name %> deployment
 * The [Cloud Foundry Command Line Interface](../cf-cli/install-go-cli.html) (cf CLI) v6.23.0 or later
 
 
@@ -50,7 +50,7 @@ To add a SAML or LDAP user:
     ```
     Where:
     * `EXAMPLE-USERNAME` is the username of the SAML or LDAP user you want to add.
-    * `YOUR-PROVIDER-NAME` is `ldap` for an LDAP user, or the name of the SAML provider you provided when configuring Ops Manager for a SAML user.
+    * `YOUR-PROVIDER-NAME` is `ldap` for an LDAP user, or the name of the SAML provider you provided when configuring <%= vars.ops_manager %> for a SAML user.
 
 ### <a id='user-role'></a> Step 2: Associate User with Org or Space Role
 
@@ -80,7 +80,7 @@ For `ROLE`, enter one of the following:
 For example:
 
 ```
-cf set-org-role j.smith<span>@</span>example.com my-org OrgManager
+cf set-org-role j.smith@example.com my-org OrgManager
 ```
 
 #### <a id='space-role'></a> Associate User with Space Role
@@ -106,5 +106,5 @@ For `ROLE`, enter one of the following:
 For example:
 
 ```
-cf set-space-role j.smith<span>@</span>example.com my-org my-space SpaceDeveloper
+cf set-space-role j.smith@example.com my-org my-space SpaceDeveloper
 ```
