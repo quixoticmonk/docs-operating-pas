@@ -3,14 +3,14 @@ title: Upgrade Load Example&#58; Pivotal Web Services
 owner: CloudOps
 ---
 
-This topic provides sample performance measurements of a <%= vars.platform_name %> installation undergoing the workload associated with an upgrade. 
+This topic provides sample performance measurements of a Pivotal Web Services (PWS) installation undergoing the workload associated with an upgrade.
 
-To obtain these measurements, Pivotal repaved its production Pivotal Web Services (PWS) deployment. The repave process simulates system load that would be incurred when performing a rolling upgrade of Diego Cells.
+To obtain these measurements, the PWS team repaved its production deployment.
+The repave process simulates system load that would be incurred when performing a rolling upgrade of Diego Cells.
 
 Use the measurements and configuration values published in this document as guidance when ensuring you have adequate file storage hardware prior to a platform upgrade.
 
-For more information about the impact of upgrade on file storage performance, see the [Configure File Storage](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/upgrading/configuring.html#file-storage) section of the _Configuring PAS for Upgrades_ topic.
-
+For more information about the impact of upgrade on file storage performance, see the [Configure File Storage](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/upgrading/configuring.html#file-storage) section of the _Configuring TAS for VMs for Upgrades_ topic.
 
 ## <a id="configuration"></a> Platform Configuration
 
@@ -19,12 +19,12 @@ The following table details the starting parameters and configuration of PWS.
 | Configuration | Value | How to Locate |
 | ------------- | ----- | ------------- |
 | IaaS | Amazon Web Services | See your BOSH Director configuration or BOSH deployment manifest. |
-| File Storage | AWS EBS (External with some elastic capacity) | See your Pivotal Application Service (PAS) configuration or BOSH deployment manifest. |
-| Version of Cloud Foundry (CF) | v252 | See your BOSH Director and PAS configuration or BOSH deployment manifest. |
-| Number of Diego Cells | 218 | To view the number of Diego Cell instances currently running in your deployment, see the **Resource Config** pane of your PAS tile or consult your Diego deployment manifest. |
-| Maximum number of started containers | 250 | For more information, see the [Set a Maximum Number of Starting Containers](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/upgrading/configuring.html#container-starts) section of the _Configuring PAS for Upgrades_ topic. |
+| File Storage | AWS EBS (External with some elastic capacity) | See your Tanzu Application Service for VMs (TAS for VMs) configuration or BOSH deployment manifest. |
+| Version of Cloud Foundry (CF) | v252 | See your BOSH Director and TAS for VMs configuration or BOSH deployment manifest. |
+| Number of Diego Cells | 218 | To view the number of Diego Cell instances currently running in your deployment, see the **Resource Config** pane of your TAS for VMs tile or consult your Diego deployment manifest. |
+| Maximum number of started containers | 250 | For more information, see the [Set a Maximum Number of Starting Containers](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/upgrading/configuring.html#container-starts) section of the _Configuring TAS for VMs for Upgrades_ topic. |
 | `max_in_flight` Configuration for Diego Cells | 6 | To retrieve the existing `max_in_flight` value for the Diego Cell job in BOSH Director, use the Ops Manager API. If you are running open source CF, consult your BOSH deployment manifest. |
-| Number of Availability Zones (AZs) | 2 | See your PAS or BOSH deployment AZ configuration. |
+| Number of Availability Zones (AZs) | 2 | See your TAS for VMs or BOSH deployment AZ configuration. |
 | Number of app instances | 16231 | `datadog.nozzle.bbs.LRPsRunning` |
 | Number of App Security Groups (ASGs) | 43 | As an admin user, run `cf security-groups`. For more information, see [App Security Groups](../concepts/asg.html). |
 
