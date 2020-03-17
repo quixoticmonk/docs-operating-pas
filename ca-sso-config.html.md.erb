@@ -12,9 +12,9 @@ Partnership creation between CA and <%= vars.platform_name %> involves the follo
 
 1. Installing and configuring the prerequisites. For more information, see [Prerequisites](#prerequisites).
 
-1. Configuring CA SSO as an identity provider (IDP). For more information, see [Configuring CA as the SAML Identity Provider for <%= vars.platform_name %>](#identity-provider).
+1. Configuring CA SSO as an identity provider (IDP). For more information, see [Configure CA as the SAML Identity Provider for <%= vars.platform_name %>](#identity-provider).
 
-1. Configuring the service provider (SP). For more information, see [Configuring <%= vars.platform_name %> as the SAML Service Provider for CA Single Sign-On](#service-provider).
+1. Configuring the service provider (SP). For more information, see [Configure <%= vars.platform_name %> as the SAML Service Provider for CA Single Sign-On](#service-provider).
 
 
 ## <a id='prerequisites'></a> Prerequisites
@@ -140,9 +140,9 @@ To configure a partnership between CA SSO and <%= vars.platform_name %>:
 1. To complete the **SSO and SLO** section:
 	1. Enter the **Authentication URL** that is protected by CA SSO under prerequisites.
 	1. For **SSO Binding**, click **HTTP-POST**.
-	1. In the **Audience** field, enter http://login.YOUR-SYSTEM-DOMAIN.
+	1. In the **Audience** field, enter http://login.SYSTEM-DOMAIN, where `SYSTEM-DOMAIN` is the system domain of your <%= vars.platform_name %> installation..
 	<p class="note"><strong>Note:</strong> The <strong>Audience</strong> field requires <code>http://</code> instead of <code>https://</code>. This is only a naming convention within the schema and does not determine connection security.</p>
-	1. Select **Both IDP and DP Initiated** from the **Transactions Allowed** dropdown.
+	1. Select **Both IDP and SP Initiated** from the **Transactions Allowed** dropdown.
 	1. The **Assertion Consumer Service URL** field is be pre-populated using information from the SP entity.
 
 1. Click **Next**.
