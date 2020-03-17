@@ -52,6 +52,8 @@ To configure <%= vars.app_runtime_abbr %> to use a SAML identity provider:
 1. Set the **Provider name**. This is a unique name you create for the identity provider. This name can include only alphanumeric characters, `+`, `_`, and `-`. You should not change this name after deployment because all external users use it to link to the provider.
 
 1. Enter a **Display name**. Your provider display name appears as a link on your Pivotal login page. You can access this link at `https://login.SYSTEM-DOMAIN`, where `SYSTEM-DOMAIN` is the system domain you recorded from the **Domains** pane.
+<br>
+<br>
     ![At the top of the image is the Pivotal logo in large teal letters. Below the logo is the text "Welcome!" in medium-sized letters. Below this text are two fields on top of each other. The top field contains the text "pi", followed by a black rectangle to redact the rest of the username. The bottom field contains eleven small circles, indicating hidden characters. Below these fields is a blue, rectangular button labeled "SIGN IN" in white letters. Below this button is a horizontal line break.](login-page.png)
 
 1. Retrieve the metadata from your identity provider and copy it into either the **Provider metadata** or the **Provider metadata URL** fields, depending on whether your identity provider exposes a metadata URL or not. For more information, see [Configure SAML as an Identity Provider for <%= vars.app_runtime_abbr %>](#configure-saml-for-pcf). <%= vars.recommended_by %> recommends that you use the provider metadata URL rather than provider metadata because the metadata can change. You can do this in either of the following ways:
