@@ -54,8 +54,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
     * `PROXY` is your proxy.
     * `no_proxy` is a comma-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain `.cf.internal`, which is used by the platform to communicate with CredHub.
     * `DNS-SUFFIX-OR-IP-ADDRESS` is a DNS suffix or IP address that can be accessed without passing through the proxy.
-    <br>
-    <br>
+
   From now on, the proxy settings are applied to apps during staging.
 
 1. To configure proxy access for apps that are running, run:
@@ -69,8 +68,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
     * `PROXY` is your proxy.
     * `no_proxy` is a comma-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain `.cf.internal`, which is used by the platform to communicate with CredHub.
     * `DNS-SUFFIX-OR-IP-ADDRESS` is a DNS suffix or IP address that can be accessed without passing through the proxy.
-    <br>
-    <br>
+
   To configure proxy settings for Java-based apps, run:
 
     ```
@@ -82,8 +80,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
     * `-Dhttp.proxyPort` is the port your proxy uses.
     * `-Dhttp.nonProxyHosts` is a pipe-separated list of DNS suffixes or IP addresses that can be accessed without passing through the proxy. <%= vars.company_name %> recommends this value contains the domain `.cf.internal`, which is used by the platform to communicate with CredHub.
     * `DNS-SUFFIX-OR-IP-ADDRESS` is a DNS suffix or IP address that can be accessed without passing through the proxy.
-    <br>
-    <br>
+
   For more information about these Java proxy settings, see [Java Networking and Proxies](http://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html) in the Oracle documentation.
 
 1. To apply the proxy configuration for the running environment variable group, restart each app that you want to use the new configuration.
