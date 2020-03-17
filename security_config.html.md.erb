@@ -54,7 +54,7 @@ In either case for either self-signed or trusted single certificates, apply thes
 * If you are using a single domain configuration, use these values as the `Subject Alternative Name` of the certificate, where `DOMAIN` is your registered wildcard domain:
     * `*.login.sys.DOMAIN.com`
     * `*.uaa.sys.DOMAIN.com`
-    <p class="note"><strong>Note:</strong> TLS certificates generated for wildcard DNS records only work for a single domain name component or component fragment. For example, a certificate generated for <code>*.DOMAIN.com</code> does not work for <code>*.apps.DOMAIN.com</code> and <code>*.sys.DOMAIN.com</code>. The certificate must have both <code>*.apps.DOMAIN.com</code> and <code>*.sys.DOMAIN.com</code> attributed to it.</p>
+    <p class="note"><strong>Note:</strong> TLS certificates generated for wildcard DNS records only work for a single domain name component or component fragment. For example, a certificate generated for <code>&#42;.DOMAIN.com</code> does not work for <code>&#42;.apps.DOMAIN.com</code> and <code>&#42;.sys.DOMAIN.com</code>. The certificate must have both <code>&#42;.apps.DOMAIN.com</code> and <code>&#42;.sys.DOMAIN.com</code> attributed to it.</p>
 
 ### <a id="ert_certgen"></a> Generate an RSA Certificate in <%= vars.app_runtime_abbr %>
 
