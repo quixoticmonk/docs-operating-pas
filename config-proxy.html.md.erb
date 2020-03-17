@@ -76,6 +76,7 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
       ```
       cf set-running-environment-variable-group '{"JAVA_OPTS": "-Dhttp.proxyHost=PROXY -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=DNS-SUFFIX-OR-IP-ADDRESS|DNS-SUFFIX-OR-IP-ADDRESS"}'
       ```
+      
     Where:
     * `-Dhttp.proxyHost` is the proxy to use for HTTP requests.
     * `PROXY` is your proxy.
