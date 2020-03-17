@@ -20,7 +20,7 @@ Before beginning your configuration, you must register three domains through you
 
 * An additional domain for the public-facing portions of your app
 
-<p class="note"><strong>Note:</strong> <%= vars.company_name %> recommends that you use the same domain name but different subdomain names for your system and app domains. Doing so allows you to use a single wildcard certificate for the domain while preventing apps from creating routes that overlap with system routes.</p>
+<p class="note"><strong>Note:</strong> <%= vars.recommended_by %> recommends that you use the same domain name but different subdomain names for your system and app domains. Doing so allows you to use a single wildcard certificate for the domain while preventing apps from creating routes that overlap with system routes.</p>
 
 
 ## <a id="system-domain"></a> Step 1: Configure System and Apps Domains
@@ -33,18 +33,18 @@ Before beginning your configuration, you must register three domains through you
 
 1. Enter the **System domain** and **Apps domain** defined in [Prerequisites](#prerequisites).
 
-     ![The page header says 'Domains'. Below this header is the text 'For help configuring these fields, see Configure Domains in Configuring TAS for VMs in the VMware Tanzu documentation,' with 'Configure Domain' in blue letters to denote a clickable link. Below this text are two fields labeled 'System domain' and 'Apps domain', with red asterisks to denote that they are required fields. The 'System domain' field contains the ghost text 'system.example.com'. The 'Apps domain' field contains the ghost text 'apps.example.com'. At the bottom of the image is a rectangular blue button labeled 'Save'.](domains.png)
+     ![The page header says 'Domains'. Below this header is the text 'For help configuring these fields, see Configure Domains in Configuring PAS in the Pivotal documentation,' with 'Configure Domain' in blue letters to denote a clickable link. Below this text are two fields labeled 'System domain' and 'Apps domain', with red asterisks to denote that they are required fields. The 'System domain' field contains the ghost text 'system.example.com'. The 'Apps domain' field contains the ghost text 'apps.example.com'. At the bottom of the image is a rectangular blue button labeled 'Save'.](domains.png)
 
-1. Navigate to your DNS provider to create A records that point from your apps domains to the public IP address of your load balancer. 
+1. Navigate to your DNS provider to create A records that point from your apps domains to the public IP address of your load balancer.
 
 1. Click **Save**.
 
 
-## <a id="load-balancer"></a> Step 2: Secure Apps Domain with HAProxy 
+## <a id="load-balancer"></a> Step 2: Secure Apps Domain with HAProxy
 
-<p class="warning note"><strong>Warning:</strong> This method is easy to implement but may not be the best option for your security needs. Contact Support if you seek a custom solution to building secure, internal services.</p>
+<p class="warning note"><strong>Warning:</strong> This method is easy to implement but may not be the best option for your security needs. Contact Pivotal Support if you seek a custom solution to building secure, internal services.</p>
 
-<p class="note"><strong>Note:</strong> <%= vars.company_name %> supports HAProxy by default. However, you may configure an internal domain using any load balancer you choose that supports host header filtering.</p>
+<p class="note"><strong>Note:</strong> <%= vars.recommended_by %> supports HAProxy by default. However, you may configure an internal domain using any load balancer you choose that supports host header filtering.</p>
 
 1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
 
