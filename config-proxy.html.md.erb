@@ -71,12 +71,12 @@ To globally configure proxy settings for <%= vars.platform_name %> apps:
     * `DNS-SUFFIX-OR-IP-ADDRESS` is a DNS suffix or IP address that can be accessed without passing through the proxy.
     <br>
     <br>
-    To configure proxy settings for Java-based apps, run:
+  To configure proxy settings for Java-based apps, run:
 
-      ```
-      cf set-running-environment-variable-group '{"JAVA_OPTS": "-Dhttp.proxyHost=PROXY -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=DNS-SUFFIX-OR-IP-ADDRESS|DNS-SUFFIX-OR-IP-ADDRESS"}'
-      ```
-      
+    ```
+    cf set-running-environment-variable-group '{"JAVA_OPTS": "-Dhttp.proxyHost=PROXY -Dhttp.proxyPort=8080 -Dhttp.nonProxyHosts=DNS-SUFFIX-OR-IP-ADDRESS|DNS-SUFFIX-OR-IP-ADDRESS"}'
+    ```
+    
     Where:
     * `-Dhttp.proxyHost` is the proxy to use for HTTP requests.
     * `PROXY` is your proxy.
