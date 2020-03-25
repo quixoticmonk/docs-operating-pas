@@ -199,6 +199,10 @@ To configure the **Smoke Tests** pane:
 
 1. Select **Smoke Tests**.
 
+1. (Optional) In **Domain**, enter the name of the apps domain <%= vars.segment_runtime_full %> should use when pushing an app to run smoke tests.
+  * To configure routing from the isolation segment to either the <%= vars.app_runtime_abbr %> or <%= vars.segment_runtime_full %> Gorouters, enter the apps domain you configured in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile.
+  * To configure separate routing for the isolation segment, enter a different apps domain.
+
 1. If you have a shared apps domain, select **A temporary space within the system org**, which creates a temporary space within the system org for running smoke tests and deletes the space afterwards. Otherwise, select **A specified org and space** and complete these fields to configure where <%= vars.segment_runtime_full %> pushes an app to run smoke tests:
   * For **Org**, enter the org <%= vars.segment_runtime_full %> should use when pushing an app to run smoke tests.
   * For **Space**, enter the space <%= vars.segment_runtime_full %> should use when pushing an app to run smoke tests.
