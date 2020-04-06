@@ -5,7 +5,7 @@ owner:
 
 This topic explains how to read app metrics metadata to identify which <%= vars.platform_name %> product generated the metrics, and to retrieve other information about the metrics source.
 
-For example, you may want to distinguish between metrics coming from apps hosted by <%= vars.app_runtime_abbr %> itself and apps hosted by a Pivotal Isolation Segment deployment.
+For example, you may want to distinguish between metrics coming from apps hosted by <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) itself and apps hosted by a <%= vars.segment_runtime_full %> deployment.
 
 
 ## <a id="metrics-prefix"></a> Source Deployment from Tile GUID
@@ -15,15 +15,14 @@ Metrics identify their source deployment with a `deployment` tag followed by `cf
 
 ## <a id="human-friendly-metric-tags"></a> Human-Friendly Metadata
 
-PAS and other runtime tiles tag metrics with additional metadata to help users parse metrics coming from different deployments.
-Downstream monitoring products such as [<%= vars.platform_name %> Healthwatch](https://docs.pivotal.io/pcf-healthwatch) also use this metadata to display human-readable names.
+<%= vars.app_runtime_abbr %> and other runtime tiles tag metrics with additional metadata to help users parse metrics coming from different deployments. Downstream monitoring products such as Healthwatch also use this metadata to display human-readable names.
 
 The tags are:
 
-* `product`: The value of this tag is always `Pivotal Application Service` for the PAS tile. The tags for other products are: `Pivotal Isolation Segment`, `Pivotal Application Service Small Footprint`, `Pivotal Application Service for Windows 2012R2`, and `Pivotal Application Service for Windows`.
+* `product`: The value of this tag is always `<%= vars.app_runtime_full %>` for the <%= vars.app_runtime_abbr %> tile. The tags for other products are: `<%= vars.segment_runtime_full %>`, `<%= vars.app_runtime_full %> Small Footprint`, `<%= vars.windows_runtime_full %> 2012R2`, and `<%= vars.windows_runtime_full %>`.
 
 * `system_domain`: The value of this tag corresponds to what you set in the **System domain** field in the **Domains** pane of a given tile. 
 
-* `placement_tag`: The value of this tag is always `null` for PAS. However, for PAS for Windows and <%= vars.platform_name %> Isolation Segment tiles, you can configure this value using the **Segment name** field in the **App Containers** pane. An operator can display capacity and other relevant metrics using the `placement_tag` name. This makes it easier to reason about the importance of a given segment when issues arise.
+* `placement_tag`: The value of this tag is always `null` for <%= vars.app_runtime_abbr %>. However, for <%= vars.windows_runtime_full %> (<%= vars.windows_runtime_abbr %>) and <%= vars.segment_runtime_full %> tiles, you can configure this value using the **Segment name** field in the **App Containers** pane. An operator can display capacity and other relevant metrics using the `placement_tag` name. This makes it easier to reason about the importance of a given segment when issues arise.
 
 These tags are properties of the Metron agent running on each VM in a deployment.
