@@ -15,14 +15,14 @@ Metrics identify their source deployment with a `deployment` tag followed by `cf
 
 ## <a id="human-friendly-metric-tags"></a> Human-Friendly Metadata
 
-<%= vars.app_runtime_abbr %> and other runtime tiles tag metrics with additional metadata to help users parse metrics coming from different deployments. Downstream monitoring products such as [Healthwatch](https://docs.pivotal.io/pcf-healthwatch) also use this metadata to display human-readable names.
+<%= vars.app_runtime_abbr %> and other runtime tiles tag metrics with additional metadata to help users parse metrics coming from different deployments. Downstream monitoring products such as Healthwatch also use this metadata to display human-readable names.
 
 The tags are:
 
-* `product`: The value of this tag is always `<%= vars.app_runtime_full %>` for the <%= vars.app_runtime_abbr %> tile. The tags for other products are: `P<%= vars.segment_runtime_full %>`, `<%= vars.app_runtime_full %> Small Footprint`, `<%= vars.windows_runtime_full_pivotal %> 2012R2`, and `<%= vars.windows_runtime_full %>`.
+* `product`: The value of this tag is always `<%= vars.app_runtime_full %>` for the <%= vars.app_runtime_abbr %> tile. The tags for other products are: `<%= vars.segment_runtime_full %>`, `<%= vars.app_runtime_full %> Small Footprint`, `<%= vars.windows_runtime_full_pivotal %> 2012R2`, and `<%= vars.windows_runtime_full %>`.
 
 * `system_domain`: The value of this tag corresponds to what you set in the **System domain** field in the **Domains** pane of a given tile. 
 
-* `placement_tag`: The value of this tag is always `null` for <%= vars.app_runtime_abbr %>. However, for <%= vars.windows_runtime_abbr %>, you can configure this value using the **Segment name** field in the **App Containers** pane. An operator can display capacity and other relevant metrics using the `placement_tag` name. This makes it easier to reason about the importance of a given segment when issues arise.
+* `placement_tag`: The value of this tag is always `null` for <%= vars.app_runtime_abbr %>. However, for <%= vars.windows_runtime_full %> (<%= vars.windows_runtime_abbr %>) and <%= vars.segment_runtime_full %> tiles, you can configure this value using the **Segment name** field in the **App Containers** pane. An operator can display capacity and other relevant metrics using the `placement_tag` name. This makes it easier to reason about the importance of a given segment when issues arise.
 
 These tags are properties of the Metron agent running on each VM in a deployment.
