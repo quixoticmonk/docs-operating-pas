@@ -15,70 +15,68 @@ Configuring multi-foundation support in Apps Manager allows you to search, view,
 
 This section describes the procedures for configuring multi-foundation support in Apps Manager.
 
-### <a id="pas"></a> Configure PAS
+### <a id="pas"></a> Configure <%= vars.app_runtime_abbr %>
 
-This section describes how to configure Pivotal Application Service (PAS) on a foundation to enable multi-foundation support in Apps Manager.
+This section describes how to configure <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on a foundation to enable multi-foundation support in Apps Manager.
 
 To configure multi-foundation support in Apps Manager: 
 
-1. In the PAS tile of one of your foundations, select **Apps Manager**.
+1. In the <%= vars.app_runtime_abbr %> tile of one of your foundations, select **Apps Manager**.
 
 1. For **Multi-foundation configuration (beta)**, enter a JSON object for each additional foundation that you want to manage. Use the following format for the JSON object:
 
-	<pre>
+	```
 	{
 	  "FOUNDATION_NAME": {
-	    "ccUrl": "https://api.FOUNDATION_SYSTEM_DOMAIN.com",
-	    "systemDomain": "FOUNDATION_SYSTEM_DOMAIN.com",
-	    "usageServiceUrl": "https://app-usage.FOUNDATION_SYSTEM_DOMAIN.com",
-	    "invitationsServiceUrl": "https://p-invitations.FOUNDATION_SYSTEM_DOMAIN.com",
-	    "logoutUrl": "https://login.FOUNDATION_SYSTEM_DOMAIN.com/logout.do",
-	    "metricsUrl": "https://metrics.FOUNDATION_SYSTEM_DOMAIN.com",
-	    "uaaUrl": "https://login.FOUNDATION_SYSTEM_DOMAIN.com"
+	    "ccUrl": "https://api.FOUNDATION-SYSTEM-DOMAIN.com",
+	    "systemDomain": "FOUNDATION-SYSTEM-DOMAIN.com",
+	    "usageServiceUrl": "https://app-usage.FOUNDATION-SYSTEM-DOMAIN.com",
+	    "invitationsServiceUrl": "https://p-invitations.FOUNDATION-SYSTEM-DOMAIN.com",
+	    "logoutUrl": "https://login.FOUNDATION-SYSTEM-DOMAIN.com/logout.do",
+	    "metricsUrl": "https://metrics.FOUNDATION-SYSTEM-DOMAIN.com",
+	    "uaaUrl": "https://login.FOUNDATION-SYSTEM-DOMAIN.com"
 	  }
     }
-	</pre>
+	```
 	Where:
-	- `FOUNDATION_NAME` is a name for the foundation.
-	- `FOUNDATION_SYSTEM_DOMAIN` is the system domain of the foundation. The system domain is listed in the **Domains** pane of the PAS tile.
-	- `metricsUrl` is an optional field. If <%= vars.platform_name %> Metrics is installed on the foundation, provide the <%= vars.platform_name %> Metrics URL.
+	* `FOUNDATION-NAME` is a name for the foundation.
+	* `FOUNDATION-SYSTEM-DOMAIN` is the system domain of the foundation. The system domain is listed in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile.
+	* `metricsUrl` is an optional field. If Pivotal App Metrics is installed on the foundation, provide the Pivotal App Metrics URL.
 
-1. Do one of the following, depending on your version of PAS:
-    * **For PAS versions v2.8.4 and later:** In the **Redirect URIs** field, enter a comma-separated list of the URI for each
-    additional foundation on which you enabled multi-foundation support. Use the following format for each URI: 
+1. Do one of the following, depending on your version of <%= vars.app_runtime_abbr %>:
+    * **For <%= vars.app_runtime_abbr %> versions v2.8.4 and later:** In the **Redirect URIs** field, enter a comma-separated list of the URI for each additional foundation on which you enabled multi-foundation support. Use the following format for each URI:
 
         ```
-        https://apps.FOUNDATION_SYSTEM_DOMAIN.com/**
+        https://apps.FOUNDATION-SYSTEM-DOMAIN.com/**
         ```
-        Where `FOUNDATION_SYSTEM_DOMAIN` is the system domain of the foundation on which you enabled multi-foundation
-        support.
-    * **For PAS versions v2.8.3 and earlier:** Follow the procedure in [Add Redirects in UAA (For PAS v2.8.3 and earlier)](#redirects) to add redirects for each foundation you want to manage with Apps Manager. 
+        Where `FOUNDATION-SYSTEM-DOMAIN` is the system domain of the foundation on which you enabled multi-foundation support.
+    * **For <%= vars.app_runtime_abbr %> versions v2.8.3 and earlier:** Follow the procedure in [Add Redirects in UAA (For <%= vars.app_runtime_abbr %> v2.8.3 and earlier)](#redirects) to add redirects for each foundation you want to manage with Apps Manager. 
 
-### <a id="redirects"></a> Add Redirects in UAA (For PAS v2.8.3 and earlier)
+### <a id="redirects"></a> Add Redirects in UAA (For <%= vars.app_runtime_abbr %> v2.8.3 and earlier)
 
-The Apps Manager UAA clients on each foundation you want to manage must include a redirect to the foundation on which you enabled multi-foundation support. This allows Apps Manager to redirect to the other foundations and back when authenticating with UAA. For more information about UAA clients and configuring valid redirect URIs, see the [Client.redirect-uri](../uaa/uaa-concepts.html#redirect-uri) section in the _UAA Concepts_ topic. 
+The Apps Manager UAA clients on each foundation you want to manage must include a redirect to the foundation on which you enabled multi-foundation support. This allows Apps Manager to redirect to the other foundations and back when authenticating with UAA. For more information about UAA clients and configuring valid redirect URIs, see [Client.redirect-uri](../uaa/uaa-concepts.html#redirect-uri) in _UAA Concepts_. 
 
 To add redirects:
 
-1. Install the UAA CLI. See the [CloudFoundry UAA Command Line Client](https://github.com/cloudfoundry/cf-uaac) repository in GitHub.
+1. Install the UAA CLI. See the [Cloud Foundry UAA Command Line Client](https://github.com/cloudfoundry/cf-uaac) repository in GitHub.
 
 1. Record the UAA admin client credentials password for a foundation you want to manage with Apps Manager: 
-	1. In the PAS tile **Credentials** tab, for **Admin Client Credentials**, click **Link to Credentials**.
+	1. In the **Credentials** tab of the <%= vars.app_runtime_abbr %> tile, for **Admin Client Credentials**, click **Link to Credentials**.
 	1. Record the value in the `password` field.
 
 1. Target UAA on the foundation:
 
     ```
-    uaac target uaa.FOUNDATION_SYSTEM_DOMAIN.com
+    uaac target uaa.FOUNDATION-SYSTEM-DOMAIN.com
     ```
-    Where `FOUNDATION_SYSTEM_DOMAIN` is the system domain of the foundation.
+    Where `FOUNDATION-SYSTEM-DOMAIN` is the system domain of the foundation.
 
 1. Generate a token for the UAA admin client:
 
 	```    
-    uaac token client get admin -s ADMIN_CLIENT_PASSWORD
+    uaac token client get admin -s ADMIN-CLIENT-PASSWORD
     ```
-    Where `ADMIN_CLIENT_PASSWORD` is the **Admin Client Credentials** password you recorded in step 2.
+    Where `ADMIN-CLIENT-PASSWORD` is the **Admin Client Credentials** password you recorded in step 2.
 
 1. Record the UAA redirect URIs. To view the redirect URIs on the UAA `apps_manager_js` client:
 
@@ -90,17 +88,17 @@ To add redirects:
 
     ```
     uaac client update apps_manager_js --redirect_uri \
-        'PREVIOUS_REDIRECT_URIS,https://apps.FOUNDATION_SYSTEM_DOMAIN.com/**'
+        'PREVIOUS-REDIRECT-URIS,https://apps.FOUNDATION-SYSTEM-DOMAIN.com/**'
     ```
     Where: 
-    - `PREVIOUS_REDIRECT_URIS` is one or more redirect URIs that you recorded in the previous step. Include the previous redirect URIs in the command to ensure they are not overwritten.
-    - `FOUNDATION_SYSTEM_DOMAIN` is the system domain of foundation on which you enabled multi-foundation support.
+    - `PREVIOUS-REDIRECT-URIS` is one or more redirect URIs that you recorded in the previous step. Include the previous redirect URIs in the command to ensure they are not overwritten.
+    - `FOUNDATION-SYSTEM-DOMAIN` is the system domain of foundation on which you enabled multi-foundation support.
 
-1. Repeat steps 2 through 6 for each foundation you want to manage with Apps Manager. 
+1. Repeat steps 2 through 6 for each foundation you want to manage with Apps Manager.
 
 ### <a id="certificates"></a> Add Trusted Certificate Authorities
 
-Apps Manager must be able to validate the CAs used by all foundations. 
+Apps Manager must be able to validate the certificate authorities (CAs) used by all foundations. 
 
 If any foundation uses a certificate for TLS termination that is not signed by a globally-trusted CA, add the CA that signed the TLS certificate as a trusted CA on the foundation on which you enabled multi-foundation support. 
 
@@ -108,11 +106,11 @@ For more information, see [Setting Trusted Certificates](https://docs.pivotal.io
 
 ### <a id="saml"></a> (Optional) Configure the SAML Identity Provider
 
-Pivotal recommends that all foundations use the same external SAML identity provider. This allows Apps Manager to automatically authenticate with the identity provider. 
+<%= vars.recommended_by %> recommends that all foundations use the same external SAML identity provider. This allows Apps Manager to automatically authenticate with the identity provider. 
 
 To configure all foundations to use the same SAML identity provider:
 
-1. Select **Authentication and Enterprise SSO** in the PAS tile. 
+1. In the <%= vars.app_runtime_abbr %> tile, select **Authentication and Enterprise SSO**. 
 
 1. Verify that the foundation uses the correct provider for **Provider name**.
 
