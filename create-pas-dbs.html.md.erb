@@ -1,21 +1,27 @@
 ---
-title: Creating Databases for PAS
+title: Creating Databases for TAS for VMs
 owner: Releng
 ---
 
-This topic provides an example procedure for creating the necessary databases on your external database instance so that you can deploy Pivotal Application Service (PAS) with an external database. 
+This topic provides an example procedure for creating the necessary databases
+on your external database instance so that you can deploy <%= vars.app_runtime_full %>
+(<%= vars.app_runtime_abbr %>) with an external database.
 
-<p class="note warning"><strong>WARNING:</strong> Protect whichever database you use in your deployment with a password.</p>
+<p class="note warning"><strong>Warning:</strong> Protect whichever database you use in your deployment
+   with a password.
+</p>
 
-To create your Pivotal Application Service (PAS) databases, do the following:
+To create your <%= vars.app_runtime_abbr %> databases, do the following:
 
 <p class='note'><strong>Note:</strong> Exact configurations depend on your database provider. The following procedure uses AWS RDS as an example.</p>
 
-1. Add the `ubuntu` account key pair from your IaaS deployment to your local SSH profile so you can access the Pivotal Operations Manager VM. For example, in AWS, you add a key pair created in AWS:
+1. Add the `ubuntu` account key pair from your IaaS deployment to your local SSH profile
+   so that you can access the <%= vars.ops_manager_full %> VM.
+   For example, in AWS, you add a key pair created in AWS:
 
     <pre class='terminal'>$ ssh-add aws-keypair.pem</pre>
 
-1. SSH in to your Ops Manager using the Ops Manager FQDN and the username `ubuntu`:
+1. SSH in to your <%= vars.ops_manager %> using the <%= vars.ops_manager %> FQDN and the username `ubuntu`:
 
     <pre class='terminal'>$ ssh ubuntu@OPS-MANAGER-FQDN</pre>
 
@@ -23,7 +29,8 @@ To create your Pivotal Application Service (PAS) databases, do the following:
 
      <pre class='terminal'>$ mysql --host=RDSHOSTNAME --user=RDSUSERNAME --password=RDSPASSWORD</pre>
 
-1. Run the following MySQL commands to create databases for the eleven PAS components that require a relational database:
+1. Run the following MySQL commands to create databases for the eleven
+   <%= vars.app_runtime_abbr %> components that require a relational database:
   <pre class="terminal">CREATE database ccdb;
   CREATE database notifications;
   CREATE database autoscale;
@@ -39,4 +46,5 @@ To create your Pivotal Application Service (PAS) databases, do the following:
   CREATE database credhub;
   </pre>
 
-1. Type `exit` to quit the MySQL client, and `exit` again to close your connection to the Ops Manager VM.
+1. Type `exit` to quit the MySQL client, and `exit` again to close your connection
+   to the <%= vars.ops_manager %> VM.
