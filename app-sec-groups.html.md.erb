@@ -1,5 +1,5 @@
 ---
-title: Restricting App Access to Internal PAS Components
+title: Restricting App Access to Internal TAS for VMs Components
 owner: Security
 ---
 
@@ -38,7 +38,7 @@ See the following list to understand the concepts for this topic:
     </tr>
     <tr>
       <td>1</td>
-      <td><a href="#network">Determine Your Network Layout</a>: <br>The procedure for securing your deployment with ASGs varies depending on your network layout, which you can determine using Ops Manager.</td>
+      <td><a href="#network">Determine Your Network Layout</a>: <br>The procedure for securing your deployment with ASGs varies depending on your network layout, which you can determine using <%= vars.ops_manager %>.</td>
     </tr>
     <tr>
       <td>2</td>
@@ -59,7 +59,10 @@ See the following list to understand the concepts for this topic:
     </table>
 
 * **When to set up new rules**:
-  * Pivotal recommends that you complete this procedure directly after installing <%= vars.app_runtime_abbr %>, prior to developers pushing apps to the platform. If you complete the procedure after apps have been pushed to the platform, you must restart all the apps in your deployment.
+  * <%= vars.company_name %> recommends that you complete this procedure directly after installing <%= vars.app_runtime_abbr %>
+    and before developers push apps to the platform.
+    If you complete the procedure after apps have been pushed to the platform,
+    you must restart all the apps in your deployment.
 
 
 ## <a id='prerequisites'></a> Prerequisites
@@ -75,7 +78,7 @@ This procedure outlines how to apply ASGs that prevent apps running on your depl
 
 The procedure for securing your deployment with ASGs varies depending on your network layout. To determine your network layout:
 
-1. Log in to Ops Manager.
+1. Log in to <%= vars.ops_manager %>.
 
 1. For each tile, click **Assign AZs and Networks** and record the selected **Network** that the tile is installed on.
 
@@ -87,25 +90,25 @@ The procedure for securing your deployment with ASGs varies depending on your ne
     </tr>
     <tr>
       <td>One Network</td>
-      <td><ul><li>One network for Ops Manager and the BOSH Director, Pivotal Application Service (PAS), and services.</li></ul>
+      <td><ul><li>One network for <%= vars.ops_manager %> and the BOSH Director, <%= vars.app_runtime_abbr %>, and services.</li></ul>
       <p class="note"><strong>Note:</strong> You cannot secure your deployment with ASGs if you have this network layout. Because <%= vars.platform_name %> dynamically allocates IPs, they cannot be easily excluded in the case of a single network.</p>
       </td>
     </tr>
     <tr>
       <td>Two Networks</td>
-      <td><ul><li>One network for Ops Manager and the BOSH Director.</li>
-          <li>One network for PAS and Services.</li></ul></td>
+      <td><ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li>
+          <li>One network for <%= vars.app_runtime_abbr %> and Services.</li></ul></td>
     </tr>
     <tr>
       <td>Three Networks</td>
-      <td><ul><li>One network for Ops Manager and the BOSH Director.</li>
-          <li>One network for PAS.</li>
+      <td><ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li>
+          <li>One network for <%= vars.app_runtime_abbr %>.</li>
           <li>One network for all services.</li></ul></td>
     </tr>
     <tr>
       <td>Three or More Networks</td>
-      <td><ul><li>One network for Ops Manager and the BOSH Director.</li>
-          <li>One network for PAS.</li>
+      <td><ul><li>One network for <%= vars.ops_manager %> and the BOSH Director.</li>
+          <li>One network for <%= vars.app_runtime_abbr %>.</li>
           <li>One network for each service.</ul></td>
     </tr>
   </table>
@@ -146,7 +149,8 @@ To gather the CIDRs for each network in your deployment:
 
 #### <a name='initial-asgs'></a> Part B: Create and Bind ASGs that Block Network Access
 
-To create ASGs that block apps from sending traffic to the networks that host Ops Manager, <%= vars.app_runtime_abbr %>, and, optionally, any installed services:
+To create ASGs that block apps from sending traffic to the networks that host <%= vars.ops_manager %>,
+<%= vars.app_runtime_abbr %>, and, optionally, any installed services:
 
 1. Create a `config.yml` containing the appropriate content for your network layout and replace the indicated values with the CIDRs you gathered:
   * **Two Network Layout**:
@@ -154,24 +158,29 @@ To create ASGs that block apps from sending traffic to the networks that host Op
         ```
         exclude:
         - YOUR-OPS-MANAGER-CIDR
-        - YOUR-PAS-AND-SERVICES-CIDR
+        - YOUR-TAS-AND-SERVICES-CIDR
         ```
    * **Three Network Layout**:
-      <p class="note"><strong>Note:</strong> If you want to secure only the Ops Manager and PAS components, you can remove the services CIDR from the <code>exclude</code> section.</p>
+      <p class="note"><strong>Note:</strong> If you want to secure only the <%= vars.ops_manager %>
+         and <%= vars.app_runtime_abbr %> components, you can remove the services CIDR
+         from the <code>exclude</code> section.</p>
 
          ```
           exclude:
           - YOUR-OPS-MANAGER-CIDR
-          - YOUR-PAS-CIDR
+          - YOUR-TAS-CIDR
           - YOUR-SERVICES-CIDR
          ```
     * **Three or More Network Layout**:
-      <p class="note"><strong>Note:</strong> If you want to secure only the Ops Manager and PAS components, you can remove the services CIDRs from the <code>exclude</code> section.</p>
+      <p class="note"><strong>Note:</strong> If you want to secure only the <%= vars.ops_manager %>
+         and <%= vars.app_runtime_abbr %> components, you can remove the services CIDRs
+         from the <code>exclude</code> section.
+      </p>
 
         ```
         exclude:
         - YOUR-OPS-MANAGER-CIDR
-        - YOUR-PAS-CIDR
+        - YOUR-TAS-CIDR
         - YOUR-SERVICE-CIDR-1
         - YOUR-SERVICE-CIDR-2
         etc...
@@ -227,7 +236,7 @@ To create ASGs that block apps from sending traffic to the networks that host Op
 
 <p class="note warning"><strong>Warning:</strong> In the two network layout, <%= vars.app_runtime_abbr %> and services share the same network. This means that each time you create an ASG that allows apps to access a new port and protocol within the network, you further expose the <%= vars.app_runtime_abbr %> component VMs. This is a limitation of a two network layout. For guidance on network topology, see <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/plan/index.html">Reference Architectures</a>.</p>
 
-Now that you have created ASGs to secure the Ops Manager, <%= vars.app_runtime_abbr %>, and service components, work with developers to create additional ASGs that give apps access to the services they need.
+Now that you have created ASGs to secure the <%= vars.ops_manager %>, <%= vars.app_runtime_abbr %>, and service components, work with developers to create additional ASGs that give apps access to the services they need.
 
 For more information about creating and binding ASGs, see the [Managing ASGs with the cf CLI](../concepts/asg.html#procedures) and [Typical ASGs](../concepts/asg.html#typical-groups) sections of the _App Security Groups_ topic.
 
@@ -249,7 +258,9 @@ Now that you have bound new ASGs to determine outbound traffic rules, you no lon
 
 ### <a name='restart'></a> Step 5: Restart your Apps
 
-To apply the ASG changes, you must restart all of the apps in your deployment. To mitigate app downtime during the restart, Pivotal recommends a blue-green deployment strategy. For more information, see [Using Blue-Green Deployment to Reduce Downtime and Risk](../devguide/deploy-apps/blue-green.html)
+To apply the ASG changes, you must restart all of the apps in your deployment.
+To mitigate app downtime during the restart, <%= vars.company_name %> recommends a blue-green deployment strategy.
+For more information, see [Using Blue-Green Deployment to Reduce Downtime and Risk](../devguide/deploy-apps/blue-green.html).
 
 To restart all of the apps in your deployment:
 
