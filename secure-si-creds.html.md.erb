@@ -10,7 +10,8 @@ This topic describes how <%= vars.platform_name %> operators can ensure service 
 
 The Pivotal Application Service (PAS) tile includes its own CredHub component, separate from the CredHub component included with the BOSH Director tile. For more information about this centralized credential management component, see the [CredHub](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/credhub/index.html) documentation.
 
-Runtime CredHub exists to securely store service instance credentials. Previously, <%= vars.platform_name %> could only use the Cloud Controller database for storing these credentials.
+Runtime CredHub exists to securely store service instance credentials.
+Previously, <%= vars.app_runtime_abbr %> could only use the Cloud Controller database for storing these credentials.
 
 When developers want their app to use a service, such as those provided by the Spring Cloud Services for VMware Tanzu tile for <%= vars.platform_name %>, they must bind their app to an instance of that service. Service bindings include credentials that developers can use to access the service from their app. For more information, see [Binding Credentials](../services/binding-credentials.html).
 
