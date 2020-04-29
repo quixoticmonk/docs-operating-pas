@@ -43,12 +43,17 @@ To configure multi-foundation support in Apps Manager:
 	* `FOUNDATION-SYSTEM-DOMAIN` is the system domain of the foundation. The system domain is listed in the **Domains** pane of the <%= vars.app_runtime_abbr %> tile.
 	* `metricsUrl` is an optional field. If Pivotal App Metrics is installed on the foundation, provide the Pivotal App Metrics URL.
 
-1. For <%= vars.app_runtime_abbr %> v2.7.10 and later, in the **Redirect URIs** field, enter a comma-separated list of the URI for each additional foundation on which you enabled multi-foundation support. Use the following format for each URI:
+1. For <%= vars.app_runtime_abbr %> v2.7.10 and later, in the **Redirect URIs** field,
+   enter a comma-separated list of the URI for each additional foundation on which
+   you enabled multi-foundation support.
+   Use the following format for each URI:
 
     ```
     https://apps.FOUNDATION-SYSTEM-DOMAIN.com/**
     ```
     Where `FOUNDATION-SYSTEM-DOMAIN` is the system domain of the foundation on which you enabled multi-foundation support.
+
+    For example: <code>https://apps.example.com/**, https://apps.example2.com/** </code>
 
 ### <a id="redirects"></a> Add Redirects in UAA (For <%= vars.app_runtime_abbr %> v2.7.9 and earlier)
 
