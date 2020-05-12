@@ -19,7 +19,10 @@ This section describes how to configure file storage for AWS.
 
 <p class="note"><strong>Note:</strong> If you followed the instructions in <a href="https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/om/aws/prepare-env-manual.html">Installing <%= vars.platform_name %> on AWS Manually</a>, you created the necessary resources for external S3-compatible file storage.</p>
 
-For production-level <%= vars.platform_name %> deployments on AWS, <%= vars.company_name %> recommends selecting the **External S3-compatible filestore**. For more information about production-level <%= vars.platform_name %> deployments on AWS, see the [Reference Architecture for <%= vars.platform_name %> on AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/plan/aws/aws_ref_arch.html).
+For production-level <%= vars.platform_name %> deployments on AWS,
+<%= vars.company_name %> recommends selecting the **External S3-compatible filestore**.
+For more information about production-level <%= vars.platform_name %> deployments on AWS,
+see the [AWS Reference Architecture %> on AWS](https://docs.pivotal.io/platform/<%= vars.current_major_version.sub('.', '-') %>/plan/aws/aws_ref_arch.html).
 
 <%# Find this partial in GitHub at `pivotal-cf/docs-partials` %>
 <%= partial(:"/pcf/core/#{vars.current_major_version.sub('.', '-')}/filestore_s3_config", :locals => { :aws => true }) %>
